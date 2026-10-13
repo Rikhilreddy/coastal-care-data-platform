@@ -1,0 +1,81 @@
+Timing is off.
+BEGIN
+DROP TABLE
+DROP TABLE
+SELECT 11934
+SELECT 20000
+SELECT 20000
+SELECT 11814
+SELECT 11934
+ALTER TABLE
+SELECT 11814
+CREATE INDEX
+COMMIT
+
+================ ICD-9 -> ICD-10 CONVERSION QUALITY REPORT ================
+
+--- R1. Coverage by match type (distinct codes, all diagnosis rows, principal diagnoses) ---
+  gem_match_type   | distinct_codes | pct_codes | dx_rows | pct_dx_rows | pct_principal 
+-------------------+----------------+-----------+---------+-------------+---------------
+ APPROXIMATE       |           5407 |      45.3 | 1149995 |        40.1 |          43.1
+ EXACT             |           3081 |      25.8 |  912678 |        31.8 |          31.8
+ APPROXIMATE_MULTI |           2242 |      18.8 |  717348 |        25.0 |          18.5
+ NOT_IN_GEM        |            456 |       3.8 |   65048 |         2.3 |           5.3
+ COMBINATION       |            540 |       4.5 |   12725 |         0.4 |           1.2
+ NO_MAP            |            208 |       1.7 |    8258 |         0.3 |           0.2
+
+
+--- R2. How multi-candidate conversions were decided ---
+  gem_match_type   |  decided_by  | distinct_codes | dx_rows 
+-------------------+--------------+----------------+---------
+ APPROXIMATE_MULTI | LOWEST_CODE  |           1827 |  309755
+ APPROXIMATE_MULTI | UNSPECIFIED  |            335 |  276207
+ APPROXIMATE_MULTI | BILLABLE     |             23 |  113248
+ APPROXIMATE_MULTI | RECIPROCAL   |             56 |   17227
+ APPROXIMATE_MULTI | VALID_FY2027 |              1 |     911
+ COMBINATION       | LOWEST_CODE  |             96 |    4013
+ COMBINATION       | UNSPECIFIED  |              4 |       7
+
+
+--- R3. Target validity in FY2027 ICD-10-CM ---
+ converted_codes | target_not_valid_fy2027 | target_not_billable 
+-----------------+-------------------------+---------------------
+           11270 |                      16 |                 165
+
+
+--- R4. Dollars on claims whose principal diagnosis is missing or not converted ---
+ claim_type | claims_affected | paid_affected 
+------------+-----------------+---------------
+ IP         |             467 |    4411300.00
+ OP         |           46307 |   15272610.00
+
+
+--- R5. Most-used multi-candidate conversions (review sample) ---
+ icd9_code | icd10_code |                           icd10_description                           | candidate_count | decided_by  | dx_rows 
+-----------+------------+-----------------------------------------------------------------------+-----------------+-------------+---------
+ 4019      | I169       | Hypertensive crisis, unspecified                                      |               2 | UNSPECIFIED |  122533
+ 2724      | E785       | Hyperlipidemia, unspecified                                           |               2 | BILLABLE    |   57209
+ V5869     | Z7984      | Long term (current) use of oral hypoglycemic drugs                    |               3 | LOWEST_CODE |   38011
+ 2720      | E7800      | Pure hypercholesterolemia, unspecified                                |               2 | BILLABLE    |   29458
+ 4280      | I509       | Heart failure, unspecified                                            |               2 | UNSPECIFIED |   25911
+ 78079     | R531       | Weakness                                                              |               4 | LOWEST_CODE |   19800
+ 71590     | M159       | Polyosteoarthritis, unspecified                                       |               2 | LOWEST_CODE |   10636
+ 2948      | F068       | Other specified mental disorders due to known physiological condition |               2 | RECIPROCAL  |    8096
+ 78659     | R0782      | Intercostal pain                                                      |               2 | LOWEST_CODE |    7784
+ 7245      | M549       | Dorsalgia, unspecified                                                |               2 | UNSPECIFIED |    7608
+
+
+--- R6. Codes used in claims but absent from GEMs (top 10 by use) ---
+ icd9_code | dx_rows | principal_rows 
+-----------+---------+----------------
+ V726      |    2411 |            331
+ 7807      |    2154 |           2154
+ 7902      |    2140 |           2140
+ V451      |    1995 |           1348
+ 7931      |    1850 |            446
+ 0414      |    1493 |              4
+ 7806      |    1482 |            365
+ 2766      |    1465 |            388
+ 585       |    1436 |           1436
+ 2841      |    1383 |            497
+
