@@ -1,0 +1,30 @@
+
+=== F1. What do segment 2 rows carry? (dates, payments, diagnoses) ===
+   source   | segment |  rows  | rows_with_from_date | rows_with_payment |  total_paid  | rows_with_primary_dx 
+------------+---------+--------+---------------------+-------------------+--------------+----------------------
+ inpatient  | 1       |  66705 |               66705 |             64547 | 637982480.00 |                66678
+ inpatient  | 2       |     68 |                   0 |                66 |   1277700.00 |                    0
+ outpatient | 1       | 779537 |              779537 |            749643 | 209292350.00 |               779514
+ outpatient | 2       |  11253 |                   0 |             11042 |  15232360.00 |                 5656
+
+
+=== F2. Segment 2 rows with no matching segment 1 (orphan continuations) ===
+   source   | orphan_segment_2 | orphan_paid 
+------------+------------------+-------------
+ inpatient  |                0 |            
+ outpatient |              278 |   392320.00
+
+
+=== F3. Claims starting in 2007: which year do they end in? ===
+   source   | thru_year | claims 
+------------+-----------+--------
+ inpatient  | 2008      |    224
+ outpatient | 2008      |    312
+
+
+=== F4. Re-run of enrollment match using thru-date year (segment 1 only) ===
+   source   | segment_1_claims | not_enrolled_in_thru_year 
+------------+------------------+---------------------------
+ inpatient  |            66705 |                         0
+ outpatient |           779537 |                         0
+
