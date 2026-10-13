@@ -1,0 +1,86 @@
+target_table,target_column,data_type,nullable,source_table,source_columns,transformation_rule,finding_ref,notes
+silver.member,source_system,TEXT,N,(constant),,'DESYNPUF',F15,Distinguishes legacy members from EDI/FHIR members
+silver.member,member_source_id,TEXT,N,bronze.desynpuf_beneficiary,desynpuf_id,Trim; keep as text,F10,Natural key within source
+silver.member,birth_date,DATE,N,bronze.desynpuf_beneficiary,bene_birth_dt,"TO_DATE(YYYYMMDD); value from latest coverage year; exception if it differs across years",,PHI; generalized to birth year in analyst views
+silver.member,death_date,DATE,Y,bronze.desynpuf_beneficiary,bene_death_dt,TO_DATE(YYYYMMDD); earliest non-null value across years,F16,Null = no recorded death
+silver.member,sex_code,TEXT,N,bronze.desynpuf_beneficiary,bene_sex_ident_cd,"1→'M', 2→'F'; any other value→'U' plus exception",,CMS code set
+silver.member,race_code,TEXT,Y,bronze.desynpuf_beneficiary,bene_race_cd,"1→'WHITE', 2→'BLACK', 3→'OTHER', 5→'HISPANIC'; other→'UNKNOWN'",,RESTRICTED column; masked for analyst role (HIPAA minimum necessary)
+silver.member,first_coverage_year,INTEGER,N,bronze.desynpuf_beneficiary,_file_year,MIN across member's rows,F7,
+silver.member,last_coverage_year,INTEGER,N,bronze.desynpuf_beneficiary,_file_year,MAX across member's rows,F7,Members leaving before 2010 are retained
+silver.member_year,source_system,TEXT,N,(constant),,'DESYNPUF',F15,
+silver.member_year,member_source_id,TEXT,N,bronze.desynpuf_beneficiary,desynpuf_id,Trim,F10,
+silver.member_year,coverage_year,INTEGER,N,bronze.desynpuf_beneficiary,_file_year,Direct (year comes from file name),F7,Year exists only in the file name
+silver.member_year,state_code,TEXT,N,bronze.desynpuf_beneficiary,sp_state_code,LPAD to 2 characters,F10,SSA state code (e.g. 10 = Florida); decoded via ref table
+silver.member_year,county_code,TEXT,N,bronze.desynpuf_beneficiary,bene_county_cd,LPAD to 3 characters,F10,SSA county code
+silver.member_year,part_a_months,INTEGER,N,bronze.desynpuf_beneficiary,bene_hi_cvrage_tot_mons,Cast to integer; must be 0–12 else exception,,Medicare Part A (hospital) months
+silver.member_year,part_b_months,INTEGER,N,bronze.desynpuf_beneficiary,bene_smi_cvrage_tot_mons,Cast to integer; must be 0–12 else exception,,Medicare Part B (medical) months
+silver.member_year,hmo_months,INTEGER,N,bronze.desynpuf_beneficiary,bene_hmo_cvrage_tot_mons,Cast to integer; must be 0–12 else exception,,Medicare Advantage / HMO months
+silver.member_year,part_d_months,INTEGER,N,bronze.desynpuf_beneficiary,plan_cvrg_mos_num,Cast to integer; must be 0–12 else exception,,Drug coverage months
+silver.member_year,esrd_flag,BOOLEAN,N,bronze.desynpuf_beneficiary,bene_esrd_ind,"'Y'→true, '0'→false; other→exception",,End-stage renal disease
+silver.member_year,has_alzheimers,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_alzhdmta,"1→true, 2→false",,Chronic condition flag
+silver.member_year,has_chf,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_chf,"1→true, 2→false",,Congestive heart failure
+silver.member_year,has_ckd,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_chrnkidn,"1→true, 2→false",,Chronic kidney disease
+silver.member_year,has_cancer,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_cncr,"1→true, 2→false",,
+silver.member_year,has_copd,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_copd,"1→true, 2→false",,
+silver.member_year,has_depression,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_depressn,"1→true, 2→false",,
+silver.member_year,has_diabetes,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_diabetes,"1→true, 2→false",,
+silver.member_year,has_ischemic_heart,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_ischmcht,"1→true, 2→false",,
+silver.member_year,has_osteoporosis,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_osteoprs,"1→true, 2→false",,
+silver.member_year,has_ra_oa,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_ra_oa,"1→true, 2→false",,Rheumatoid arthritis / osteoarthritis
+silver.member_year,has_stroke_tia,BOOLEAN,N,bronze.desynpuf_beneficiary,sp_strketia,"1→true, 2→false",,
+silver.member_year,reported_ip_medicare_paid,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,medreimb_ip,Cast to numeric; negatives retained,F2,Used to cross-check against summed inpatient claims
+silver.member_year,reported_ip_bene_resp,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,benres_ip,Cast to numeric,,Beneficiary responsibility
+silver.member_year,reported_ip_primary_payer,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,pppymt_ip,Cast to numeric,,Primary payer (non-Medicare) amount
+silver.member_year,reported_op_medicare_paid,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,medreimb_op,Cast to numeric; negatives retained,F2,Used to cross-check against summed outpatient claims
+silver.member_year,reported_op_bene_resp,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,benres_op,Cast to numeric,,
+silver.member_year,reported_op_primary_payer,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,pppymt_op,Cast to numeric,,
+silver.member_year,reported_car_medicare_paid,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,medreimb_car,Cast to numeric,,Carrier (professional) claims not loaded yet
+silver.member_year,reported_car_bene_resp,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,benres_car,Cast to numeric,,
+silver.member_year,reported_car_primary_payer,"NUMERIC(14,2)",N,bronze.desynpuf_beneficiary,pppymt_car,Cast to numeric,,
+silver.member_year,_batch_id / _source_file / _source_row_num,lineage,N,bronze.desynpuf_beneficiary,_batch_id; _source_file; _source_row_num,Carried through,,Traceability to source line
+silver.claim_header,source_system,TEXT,N,(constant),,'DESYNPUF',F15,
+silver.claim_header,claim_id,TEXT,N,bronze.desynpuf_inpatient / bronze.desynpuf_outpatient,clm_id,Trim; one row per clm_id,"F1, F15",
+silver.claim_header,claim_type,TEXT,N,(derived),,"'IP' if from inpatient table, 'OP' if from outpatient",,
+silver.claim_header,member_source_id,TEXT,N,both claim tables,desynpuf_id,From segment 1,F1,FK to silver.member
+silver.claim_header,segment_count,INTEGER,N,both claim tables,segment,COUNT of segments per clm_id,"F1, F11",Used in row reconciliation
+silver.claim_header,claim_from_date,DATE,N,both claim tables,clm_from_dt,TO_DATE(YYYYMMDD) from segment 1,F11,Segment 2 has no dates
+silver.claim_header,claim_thru_date,DATE,N,both claim tables,clm_thru_dt,TO_DATE(YYYYMMDD) from segment 1,F11,
+silver.claim_header,claim_year,INTEGER,N,(derived),clm_thru_dt,EXTRACT(YEAR FROM claim_thru_date),F13,Claims starting in 2007 fall into 2008
+silver.claim_header,admission_date,DATE,Y,bronze.desynpuf_inpatient,clm_admsn_dt,TO_DATE(YYYYMMDD) from segment 1; null for OP,,Readmission logic
+silver.claim_header,discharge_date,DATE,Y,bronze.desynpuf_inpatient,nch_bene_dschrg_dt,TO_DATE(YYYYMMDD) from segment 1; null for OP,,Readmission logic
+silver.claim_header,provider_id,TEXT,Y,both claim tables,prvdr_num,Trim; from segment 1,F10,Institutional provider number (CCN)
+silver.claim_header,attending_npi,TEXT,Y,both claim tables,at_physn_npi,Trim; from segment 1,F10,NPI check-digit validation added in Phase 3
+silver.claim_header,operating_npi,TEXT,Y,both claim tables,op_physn_npi,Trim; from segment 1,F10,
+silver.claim_header,other_npi,TEXT,Y,both claim tables,ot_physn_npi,Trim; from segment 1,F10,
+silver.claim_header,drg_code,TEXT,Y,bronze.desynpuf_inpatient,clm_drg_cd,Trim; LPAD to 3; null for OP,F10,MS-DRG
+silver.claim_header,utilization_days,INTEGER,Y,bronze.desynpuf_inpatient,clm_utlztn_day_cnt,Cast to integer; from segment 1; null for OP,,Covered days
+silver.claim_header,paid_amount,"NUMERIC(14,2)",N,both claim tables,clm_pmt_amt,SUM across ALL segments,"F2, F11",Segment 2 carries $16.5M; must not be dropped
+silver.claim_header,primary_payer_paid_amount,"NUMERIC(14,2)",N,both claim tables,nch_prmry_pyr_clm_pd_amt,SUM across all segments,F11,
+silver.claim_header,pass_thru_per_diem_amount,"NUMERIC(14,2)",Y,bronze.desynpuf_inpatient,clm_pass_thru_per_diem_amt,From segment 1 (a rate; not summed),,
+silver.claim_header,ip_deductible_amount,"NUMERIC(14,2)",Y,bronze.desynpuf_inpatient,nch_bene_ip_ddctbl_amt,SUM across all segments; null for OP,F11,
+silver.claim_header,part_a_coinsurance_amount,"NUMERIC(14,2)",Y,bronze.desynpuf_inpatient,nch_bene_pta_coinsrnc_lblty_am,SUM across all segments; null for OP,F11,
+silver.claim_header,blood_deductible_amount,"NUMERIC(14,2)",Y,both claim tables,nch_bene_blood_ddctbl_lblty_am,SUM across all segments,F11,
+silver.claim_header,part_b_deductible_amount,"NUMERIC(14,2)",Y,bronze.desynpuf_outpatient,nch_bene_ptb_ddctbl_amt,SUM across all segments; null for IP,F11,
+silver.claim_header,part_b_coinsurance_amount,"NUMERIC(14,2)",Y,bronze.desynpuf_outpatient,nch_bene_ptb_coinsrnc_amt,SUM across all segments; null for IP,F11,
+silver.claim_header,is_adjustment,BOOLEAN,N,(derived),clm_pmt_amt,paid_amount < 0,F2,Adjustments retained in all totals
+silver.claim_header,primary_dx_missing,BOOLEAN,N,(derived),icd9_dgns_cd_1,True if segment 1 icd9_dgns_cd_1 is null or 'OTHER',F5,
+silver.claim_header,_source_row_nums,BIGINT[],N,both claim tables,_source_row_num,ARRAY of bronze row numbers for all segments,,Lineage for rolled-up rows
+silver.claim_diagnosis,source_system / claim_id / segment,TEXT / TEXT / INTEGER,N,both claim tables,clm_id; segment,Carried from bronze row,F1,
+silver.claim_diagnosis,dx_position,INTEGER,N,(derived),icd9_dgns_cd_1..10; admtng_icd9_dgns_cd,"Column suffix 1–10; 0 for admitting diagnosis",F8,Unpivot wide to long
+silver.claim_diagnosis,dx_role,TEXT,N,(derived),,"'ADMITTING' (position 0); 'PRINCIPAL' (segment 1, position 1); else 'SECONDARY'",F8,
+silver.claim_diagnosis,icd9_code,TEXT,N,both claim tables,icd9_dgns_cd_1..10; admtng_icd9_dgns_cd,"Unpivot; drop nulls; 'OTHER'→code_exception PLACEHOLDER_CODE; format-invalid→code_exception INVALID_FORMAT","F5, F8, F9",Leading zeros preserved
+silver.claim_diagnosis,icd9_in_reference,BOOLEAN,N,ref.icd9_dx (from 2018_I9gem.txt),icd9_code,True if code exists in the GEM ICD-9 source list,,Date-appropriate validation for 2008–2010 codes
+silver.claim_diagnosis,icd10_code,TEXT,Y,ref.gem_icd9_to_icd10,icd9_code,Converted via CMS 2018 GEMs; selection rules in conversion spec,,Core legacy conversion
+silver.claim_diagnosis,gem_match_type,TEXT,Y,ref.gem_icd9_to_icd10,flags,"EXACT / APPROXIMATE / COMBINATION / NO_MAP",,Conversion quality is measurable
+silver.claim_procedure,source_system / claim_id / segment,TEXT / TEXT / INTEGER,N,both claim tables,clm_id; segment,Carried from bronze row,F1,
+silver.claim_procedure,code_system,TEXT,N,(derived),,"'ICD9-PROC' for icd9_prcdr_cd_*; 'HCPCS' for hcpcs_cd_*",F3,
+silver.claim_procedure,position,INTEGER,N,(derived),icd9_prcdr_cd_1..6; hcpcs_cd_1..45,Column suffix,F8,Unpivot wide to long
+silver.claim_procedure,procedure_code,TEXT,N,bronze.desynpuf_inpatient,icd9_prcdr_cd_1..6,"Unpivot; drop nulls; must match ^\d{2,4}$ else code_exception WRONG_CODE_SYSTEM",F3,Positions 2–6 are ~53% misplaced diagnosis codes
+silver.claim_procedure,procedure_code,TEXT,N,bronze.desynpuf_outpatient,hcpcs_cd_1..45,"Unpivot; drop nulls; must match ^[A-Z0-9]\d{3}[A-Z0-9]$; else classify: \d+E\d+→SCI_NOTATION, ^0\d{3}$→REVENUE_CODE, length<5 numeric→TRUNCATED, letters→NON_CODE_TEXT",F4,
+silver.claim_procedure,hcpcs_level,TEXT,Y,(derived),procedure_code,"'II' if ^[A-Z]\d{4}$ (validated against ref.hcpcs); 'I' if numeric (CPT: format-only validation)",,CPT is AMA-licensed; no descriptions stored
+(not mapped),,,,bronze.desynpuf_outpatient,icd9_prcdr_cd_1..6,Not mapped to silver; retained in bronze,F6,≈100% empty; outpatient uses HCPCS
+(not mapped),,,,bronze.desynpuf_inpatient,hcpcs_cd_1..45,Not mapped; verify empty during build,,Expected empty for institutional inpatient in this source
+quarantine.claim_exception,source_system / source_table / claim_id / segment,TEXT,N,both claim tables,clm_id; segment,Segment 2 rows with no segment 1 for the same clm_id,F12,278 outpatient rows; $392320
+quarantine.claim_exception,reason_code,TEXT,N,(derived),,'ORPHAN_SEGMENT',F12,
+quarantine.claim_exception,paid_amount,"NUMERIC(14,2)",N,both claim tables,clm_pmt_amt,Cast to numeric,F12,Included in dollar reconciliation
+quarantine.code_exception,source_column / original_value / reason_code,TEXT,N,both claim tables,any code column,"One row per rejected value: PLACEHOLDER_CODE, INVALID_FORMAT, WRONG_CODE_SYSTEM, SCI_NOTATION, REVENUE_CODE, TRUNCATED, NON_CODE_TEXT","F3, F4, F5",Claim retained; only the bad value is excluded
