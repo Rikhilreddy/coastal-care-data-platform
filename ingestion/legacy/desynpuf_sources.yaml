@@ -1,0 +1,24 @@
+# Bronze load configuration for the DE-SynPUF legacy claims source.
+# Each entry maps one or more source files (glob pattern) to a bronze table.
+#
+# control_amount_columns: dollar columns summed in the source file and in the
+#   database after load; the two totals must match or the load rolls back.
+# file_year_regex: optional; extracts the data year from the file name into
+#   the _file_year audit column (beneficiary files carry the year only in the name).
+
+source_system: desynpuf
+source_dir: data/source/desynpuf
+
+files:
+  - pattern: "DE1_0_*_Beneficiary_Summary_File_Sample_1.csv"
+    target_table: bronze.desynpuf_beneficiary
+    control_amount_columns: [MEDREIMB_IP, MEDREIMB_OP, MEDREIMB_CAR]
+    file_year_regex: "DE1_0_(\\d{4})_Beneficiary"
+
+  - pattern: "DE1_0_2008_to_2010_Inpatient_Claims_Sample_1.csv"
+    target_table: bronze.desynpuf_inpatient
+    control_amount_columns: [CLM_PMT_AMT]
+
+  - pattern: "DE1_0_2008_to_2010_Outpatient_Claims_Sample_1.csv"
+    target_table: bronze.desynpuf_outpatient
+    control_amount_columns: [CLM_PMT_AMT]
