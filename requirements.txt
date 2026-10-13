@@ -31,6 +31,7 @@ debugpy==1.8.22
 deepdiff==8.6.2
 defusedxml==0.7.1
 diff_cover==10.6.0
+et_xmlfile==2.0.0
 executing==2.3.0
 Faker==40.43.0
 fastjsonschema==2.22.2
@@ -89,6 +90,7 @@ networkx==3.6.1
 notebook==7.6.3
 notebook_shim==0.2.4
 numpy==2.4.6
+openpyxl==3.1.5
 opentelemetry-api==1.45.1
 orderly-set==5.5.0
 overrides==7.7.0
