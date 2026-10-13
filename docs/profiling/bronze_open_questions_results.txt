@@ -1,0 +1,43 @@
+Timing is off.
+CREATE INDEX
+
+=== Q1a. Segment values present ===
+   source   | segment |  rows  
+------------+---------+--------
+ inpatient  | 1       |  66705
+ inpatient  | 2       |     68
+ outpatient | 1       | 779537
+ outpatient | 2       |  11253
+
+
+=== Q1b. Multi-segment claims: do segments disagree on member or dates? ===
+   source   | multi_segment_claims | segments_differ_by_member | segments_differ_by_from_date | segments_differ_by_thru_date 
+------------+----------------------+---------------------------+------------------------------+------------------------------
+ inpatient  |                   68 |                         0 |                            0 |                            0
+ outpatient |                10975 |                         0 |                            0 |                            0
+
+
+=== Q2. Claim IDs present in both inpatient and outpatient ===
+ clm_ids_in_both_files 
+-----------------------
+                     0
+
+
+=== Q3. Orphan claims: member not enrolled in the claim year / never seen ===
+   source   | total_claims | missing_from_date | not_enrolled_that_year | paid_not_enrolled | member_never_seen 
+------------+--------------+-------------------+------------------------+-------------------+-------------------
+ inpatient  |        66773 |                68 |                    292 |        4047700.00 |                 0
+ outpatient |       790790 |             11253 |                  11565 |       15497480.00 |                 0
+
+
+=== Q4. Date sanity ===
+   source   | null_from | null_thru | from_outside_2008_2010 | thru_before_from | min_from | max_thru 
+------------+-----------+-----------+------------------------+------------------+----------+----------
+ inpatient  |        68 |        68 |                    224 |                0 | 20071127 | 20101231
+ outpatient |     11253 |     11253 |                    312 |                0 | 20071212 | 20101231
+
+
+=== Q5. Payment integrity: service after the member's recorded death ===
+ source | claims_after_death | members_affected | paid_after_death 
+--------+--------------------+------------------+------------------
+
