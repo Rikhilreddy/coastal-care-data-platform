@@ -1,0 +1,2 @@
+- Synthea generated via Docker (eclipse-temurin:17-jre), seed 42, 1,000 living Florida members (1,168 total incl. deceased).
+- Reference data: ICD-10-CM FY2027, CMS 2018 diagnosis GEMs (final release), HCPCS Level II Oct 2026.
