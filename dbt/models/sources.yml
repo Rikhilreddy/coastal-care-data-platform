@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: Raw source data, loaded unchanged by ingestion/legacy/load_bronze_desynpuf.py
+    schema: bronze
+    tables:
+      - name: desynpuf_beneficiary
+        description: CMS DE-SynPUF beneficiary summary, one row per member per year (_file_year)
+      - name: desynpuf_inpatient
+        description: CMS DE-SynPUF inpatient claims, one row per claim segment
+      - name: desynpuf_outpatient
+        description: CMS DE-SynPUF outpatient claims, one row per claim segment
+  - name: ref
+    description: Code sets and conversion outputs, loaded by ingestion/reference and sql/conversion
+    schema: ref
+    tables:
+      - name: icd9_dx_conversion
+      - name: icd10cm
+      - name: hcpcs

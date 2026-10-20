@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: member_year
+    description: One row per member per coverage year (geography, coverage months, chronic conditions, reported reimbursement)
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "member_source_id || '-' || coverage_year"
+    columns:
+      - name: member_source_id
+        data_tests: [not_null]
+      - name: coverage_year
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [2008, 2009, 2010]
+                quote: false
+      - name: esrd_flag
+        data_tests: [not_null]
+      - name: has_diabetes
+        data_tests: [not_null]
+      - name: has_chf
+        data_tests: [not_null]
+
+  - name: member
+    description: One row per member (stable demographics). race_code is RESTRICTED (masked for analyst roles).
+    columns:
+      - name: member_source_id
+        data_tests: [unique, not_null]
+      - name: birth_date
+        data_tests: [not_null]
+      - name: sex_code
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['M', 'F']
+      - name: race_code
+        meta:
+          pii: restricted
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['WHITE', 'BLACK', 'OTHER', 'HISPANIC']

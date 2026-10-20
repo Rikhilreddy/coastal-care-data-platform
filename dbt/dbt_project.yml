@@ -1,0 +1,26 @@
+# Coastal Care Data Platform: dbt project
+# dbt builds the silver and gold layers from bronze using version-controlled SQL,
+# and runs data tests that prove each layer is correct.
+name: coastal_care
+version: "1.0.0"
+config-version: 2
+profile: coastal_care
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+target-path: target
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  coastal_care:
+    silver:
+      +schema: silver
+      +materialized: table
+
+seeds:
+  coastal_care:
+    # The SME override file is loaded by ingestion/reference/load_reference.py
+    # (with approval validation and the load manifest), not by dbt.
+    +enabled: false

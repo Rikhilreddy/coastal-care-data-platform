@@ -5,4 +5,4 @@ __pycache__/
 dbt/target/
 dbt/logs/
 *.zip
-.DS_Store
+.DS_Storedbt/.user.yml

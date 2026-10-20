@@ -1,0 +1,14 @@
+# Connection settings. Credentials come from environment variables (loaded from .env),
+# never from this file, so it is safe to commit.
+coastal_care:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('PG_HOST', 'localhost') }}"
+      port: "{{ env_var('PG_PORT', '5432') | int }}"
+      dbname: "{{ env_var('PG_DB', 'coastal_care') }}"
+      user: "{{ env_var('PG_USER') }}"
+      password: "{{ env_var('PG_PASSWORD', '') }}"
+      schema: public
+      threads: 4
