@@ -1,0 +1,34 @@
+# Bronze load configuration for Synthea FHIR R4 bundles (FHIR-1).
+# Decisions are based on docs/profiling/fhir_profile.md; rationale in docs/profiling/fhir_findings.md.
+
+source_system: synthea_fhir
+source_dir: data/source/synthea/fhir
+file_pattern: "*.json"
+target_table: bronze.fhir_resource
+
+# Resources loaded to bronze. Everything else is COUNTED per file in the load
+# manifest (so bundle entries = loaded + skipped) but not stored.
+load_resource_types:
+  - Patient                # -> silver.member
+  - Encounter              # -> visit context, admissions for readmission logic
+  - Condition              # -> diagnoses (SNOMED CT; ICD-10 conversion ticket CONV-4)
+  - Procedure              # -> procedures (SNOMED CT)
+  - Claim                  # -> silver.claim_header, 837 generation
+  - ExplanationOfBenefit   # -> adjudication / payments, 835 generation
+  - MedicationRequest      # -> pharmacy (RxNorm)
+  - Immunization           # -> quality measures (CVX)
+  - Organization           # -> payers and facilities
+  - Location
+  - Practitioner           # -> providers (NPI)
+  - PractitionerRole
+
+# Not loaded, and why (kept here so the decision is reviewable in Git):
+#   DocumentReference  - free-text clinical notes: HIPAA minimum necessary
+#   Observation, DiagnosticReport, ImagingStudy - clinical results; not used by planned
+#                        gold metrics (PMPM, readmissions, HCC). Add here when a quality
+#                        measure needs them, then rerun with --force.
+#   Provenance, SupplyDelivery, MedicationAdministration, Medication, CarePlan,
+#   CareTeam, Device, AllergyIntolerance - not in scope
+
+# Dollar control: sum of Claim.total.value in each file must equal the sum in the database.
+control_amount: Claim.total.value
