@@ -2,3 +2,4 @@
 - Reference data: ICD-10-CM FY2027, CMS 2018 diagnosis GEMs (final release), HCPCS Level II Oct 2026.
 - CONV-3 (backlog): when the top-similarity candidate is a non-billable header, descend to its billable residual child instead of choosing a different billable concept. Found via 42789 (I49.8 vs R00.1); 172 non-billable targets in v2.
 - CONV-3 (backlog): when the top-similarity candidate is a non-billable header, descend to its billable residual child instead of choosing a different billable concept. Found via 42789 (I49.8 vs R00.1); 172 non-billable targets in v2.
+- SILVER-2 (backlog): 4,034 of 65,504 accepted ICD-9 procedure codes (6.2%) also appear as a diagnosis on the same claim (e.g. 4019 passes procedure format). Fix: cross-check against claim diagnoses or load the ICD-9 v32 procedure list (CMS32_DESC_LONG_SG.txt).

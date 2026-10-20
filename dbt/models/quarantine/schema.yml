@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: claim_exception
+    description: Rejected claim segments (whole rows). Counted in reconciliation.
+    columns:
+      - name: reason_code
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['ORPHAN_SEGMENT']
+
+  - name: code_exception
+    description: Rejected code values. The claim stays in silver; only the bad value is excluded.
+    columns:
+      - name: reason_code
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['PLACEHOLDER_CODE', 'INVALID_FORMAT', 'WRONG_CODE_SYSTEM',
+                         'SCI_NOTATION', 'REVENUE_CODE', 'TRUNCATED', 'NON_CODE_TEXT']

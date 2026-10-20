@@ -43,3 +43,84 @@ models:
           - accepted_values:
               arguments:
                 values: ['WHITE', 'BLACK', 'OTHER', 'HISPANIC']
+
+  - name: claim_header
+    description: One row per claim, segments rolled up. Dates from segment 1, dollars summed across segments.
+    columns:
+      - name: claim_id
+        data_tests: [unique, not_null]
+      - name: claim_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['IP', 'OP']
+      - name: member_source_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('member')
+                field: member_source_id
+      - name: claim_from_date
+        data_tests: [not_null]
+      - name: claim_thru_date
+        data_tests: [not_null]
+      - name: claim_year
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [2008, 2009, 2010]
+                quote: false
+      - name: paid_amount
+        data_tests: [not_null]
+      - name: segment_count
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2]
+                quote: false
+
+  - name: claim_diagnosis
+    description: One row per valid ICD-9 diagnosis on a claim, with its ICD-10 conversion.
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "claim_id || '-' || segment || '-' || dx_position"
+    columns:
+      - name: claim_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('claim_header')
+                field: claim_id
+      - name: dx_role
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['ADMITTING', 'PRINCIPAL', 'SECONDARY']
+      - name: gem_match_type
+        description: NULL would mean the code was never seen by the conversion build
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['EXACT', 'APPROXIMATE', 'APPROXIMATE_MULTI', 'COMBINATION', 'PARENT_FALLBACK', 'NO_MAP', 'NOT_IN_GEM']
+
+  - name: claim_procedure
+    description: One row per valid procedure code (ICD-9-CM procedure or HCPCS/CPT) on a claim.
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "claim_id || '-' || segment || '-' || code_system || '-' || position"
+    columns:
+      - name: claim_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('claim_header')
+                field: claim_id
+      - name: code_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['ICD9-PROC', 'HCPCS']

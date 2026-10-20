@@ -15,8 +15,16 @@ clean-targets: ["target", "dbt_packages"]
 
 models:
   coastal_care:
+    # staging: typed, cleaned 1:1 copies of bronze rows (views, not for analysts)
+    staging:
+      +schema: staging
+      +materialized: view
     silver:
       +schema: silver
+      +materialized: table
+    # quarantine: rejected rows and values, kept so nothing disappears
+    quarantine:
+      +schema: quarantine
       +materialized: table
 
 seeds:
