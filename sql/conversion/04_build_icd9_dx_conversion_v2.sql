@@ -123,15 +123,22 @@ LEFT JOIN tmp_ranked r2
 WHERE r1.rnk = 1;
 
 -- 6. Apply APPROVED SME overrides (R0) to the first slot of each overridden code.
+--    An override also applies to parent codes that convert THROUGH the overridden code
+--    (e.g. an override on 78079 also governs parent 7807 via fallback), so one clinical
+--    decision is applied consistently. A direct override on the claim code wins.
 UPDATE tmp_choice c
 SET icd10_code      = o.icd10_code,
     decided_by      = 'SME_OVERRIDE',
     is_valid_fy2027 = (i.icd10_code IS NOT NULL),
     is_billable     = COALESCE(i.is_billable, false)
-FROM ref.icd9_dx_override o
+FROM tmp_resolved r
+JOIN ref.icd9_dx_override o ON o.review_status = 'APPROVED'
+                           AND o.icd9_code = CASE WHEN EXISTS (SELECT 1 FROM ref.icd9_dx_override d
+                                                               WHERE d.icd9_code = r.icd9_code
+                                                                 AND d.review_status = 'APPROVED')
+                                                  THEN r.icd9_code ELSE r.gem_code END
 LEFT JOIN ref.icd10cm i ON i.icd10_code = o.icd10_code
-WHERE o.review_status = 'APPROVED'
-  AND c.icd9_code = o.icd9_code
+WHERE r.icd9_code = c.icd9_code
   AND c.choice_list = (SELECT min(choice_list) FROM tmp_choice x WHERE x.icd9_code = c.icd9_code);
 
 -- 7. One conversion row per distinct ICD-9 code (rules R0–R6).

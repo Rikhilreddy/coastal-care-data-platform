@@ -11,7 +11,7 @@ SELECT 11934
 SELECT 20633
 SELECT 20633
 SELECT 12216
-UPDATE 5
+UPDATE 9
 SELECT 11934
 ALTER TABLE
 SELECT 12216
@@ -23,7 +23,7 @@ COMMIT
 --- R0. Reference inputs ---
  icd9_descriptions | overrides_approved | overrides_pending 
 -------------------+--------------------+-------------------
-             14567 |                  5 |                 0
+             14567 |                  8 |                 0
 
 
 --- R1. Coverage by match type ---
@@ -41,10 +41,10 @@ COMMIT
 --- R2. How multi-candidate conversions were decided ---
    decided_by    | distinct_codes | dx_rows 
 -----------------+----------------+---------
- DESC_SIMILARITY |           2293 |  408922
- SME_OVERRIDE    |              5 |  198764
+ DESC_SIMILARITY |           2290 |  391471
+ SME_OVERRIDE    |              9 |  218369
  BILLABLE        |             25 |  113916
- LOWEST_CODE     |            115 |   18281
+ LOWEST_CODE     |            114 |   16127
  VALID_FY2027    |              2 |     944
  RECIPROCAL      |              1 |       1
 
@@ -77,8 +77,8 @@ COMMIT
  7245      | Backache, unspecified                    | M549       | Dorsalgia, unspecified                        | DESC_SIMILARITY |           0.387 |    7608
  49390     | Asthma, unspecified type, unspecified    | J45909     | Unspecified asthma, uncomplicated             | DESC_SIMILARITY |           0.543 |    7429
  42789     | Other specified cardiac dysrhythmias     | R001       | Bradycardia, unspecified                      | BILLABLE        |           0.245 |    7289
- 7823      | Edema                                    | R600       | Localized edema                               | DESC_SIMILARITY |           0.375 |    7020
- 7812      | Abnormality of gait                      | R2689      | Other abnormalities of gait and mobility      | DESC_SIMILARITY |           0.526 |    6663
+ 7823      | Edema                                    | R609       | Edema, unspecified                            | SME_OVERRIDE    |           0.375 |    7020
+ 7812      | Abnormality of gait                      | R269       | Unspecified abnormalities of gait and mobilit | SME_OVERRIDE    |           0.526 |    6663
  78609     | Other respiratory abnormalities          | R0689      | Other abnormalities of breathing              | DESC_SIMILARITY |           0.455 |    6112
 
 
@@ -86,7 +86,7 @@ COMMIT
  icd9_code | gem_source_code | icd10_code |                 icd10_description                  | dx_rows 
 -----------+-----------------+------------+----------------------------------------------------+---------
  V726      | V7260           | Z0000      | Encounter for general adult medical examination wi |    2411
- 7807      | 78079           | R5381      | Other malaise                                      |    2154
+ 7807      | 78079           | R5383      | Other fatigue                                      |    2154
  7902      | 79029           | R7309      | Other abnormal glucose                             |    2140
  7931      | 79319           | R918       | Other nonspecific abnormal finding of lung field   |    1850
  0414      | 04149           | B9620      | Unspecified Escherichia coli [E. coli] as the caus |    1493
@@ -115,23 +115,12 @@ COMMIT
 --- R8. Regression versus previous run: decisions that changed ---
  codes_changed | dx_rows_affected 
 ---------------+------------------
-          1832 |           498691
+             4 |            19605
 
- icd9_code | previous | current | decided_by_now  | dx_rows 
------------+----------+---------+-----------------+---------
- 4019      | I169     | I10     | SME_OVERRIDE    |  122533
- V5869     | Z7984    | Z79899  | SME_OVERRIDE    |   38011
- 78079     | R531     | R5383   | SME_OVERRIDE    |   19800
- 71590     | M159     | M1990   | SME_OVERRIDE    |   10636
- 78659     | R0782    | R0789   | SME_OVERRIDE    |    7784
- 7823      | R609     | R600    | DESC_SIMILARITY |    7020
- 7812      | R269     | R2689   | DESC_SIMILARITY |    6663
- 78609     | R0600    | R0689   | DESC_SIMILARITY |    6112
- 73390     | M859     | M949    | DESC_SIMILARITY |    5202
- 79029     | R7303    | R7309   | DESC_SIMILARITY |    5106
- 42781     | R001     | I495    | DESC_SIMILARITY |    4306
- V4589     | Z974     | Z98890  | DESC_SIMILARITY |    4193
- 4241      | I359     | I358    | DESC_SIMILARITY |    3768
- 7906      | R7889    | R7989   | DESC_SIMILARITY |    3616
- 72252     | M5136    | M5137   | DESC_SIMILARITY |    3582
+ icd9_code | previous | current | decided_by_now | dx_rows 
+-----------+----------+---------+----------------+---------
+ 7823      | R600     | R609    | SME_OVERRIDE   |    7020
+ 7812      | R2689    | R269    | SME_OVERRIDE   |    6663
+ 4241      | I358     | I359    | SME_OVERRIDE   |    3768
+ 7807      | R5381    | R5383   | SME_OVERRIDE   |    2154
 
