@@ -57,3 +57,10 @@
 - **Local dates.** Dates are taken as written (`left(timestamp, 10)`), not converted to UTC: a 23:15 −05:00 visit stays on its own day.
 - **Array elements by meaning.** JSONPath selects the official name, the SSN identifier and the US Core race/ethnicity extensions by their system/url, never by array position.
 - **Diagnoses wait for CONV-4.** FHIR diagnoses are SNOMED; they enter `silver.claim_diagnosis` once converted.
+
+## Findings from the FHIR-2 build (test failures investigated)
+
+| # | Finding | Evidence | Rule | Layer |
+|---|---|---|---|---|
+| H17 | EOB payments carry floating-point artifacts | 70,143 of 151,490 EOBs (46%) have more than 2 decimals; raw sum $232,244,709.30, sum rounded per claim $232,244,613.68 | Money is stored as NUMERIC(14,2), rounded per claim. FHIR dollar reconciliation is defined as the sum of per-claim amounts rounded to cents | Silver, Tests |
+| H18 | One professional claim after death per deceased member | 158 claims, 158 members, 1–14 days after death, $38,183.86; service = Death Certification (SNOMED 308646001) | Death certification is an allowed post-death service; every other post-death claim fails `assert_no_service_after_death` (payment integrity) | Tests, Gold |

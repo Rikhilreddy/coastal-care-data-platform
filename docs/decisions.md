@@ -3,3 +3,4 @@
 - CONV-3 (backlog): when the top-similarity candidate is a non-billable header, descend to its billable residual child instead of choosing a different billable concept. Found via 42789 (I49.8 vs R00.1); 172 non-billable targets in v2.
 - CONV-3 (backlog): when the top-similarity candidate is a non-billable header, descend to its billable residual child instead of choosing a different billable concept. Found via 42789 (I49.8 vs R00.1); 172 non-billable targets in v2.
 - SILVER-2 (backlog): 4,034 of 65,504 accepted ICD-9 procedure codes (6.2%) also appear as a diagnosis on the same claim (e.g. 4019 passes procedure format). Fix: cross-check against claim diagnoses or load the ICD-9 v32 procedure list (CMS32_DESC_LONG_SG.txt).
+- Licensing (2026-10-20): project uses only free/open-source tools and public-domain or open data. No UMLS, no paid X12 guides, no CPT descriptions (codes format-only). Dashboards: Apache Superset.
