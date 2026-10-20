@@ -12,11 +12,11 @@ with bronze as (
 ),
 silver as (
     select claim_type, sum(segment_count) as row_count, sum(paid_amount) as dollars
-    from {{ ref('claim_header') }} group by claim_type
+    from {{ ref('claim_header') }} where source_system = 'DESYNPUF' group by claim_type
 ),
 quarantine as (
     select claim_type, count(*) as row_count, coalesce(sum(paid_amount), 0) as dollars
-    from {{ ref('claim_exception') }} group by claim_type
+    from {{ ref('claim_exception') }} where source_system = 'DESYNPUF' group by claim_type
 )
 select
     b.claim_type,

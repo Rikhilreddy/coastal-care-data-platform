@@ -1,0 +1,26 @@
+target_table,target_column,data_type,nullable,source,source_path,transformation_rule,finding_ref,notes
+silver.member,source_system,TEXT,N,(constant),,'SYNTHEA_FHIR',F15,
+silver.member,member_source_id,TEXT,N,Patient,id,Direct,H1,Same UUID as bundle fullUrl
+silver.member,birth_date,DATE,N,Patient,birthDate,Cast to date,,PHI; generalized in analyst views
+silver.member,death_date,DATE,Y,Patient,deceasedDateTime,"left(…,10)::date (local date as recorded)",H15,
+silver.member,sex_code,TEXT,N,Patient,gender,"male→M, female→F, else U",,
+silver.member,race_code,TEXT,N,Patient,extension us-core-race / us-core-ethnicity ombCategory,"Hispanic ethnicity (2135-2)→HISPANIC; else race 2106-3→WHITE, 2054-5→BLACK, other→OTHER, missing→UNKNOWN",,RESTRICTED; CMS categories
+silver.member_identity,first_name / last_name,TEXT,Y,Patient,name[use=official].given[0] / .family,JSONPath by use,,RESTRICTED
+silver.member_identity,ssn,TEXT,Y,Patient,identifier[system=http://hl7.org/fhir/sid/us-ssn].value,JSONPath by system,,RESTRICTED; MPI input
+silver.member_identity,mrn,TEXT,Y,Patient,identifier[type.coding.code=MR].value,JSONPath by type,,RESTRICTED
+silver.member_identity,address_line / city / state / postal_code,TEXT,Y,Patient,address[0],Direct,,RESTRICTED
+silver.member_identity,phone,TEXT,Y,Patient,telecom[system=phone].value,JSONPath by system,,RESTRICTED
+silver.claim_header,claim_id,TEXT,N,Claim,id,Direct,H11,
+silver.claim_header,claim_type,TEXT,N,Claim + Encounter,type.coding[0].code; Encounter.class.code,"pharmacy→RX; professional→PROF; institutional + class IMP/ACUTE/NONAC→IP; else OP",H8,
+silver.claim_header,source_claim_type,TEXT,N,Claim,type.coding[0].code,Direct,H8,
+silver.claim_header,payer_name,TEXT,N,Claim,insurance[0].coverage.display,Direct,H10,
+silver.claim_header,member_source_id,TEXT,N,Claim,patient.reference,Strip urn:uuid: / Patient/,,
+silver.claim_header,claim_from_date / claim_thru_date,DATE,N,Claim,billablePeriod.start / .end,"left(…,10)::date",,
+silver.claim_header,claim_year,INTEGER,N,(derived),,EXTRACT(YEAR FROM claim_thru_date),F13,Same rule as DE-SynPUF
+silver.claim_header,admission_date / discharge_date,DATE,Y,Claim + Encounter,billablePeriod,Only when institutional AND inpatient class,H8,Readmission logic; guarded by test
+silver.claim_header,provider_id,TEXT,Y,Claim,provider.reference,Identifier value after last | / :,,
+silver.claim_header,billed_amount,"NUMERIC(14,2)",N,Claim,total.value,Direct,H11,
+silver.claim_header,paid_amount,"NUMERIC(14,2)",N,ExplanationOfBenefit,payment.amount.value,Joined by EOB.claim.reference; 0 if absent,"H9, H11",RX always 0
+silver.claim_header,segment_count,INTEGER,N,(constant),,1,,FHIR claims are not segmented
+silver.claim_header,primary_dx_missing,BOOLEAN,N,Claim,diagnosis,"No diagnosis entries, non-pharmacy",,
+silver.claim_header,_source_row_nums,BIGINT[],N,bronze.fhir_resource,_source_entry_num,ARRAY[entry number],,Lineage to bundle entry

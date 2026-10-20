@@ -27,8 +27,8 @@ op as (   -- outpatient ICD-9 procedure columns are not mapped (F6)
 totals as (
     select
         (select n from ip) + (select n from op)              as bronze_values,
-        (select count(*) from {{ ref('claim_diagnosis') }})
-      + (select count(*) from {{ ref('claim_procedure') }})
-      + (select count(*) from {{ ref('code_exception') }})   as silver_plus_quarantine_values
+        (select count(*) from {{ ref('claim_diagnosis') }} where source_system = 'DESYNPUF')
+      + (select count(*) from {{ ref('claim_procedure') }} where source_system = 'DESYNPUF')
+      + (select count(*) from {{ ref('code_exception') }} where source_system = 'DESYNPUF')   as silver_plus_quarantine_values
 )
 select * from totals where bronze_values <> silver_plus_quarantine_values

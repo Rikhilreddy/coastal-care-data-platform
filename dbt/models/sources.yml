@@ -11,6 +11,8 @@ sources:
         description: CMS DE-SynPUF inpatient claims, one row per claim segment
       - name: desynpuf_outpatient
         description: CMS DE-SynPUF outpatient claims, one row per claim segment
+      - name: fhir_resource
+        description: Synthea FHIR R4 resources, one row per resource as JSONB, loaded by ingestion/fhir/load_bronze_fhir.py
   - name: ref
     description: Code sets and conversion outputs, loaded by ingestion/reference and sql/conversion
     schema: ref

@@ -25,10 +25,19 @@ models:
         data_tests: [not_null]
 
   - name: member
-    description: One row per member (stable demographics). race_code is RESTRICTED (masked for analyst roles).
+    description: One row per member per source system (stable demographics). race_code is RESTRICTED (masked for analyst roles).
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "source_system || '-' || member_source_id"
     columns:
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['DESYNPUF', 'SYNTHEA_FHIR']
       - name: member_source_id
-        data_tests: [unique, not_null]
+        data_tests: [not_null]
       - name: birth_date
         data_tests: [not_null]
       - name: sex_code
@@ -42,25 +51,27 @@ models:
         data_tests:
           - accepted_values:
               arguments:
-                values: ['WHITE', 'BLACK', 'OTHER', 'HISPANIC']
+                values: ['WHITE', 'BLACK', 'OTHER', 'HISPANIC', 'UNKNOWN']   # UNKNOWN: race is optional in US Core
 
   - name: claim_header
-    description: One row per claim, segments rolled up. Dates from segment 1, dollars summed across segments.
+    description: One row per claim from every source (DE-SynPUF segments rolled up; FHIR Claim + EOB).
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "source_system || '-' || claim_id"
     columns:
       - name: claim_id
-        data_tests: [unique, not_null]
+        data_tests: [not_null]
       - name: claim_type
+        description: Canonical across sources. IP/OP facility, PROF professional, RX pharmacy
         data_tests:
           - accepted_values:
               arguments:
-                values: ['IP', 'OP']
+                values: ['IP', 'OP', 'PROF', 'RX']
+      - name: payer_name
+        data_tests: [not_null]
       - name: member_source_id
-        data_tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('member')
-                field: member_source_id
+        data_tests: [not_null]
       - name: claim_from_date
         data_tests: [not_null]
       - name: claim_thru_date
@@ -71,6 +82,9 @@ models:
               arguments:
                 values: [2008, 2009, 2010]
                 quote: false
+              config:
+                where: "source_system = 'DESYNPUF'"
+          - not_null
       - name: paid_amount
         data_tests: [not_null]
       - name: segment_count
@@ -124,3 +138,12 @@ models:
           - accepted_values:
               arguments:
                 values: ['ICD9-PROC', 'HCPCS']
+
+  - name: member_identity
+    description: RESTRICTED direct identifiers (name, SSN, MRN, address, phone). Not for analyst roles.
+    meta:
+      pii: restricted
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "source_system || '-' || member_source_id"
