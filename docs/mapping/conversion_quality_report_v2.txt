@@ -1,0 +1,137 @@
+Timing is off.
+CREATE EXTENSION
+BEGIN
+DROP TABLE
+CREATE TABLE
+DO
+DROP TABLE
+DROP TABLE
+SELECT 11934
+SELECT 11934
+SELECT 20633
+SELECT 20633
+SELECT 12216
+UPDATE 5
+SELECT 11934
+ALTER TABLE
+SELECT 12216
+CREATE INDEX
+COMMIT
+
+============= ICD-9 -> ICD-10 CONVERSION QUALITY REPORT (v2) =============
+
+--- R0. Reference inputs ---
+ icd9_descriptions | overrides_approved | overrides_pending 
+-------------------+--------------------+-------------------
+             14567 |                  5 |                 0
+
+
+--- R1. Coverage by match type ---
+  gem_match_type   | distinct_codes | pct_codes | dx_rows | pct_dx_rows | pct_principal 
+-------------------+----------------+-----------+---------+-------------+---------------
+ APPROXIMATE       |           5407 |      45.3 | 1149995 |        40.1 |          43.1
+ EXACT             |           3081 |      25.8 |  912678 |        31.8 |          31.8
+ APPROXIMATE_MULTI |           2242 |      18.8 |  717348 |        25.0 |          18.5
+ PARENT_FALLBACK   |            402 |       3.4 |   56628 |         2.0 |           4.7
+ COMBINATION       |            540 |       4.5 |   12725 |         0.4 |           1.2
+ NOT_IN_GEM        |             53 |       0.4 |    8347 |         0.3 |           0.7
+ NO_MAP            |            209 |       1.8 |    8331 |         0.3 |           0.2
+
+
+--- R2. How multi-candidate conversions were decided ---
+   decided_by    | distinct_codes | dx_rows 
+-----------------+----------------+---------
+ DESC_SIMILARITY |           2293 |  408922
+ SME_OVERRIDE    |              5 |  198764
+ BILLABLE        |             25 |  113916
+ LOWEST_CODE     |            115 |   18281
+ VALID_FY2027    |              2 |     944
+ RECIPROCAL      |              1 |       1
+
+
+--- R3. Target validity in FY2027 ICD-10-CM (overrides included) ---
+ converted_codes | target_not_valid_fy2027 | target_not_billable 
+-----------------+-------------------------+---------------------
+           11672 |                      16 |                 172
+
+
+--- R4. Dollars on claims whose principal diagnosis is missing or not converted ---
+ claim_type | claims_affected | paid_affected 
+------------+-----------------+---------------
+ IP         |              77 |    1457900.00
+ OP         |            7196 |    4709540.00
+
+
+--- R5. Most-used multi-candidate conversions (SME review sample) ---
+ icd9_code |             icd9_description             | icd10_code |               icd10_description               |   decided_by    | desc_similarity | dx_rows 
+-----------+------------------------------------------+------------+-----------------------------------------------+-----------------+-----------------+---------
+ 4019      | Unspecified essential hypertension       | I10        | Essential (primary) hypertension              | SME_OVERRIDE    |           0.535 |  122533
+ 2724      | Other and unspecified hyperlipidemia     | E785       | Hyperlipidemia, unspecified                   | BILLABLE        |           0.730 |   57209
+ V5869     | Long-term (current) use of other medicat | Z79899     | Other long term (current) drug therapy        | SME_OVERRIDE    |           0.462 |   38011
+ 2720      | Pure hypercholesterolemia                | E7800      | Pure hypercholesterolemia, unspecified        | BILLABLE        |           0.676 |   29458
+ 4280      | Congestive heart failure, unspecified    | I509       | Heart failure, unspecified                    | DESC_SIMILARITY |           0.703 |   25911
+ 78079     | Other malaise and fatigue                | R5383      | Other fatigue                                 | SME_OVERRIDE    |           0.538 |   19800
+ 71590     | Osteoarthrosis, unspecified whether gene | M1990      | Unspecified osteoarthritis, unspecified site  | SME_OVERRIDE    |           0.452 |   10636
+ 2948      | Other persistent mental disorders due to | F068       | Other specified mental disorders due to known | DESC_SIMILARITY |           0.462 |    8096
+ 78659     | Other chest pain                         | R0789      | Other chest pain                              | SME_OVERRIDE    |           1.000 |    7784
+ 7245      | Backache, unspecified                    | M549       | Dorsalgia, unspecified                        | DESC_SIMILARITY |           0.387 |    7608
+ 49390     | Asthma, unspecified type, unspecified    | J45909     | Unspecified asthma, uncomplicated             | DESC_SIMILARITY |           0.543 |    7429
+ 42789     | Other specified cardiac dysrhythmias     | R001       | Bradycardia, unspecified                      | BILLABLE        |           0.245 |    7289
+ 7823      | Edema                                    | R600       | Localized edema                               | DESC_SIMILARITY |           0.375 |    7020
+ 7812      | Abnormality of gait                      | R2689      | Other abnormalities of gait and mobility      | DESC_SIMILARITY |           0.526 |    6663
+ 78609     | Other respiratory abnormalities          | R0689      | Other abnormalities of breathing              | DESC_SIMILARITY |           0.455 |    6112
+
+
+--- R6. Parent fallback conversions (top 10 by use) ---
+ icd9_code | gem_source_code | icd10_code |                 icd10_description                  | dx_rows 
+-----------+-----------------+------------+----------------------------------------------------+---------
+ V726      | V7260           | Z0000      | Encounter for general adult medical examination wi |    2411
+ 7807      | 78079           | R5381      | Other malaise                                      |    2154
+ 7902      | 79029           | R7309      | Other abnormal glucose                             |    2140
+ 7931      | 79319           | R918       | Other nonspecific abnormal finding of lung field   |    1850
+ 0414      | 04149           | B9620      | Unspecified Escherichia coli [E. coli] as the caus |    1493
+ 7806      | 78060           | R509       | Fever, unspecified                                 |    1482
+ 2766      | 27669           | E8779      | Other fluid overload                               |    1465
+ 585       | 5859            | N189       | Chronic kidney disease, unspecified                |    1436
+ 2841      | 28419           | D61818     | Other pancytopenia                                 |    1383
+ 5997      | 59970           | R319       | Hematuria, unspecified                             |    1251
+
+
+--- R7. Still not in GEM after fallback (top 10 by use) ---
+ icd9_code | dx_rows | principal_rows 
+-----------+---------+----------------
+ V451      |    1995 |           1348
+ V854      |    1303 |             47
+ V572      |     709 |            709
+ 5185      |     619 |             84
+ V581      |     608 |            608
+ 7870      |     414 |            414
+ V728      |     357 |            357
+ 7955      |     196 |             69
+ 4251      |     146 |             26
+ 7884      |     144 |            144
+
+
+--- R8. Regression versus previous run: decisions that changed ---
+ codes_changed | dx_rows_affected 
+---------------+------------------
+          1832 |           498691
+
+ icd9_code | previous | current | decided_by_now  | dx_rows 
+-----------+----------+---------+-----------------+---------
+ 4019      | I169     | I10     | SME_OVERRIDE    |  122533
+ V5869     | Z7984    | Z79899  | SME_OVERRIDE    |   38011
+ 78079     | R531     | R5383   | SME_OVERRIDE    |   19800
+ 71590     | M159     | M1990   | SME_OVERRIDE    |   10636
+ 78659     | R0782    | R0789   | SME_OVERRIDE    |    7784
+ 7823      | R609     | R600    | DESC_SIMILARITY |    7020
+ 7812      | R269     | R2689   | DESC_SIMILARITY |    6663
+ 78609     | R0600    | R0689   | DESC_SIMILARITY |    6112
+ 73390     | M859     | M949    | DESC_SIMILARITY |    5202
+ 79029     | R7303    | R7309   | DESC_SIMILARITY |    5106
+ 42781     | R001     | I495    | DESC_SIMILARITY |    4306
+ V4589     | Z974     | Z98890  | DESC_SIMILARITY |    4193
+ 4241      | I359     | I358    | DESC_SIMILARITY |    3768
+ 7906      | R7889    | R7989   | DESC_SIMILARITY |    3616
+ 72252     | M5136    | M5137   | DESC_SIMILARITY |    3582
+

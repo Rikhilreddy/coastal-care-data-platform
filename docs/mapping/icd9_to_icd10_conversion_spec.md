@@ -1,4 +1,8 @@
-# ICD-9-CM → ICD-10-CM Diagnosis Conversion Specification (v1)
+# ICD-9-CM → ICD-10-CM Diagnosis Conversion Specification (v2)
+
+**Change log**
+- **v2:** SME override table (R0); parent fallback for codes missing from GEMs (R1b); tie-break reordered with description similarity; the "unspecified" keyword rule removed; regression report against the previous run. Reason: v1 converted 4019 (unspecified essential hypertension, 122,533 diagnoses) to I16.9 (hypertensive crisis) because the keyword rule matched the word "unspecified", not the clinical meaning, and 1,827 codes were decided by alphabetical order. A tested alternative (prefer candidates whose backward GEM mapping is exact) was rejected: all candidates for the affected codes carry the same backward flag `10000`.
+- **v1:** initial rules R1–R6.
 
 **Applies to:** `silver.claim_diagnosis` (legacy DE-SynPUF claims, 2008–2010)
 **Reference data:** CMS 2018 diagnosis GEMs (`2018_I9gem.txt`, forward; `2018_I10gem.txt`, backward), ICD-10-CM FY2027 order file
@@ -28,7 +32,9 @@ Applied in this order for each distinct ICD-9 code found in claims:
 
 | Rule | Condition | Action | `gem_match_type` |
 |---|---|---|---|
-| R1 | ICD-9 code not present in GEM source list | No conversion; log `CONVERSION_NOT_IN_GEM` in `quarantine.code_exception` (claim retained) | `NOT_IN_GEM` |
+| R0 | An `APPROVED` row exists in `ref.icd9_dx_override` | Use the SME-approved target; `decided_by = SME_OVERRIDE` | unchanged |
+| R1b | Code not in GEMs, but its residual child is (code + `0`, else code + `9`) | Convert through that child; record it in `gem_source_code`. Covers codes valid in 2008–2010 that were later split into subcodes (e.g., 780.6 fever → 780.60) | `PARENT_FALLBACK` |
+| R1 | ICD-9 code not present in GEM source list and no fallback child | No conversion; log `CONVERSION_NOT_IN_GEM` in `quarantine.code_exception` (claim retained) | `NOT_IN_GEM` |
 | R2 | No Map flag = 1 | `icd10_code` = null; log `CONVERSION_NO_MAP` | `NO_MAP` |
 | R3 | Exactly one target, approximate = 0, combination = 0 | Use that target | `EXACT` |
 | R4 | Exactly one target, approximate = 1, combination = 0 | Use that target | `APPROXIMATE` |
@@ -39,11 +45,15 @@ Applied in this order for each distinct ICD-9 code found in claims:
 
 Deterministic, applied in order until one candidate remains:
 
-1. **Reciprocal match:** prefer candidates whose backward GEM (`2018_I10gem.txt`) maps back to the same ICD-9 code. This is the CMS-recommended way to use both GEM directions.
-2. **Valid today:** prefer candidates that are valid codes in ICD-10-CM FY2027.
-3. **Billable:** prefer candidates flagged billable (valid for HIPAA transactions) in the FY2027 order file.
-4. **Unspecified preference:** prefer the candidate whose description contains "unspecified", because a historical claim cannot prove the extra specificity ICD-10 demands. Choosing a more specific code would invent clinical detail.
-5. **Lowest code:** alphabetical order, so the result is always reproducible.
+1. **Valid today:** prefer candidates that are valid codes in ICD-10-CM FY2027.
+2. **Billable:** prefer candidates flagged billable (valid for HIPAA transactions) in the FY2027 order file.
+3. **Description similarity:** prefer the candidate whose ICD-10 description is most similar to the ICD-9 description (PostgreSQL `pg_trgm` trigram similarity, rounded to 3 decimals). This ties the choice to what the original code meant.
+4. **Reciprocal match:** prefer candidates whose backward GEM maps back to the same ICD-9 code.
+5. **Lowest code:** alphabetical order, so the result is always reproducible. Codes decided here are priority candidates for SME review.
+
+### SME override governance
+
+Overrides live in `dbt/seeds/icd9_dx_overrides.csv`, version-controlled in Git. Each row has `review_status` (`PROPOSED`, `APPROVED`, `REJECTED`), a rationale, reviewer, and review date. Only `APPROVED` rows affect results, and the loader rejects an `APPROVED` row with no reviewer or date. Git history records who approved each mapping and when. The highest-volume codes still decided by `LOWEST_CODE` or with low similarity are added as `PROPOSED` rows for review.
 
 `candidate_count` and the deciding tie-break step are recorded for every conversion.
 
@@ -64,7 +74,10 @@ GEMs were last published for FY2018. Some 2018 targets have since been expanded 
 | `ref.gem_icd9_to_icd10` | One row per GEM row (forward) | `icd9_code, icd10_code, approximate, no_map, combination, scenario, choice_list` |
 | `ref.gem_icd10_to_icd9` | One row per GEM row (backward) | Same layout, reversed |
 | `ref.icd10cm` | One row per FY2027 code | `icd10_code, is_billable, short_desc, long_desc` |
-| `ref.icd9_dx_conversion` | One row per distinct ICD-9 code in claims | `icd9_code, icd10_code, gem_match_type, candidate_count, decided_by, target_valid_fy2027, target_billable` |
+| `ref.icd9cm` | One row per ICD-9-CM v32 diagnosis code | `icd9_code, long_desc` |
+| `ref.icd9_dx_override` | One row per SME-reviewed code | `icd9_code, icd10_code, review_status, rationale, reviewed_by, review_date` |
+| `ref.icd9_dx_conversion` | One row per distinct ICD-9 code in claims | `icd9_code, icd10_code, gem_match_type, gem_source_code, candidate_count, decided_by, desc_similarity, target_valid_fy2027, target_billable` |
+| `ref.icd9_dx_conversion_prev` | Previous run's decisions | `icd9_code, icd10_code, gem_match_type, decided_by` (regression baseline) |
 | `silver.dx_conversion_detail` | One row per ICD-10 code produced (combination codes included) | `icd9_code, scenario, choice_list, icd10_code` |
 | `silver.claim_diagnosis` | Unchanged grain; adds `icd10_code`, `gem_match_type` | Joined from `ref.icd9_dx_conversion` |
 
@@ -76,6 +89,7 @@ Converting once per **distinct** code (thousands) instead of per claim row (mill
 - Share of **principal** diagnoses converted `EXACT` or `APPROXIMATE`
 - Paid dollars on claims whose principal diagnosis is `NO_MAP` or `NOT_IN_GEM`
 - Count of targets not valid or not billable in FY2027
+- Regression: every code whose target changed since the previous run, with diagnosis rows affected
 
 These go into the reconciliation report so conversion quality is visible, not assumed.
 

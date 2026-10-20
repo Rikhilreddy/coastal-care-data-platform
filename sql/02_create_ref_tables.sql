@@ -39,6 +39,25 @@ CREATE TABLE IF NOT EXISTS ref.gem_icd10_to_icd9 (
 CREATE INDEX IF NOT EXISTS ix_gem_bwd_icd10 ON ref.gem_icd10_to_icd9 (icd10_code);
 CREATE INDEX IF NOT EXISTS ix_gem_bwd_icd9  ON ref.gem_icd10_to_icd9 (icd9_code);
 
+-- ICD-9-CM diagnosis descriptions (CMS version 32, final release, Oct 2014).
+-- Used for description similarity in the ICD-9 -> ICD-10 conversion.
+CREATE TABLE IF NOT EXISTS ref.icd9cm (
+    icd9_code         TEXT  PRIMARY KEY,
+    long_desc         TEXT  NOT NULL,
+    code_set_version  TEXT  NOT NULL
+);
+
+-- SME-reviewed conversion overrides (source: dbt/seeds/icd9_dx_overrides.csv).
+-- Only APPROVED rows change conversion results.
+CREATE TABLE IF NOT EXISTS ref.icd9_dx_override (
+    icd9_code      TEXT  PRIMARY KEY,
+    icd10_code     TEXT  NOT NULL,
+    review_status  TEXT  NOT NULL CHECK (review_status IN ('PROPOSED', 'APPROVED', 'REJECTED')),
+    rationale      TEXT  NOT NULL,
+    reviewed_by    TEXT,
+    review_date    DATE
+);
+
 -- HCPCS Level II codes (CMS quarterly alpha-numeric file).
 -- Level I (CPT) codes are AMA-licensed and are not part of this file.
 CREATE TABLE IF NOT EXISTS ref.hcpcs (

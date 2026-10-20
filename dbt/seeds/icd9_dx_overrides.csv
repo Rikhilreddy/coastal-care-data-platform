@@ -1,0 +1,6 @@
+icd9_code,icd10_code,review_status,rationale,reviewed_by,review_date
+4019,I10,APPROVED,Unspecified essential hypertension maps to essential hypertension; I16.9 (crisis) needs documentation the claim does not carry,Rikhi Y.,2026-10-20
+V5869,Z79899,APPROVED,Residual other long-term drug therapy; specific drug classes (hypoglycemics/opiates) cannot be inferred from the claim,Rikhi Y.,2026-10-20
+78659,R0789,APPROVED,Direct residual equivalent: other chest pain; intercostal pain is a narrower concept,Rikhi Y.,2026-10-20
+78079,R5383,APPROVED,Fatigue is the dominant clinical intent of 780.79; R53.81 other malaise is an alternative,Rikhi Y.,2026-10-20
+71590,M1990,APPROVED,Site-unspecified osteoarthritis; polyosteoarthritis (M15.9) implies multiple joints not documented,Rikhi Y.,2026-10-20

@@ -6,6 +6,8 @@ Tables loaded (full refresh each time a source file changes):
   ref.gem_icd9_to_icd10  <- CMS 2018 diagnosis GEM, forward
   ref.gem_icd10_to_icd9  <- CMS 2018 diagnosis GEM, backward
   ref.hcpcs              <- HCPCS Level II quarterly file (Excel version, named columns)
+  ref.icd9cm             <- ICD-9-CM v32 long diagnosis descriptions
+  ref.icd9_dx_override   <- SME-reviewed conversion overrides (dbt/seeds/icd9_dx_overrides.csv)
 
 Each load: fingerprint the file (skip if unchanged), parse, replace the table in
 one transaction, reconcile parsed rows vs loaded rows, record in audit.load_manifest.
@@ -33,7 +35,6 @@ import psycopg2
 from dotenv import load_dotenv
 from psycopg2 import sql
 
-REF_DIR = Path("data/reference")
 DDL_FILES = [Path("sql/01_create_audit_tables.sql"), Path("sql/02_create_ref_tables.sql")]
 SOURCE_SYSTEM = "REFERENCE"
 
@@ -171,11 +172,52 @@ def parse_hcpcs(path: Path) -> tuple[list[str], list[list]]:
     return cols, rows
 
 
+ICD9_LINE_RE = re.compile(r"^(\d{3,5}|V\d{2,4}|E\d{3,4})\s+(.+)$")
+
+
+def parse_icd9cm(path: Path) -> tuple[list[str], list[list]]:
+    """Each line: an ICD-9-CM code, whitespace, its long description."""
+    rows = []
+    for n, line in enumerate(read_lines(path), start=1):
+        match = ICD9_LINE_RE.match(line.strip())
+        if not match:
+            raise ValueError(f"Line {n}: expected '<ICD-9 code> <description>', found {line[:60]!r}")
+        rows.append([match.group(1), match.group(2).strip(), "v32"])
+    return ["icd9_code", "long_desc", "code_set_version"], rows
+
+
+OVERRIDE_COLUMNS = ["icd9_code", "icd10_code", "review_status", "rationale", "reviewed_by", "review_date"]
+OVERRIDE_STATUSES = {"PROPOSED", "APPROVED", "REJECTED"}
+
+
+def parse_overrides(path: Path) -> tuple[list[str], list[list]]:
+    """SME override file. Every row needs a status; only APPROVED rows change conversions."""
+    rows = []
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        reader = csv.DictReader(handle)
+        missing = [c for c in OVERRIDE_COLUMNS if c not in (reader.fieldnames or [])]
+        if missing:
+            raise ValueError(f"Override file is missing columns {missing}")
+        for n, rec in enumerate(reader, start=2):
+            status = rec["review_status"].strip().upper()
+            if status not in OVERRIDE_STATUSES:
+                raise ValueError(f"Line {n}: review_status {status!r} must be one of {sorted(OVERRIDE_STATUSES)}")
+            if status == "APPROVED" and not (rec["reviewed_by"].strip() and rec["review_date"].strip()):
+                raise ValueError(f"Line {n}: APPROVED rows need reviewed_by and review_date")
+            rows.append([rec["icd9_code"].strip(), rec["icd10_code"].strip().upper(), status,
+                         rec["rationale"].strip(), rec["reviewed_by"].strip() or None,
+                         to_date(rec["review_date"])])
+    return OVERRIDE_COLUMNS, rows
+
+
+# Paths are relative to the project root; a glob pattern must match exactly one file.
 SOURCES = [
-    ("icd10cm_2027/icd10cm_order_2027.txt",                "ref.icd10cm",           parse_icd10cm),
-    ("gems_2018/2018_I9gem.txt",                           "ref.gem_icd9_to_icd10", make_gem_parser("icd9_code", "icd10_code")),
-    ("gems_2018/2018_I10gem.txt",                          "ref.gem_icd10_to_icd9", make_gem_parser("icd10_code", "icd9_code")),
-    ("hcpcs_2026_oct/HCPC2026_OCT_ANWEB_09232026.xlsx",    "ref.hcpcs",             parse_hcpcs),
+    ("data/reference/icd10cm_2027/icd10cm_order_2027.txt",             "ref.icd10cm",           parse_icd10cm),
+    ("data/reference/gems_2018/2018_I9gem.txt",                        "ref.gem_icd9_to_icd10", make_gem_parser("icd9_code", "icd10_code")),
+    ("data/reference/gems_2018/2018_I10gem.txt",                       "ref.gem_icd10_to_icd9", make_gem_parser("icd10_code", "icd9_code")),
+    ("data/reference/hcpcs_2026_oct/HCPC2026_OCT_ANWEB_09232026.xlsx", "ref.hcpcs",             parse_hcpcs),
+    ("data/reference/icd9cm_v32/*LONG*DX*.txt",                        "ref.icd9cm",            parse_icd9cm),
+    ("dbt/seeds/icd9_dx_overrides.csv",                                "ref.icd9_dx_override",  parse_overrides),
 ]
 
 
@@ -198,11 +240,13 @@ def copy_rows(cur, target: str, cols: list[str], rows: list[list]) -> None:
     cur.copy_expert(stmt, buffer)
 
 
-def load_one(rel_path: str, target: str, parser, force: bool, data_conn, audit_cur) -> str:
-    path = REF_DIR / rel_path
-    if not path.exists():
-        log.error("FAIL  %s not found", path)
+def load_one(pattern: str, target: str, parser, force: bool, data_conn, audit_cur) -> str:
+    matches = sorted(Path(".").glob(pattern))
+    if len(matches) != 1:
+        log.error("FAIL  %s matched %d files (expected exactly 1): %s",
+                  pattern, len(matches), [m.name for m in matches])
         return "FAILED"
+    path = matches[0]
     file_hash, batch_id = sha256_of(path), str(uuid.uuid4())
 
     audit_cur.execute(
