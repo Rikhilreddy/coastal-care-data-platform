@@ -9,7 +9,7 @@ snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_p
 741062008,Not in labor force (finding),1201,NOT_CODABLE,,false,HIGH,PROPOSED,Not in labor force is not unemployment (Z56.0); no code,,,COASTAL_CROSSWALK_V1
 444814009,Viral sinusitis (disorder),1154,DIAGNOSIS,J0190,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 18718003,Gingival disease (disorder),1012,DIAGNOSIS,K069,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-706893006,Victim of intimate partner abuse (finding),820,SDOH,Z91419,true,HIGH,PROPOSED,"Screening-based finding, not confirmed abuse (T74.-); personal history of adult abuse, unspecified",,,COASTAL_CROSSWALK_V1
+706893006,Victim of intimate partner abuse (finding),820,SDOH,Z91419,true,HIGH,APPROVED,Screening-based finding; not confirmed abuse (T74.-); personal history of adult abuse unspecified,Rikhi Y.,2026-10-20,COASTAL_CROSSWALK_V1
 109570002,Primary dental caries (disorder),765,DIAGNOSIS,K029,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 424393004,Reports of violence in the environment (finding),739,SDOH,Z658,true,HIGH,PROPOSED,Other specified problems related to psychosocial circumstances,,,COASTAL_CROSSWALK_V1
 195662009,Acute viral pharyngitis (disorder),705,DIAGNOSIS,J029,false,HIGH,PROPOSED,Viral organism not specified,,,COASTAL_CROSSWALK_V1
@@ -31,7 +31,7 @@ snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_p
 1149222004,Overdose (disorder),243,DIAGNOSIS,T50901A,true,HIGH,PROPOSED,"Substance unspecified, accidental, initial encounter; SME may refine to T40.- for opioids",,,COASTAL_CROSSWALK_V1
 274531002,Abnormal findings diagnostic imaging heart+coronary circulat (finding),220,DIAGNOSIS,R931,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 414545008,Ischemic heart disease (disorder),219,DIAGNOSIS,I259,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-10939881000119105,Unhealthy alcohol drinking behavior (finding),212,SDOH,Z7289,true,HIGH,PROPOSED,Screening finding; not coded as alcohol use disorder (F10.-) to avoid overcoding,,,COASTAL_CROSSWALK_V1
+10939881000119105,Unhealthy alcohol drinking behavior (finding),212,SDOH,Z7289,true,HIGH,APPROVED,Screening finding; not coded as alcohol use disorder (F10.-); avoids overcoding,Rikhi Y.,2026-10-20,COASTAL_CROSSWALK_V1
 278860009,Chronic low back pain (finding),202,DIAGNOSIS,M5450,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 237602007,Metabolic syndrome X (disorder),201,DIAGNOSIS,E88810,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 65363002,Otitis media (disorder),189,DIAGNOSIS,H6690,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
@@ -42,7 +42,7 @@ snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_p
 80583007,Severe anxiety (panic) (finding),171,DIAGNOSIS,F410,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 312608009,Laceration - injury (disorder),162,DIAGNOSIS,T148XXA,false,NORMAL,PROPOSED,Body region not specified,,,COASTAL_CROSSWALK_V1
 43878008,Streptococcal sore throat (disorder),155,DIAGNOSIS,J020,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-127013003,Disorder of kidney due to diabetes mellitus (disorder),152,DIAGNOSIS,E1121,false,HIGH,PROPOSED,Synthea diabetes is type 2; diabetic nephropathy,,,COASTAL_CROSSWALK_V1
+127013003,Disorder of kidney due to diabetes mellitus (disorder),152,DIAGNOSIS,E1121,false,HIGH,APPROVED,Synthea diabetes is type 2; diabetic nephropathy,Rikhi Y.,2026-10-20,COASTAL_CROSSWALK_V1
 278558000,Dental filling lost (finding),152,DIAGNOSIS,K0859,false,NORMAL,PROPOSED,Lost restoration,,,COASTAL_CROSSWALK_V1
 278602001,Loose dental filling (finding),149,DIAGNOSIS,K0859,false,NORMAL,PROPOSED,Loose restoration,,,COASTAL_CROSSWALK_V1
 431855005,Chronic kidney disease stage 1 (disorder),145,DIAGNOSIS,N181,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
@@ -110,7 +110,7 @@ snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_p
 283371005,Laceration of forearm (disorder),35,DIAGNOSIS,S51819A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 1551000119108,Nonproliferative diabetic retinopathy due to type II diabetes mellitus,35,DIAGNOSIS,E113299,false,HIGH,PROPOSED,Severity and eye not specified,,,COASTAL_CROSSWALK_V1
 46752004,Torus palatinus (disorder),34,DIAGNOSIS,M270,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-403190006,Epidermal burn of skin (disorder),32,DIAGNOSIS,T301,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+403190006,Epidermal burn of skin (disorder),32,DIAGNOSIS,T300,false,NORMAL,PROPOSED,ICD-10-CM has no degree-specific code for an unspecified body region; T30.1/T30.2 are WHO ICD-10 only; T30.0 degree unspecified,,,COASTAL_CROSSWALK_V1
 26929004,Alzheimer's disease (disorder),32,DIAGNOSIS,G309,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 233604007,Pneumonia (disorder),32,DIAGNOSIS,J189,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 58150001,Fracture of clavicle (disorder),31,DIAGNOSIS,S42009A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
@@ -134,7 +134,7 @@ snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_p
 33737001,Fracture of rib (disorder),23,DIAGNOSIS,S2239XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 46177005,End-stage renal disease (disorder),23,DIAGNOSIS,N186,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 198992004,Eclampsia in pregnancy (disorder),23,DIAGNOSIS,O159,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-254837009,Malignant neoplasm of breast (disorder),21,DIAGNOSIS,C50919,false,HIGH,PROPOSED,Assumes female breast; SME to confirm by sex,,,COASTAL_CROSSWALK_V1
+254837009,Malignant neoplasm of breast (disorder),21,DIAGNOSIS,C50919,false,HIGH,APPROVED,Assumes female breast; male patients need C50.929,Rikhi Y.,2026-10-20,COASTAL_CROSSWALK_V1
 271825005,Respiratory distress (finding),21,DIAGNOSIS,R0603,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 267036007,Dyspnea (finding),21,DIAGNOSIS,R0600,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 389087006,Hypoxemia (disorder),21,DIAGNOSIS,R0902,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
@@ -154,7 +154,7 @@ snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_p
 85116003,Miscarriage in second trimester (disorder),16,DIAGNOSIS,O039,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 443165006,Osteoporotic fracture of bone (disorder),16,DIAGNOSIS,M8000XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 398254007,Pre-eclampsia (disorder),16,DIAGNOSIS,O1490,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-403191005,Partial thickness burn (disorder),16,DIAGNOSIS,T302,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+403191005,Partial thickness burn (disorder),16,DIAGNOSIS,T300,false,NORMAL,PROPOSED,ICD-10-CM has no degree-specific code for an unspecified body region; T30.1/T30.2 are WHO ICD-10 only; T30.0 degree unspecified,,,COASTAL_CROSSWALK_V1
 239872002,Osteoarthritis of hip (disorder),16,DIAGNOSIS,M169,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 307731004,Injury of tendon of the rotator cuff of shoulder (disorder),15,DIAGNOSIS,S46009A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 68962001,Muscle pain (finding),14,DIAGNOSIS,M7910,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
