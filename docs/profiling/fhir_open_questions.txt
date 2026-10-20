@@ -1,0 +1,84 @@
+Timing is off.
+--- Q1. Claim types and dollars (institutional / professional / pharmacy) ---
+  claim_type   | claims | claim_total  
+---------------+--------+--------------
+ professional  |  74031 | 226293855.28
+ pharmacy      |  72173 |  21390101.62
+ institutional |   5286 |  64012031.34
+
+--- Q2. Payer mix (who is billed) ---
+         payer          | claims | claim_total  
+------------------------+--------+--------------
+ Medicare               |  78099 | 144217478.01
+ NO_INSURANCE           |  15109 |  29764120.15
+ Aetna                  |  11300 |  25590723.79
+ Anthem                 |  11198 |  23122774.81
+ Cigna Health           |  10315 |  23666492.39
+ Humana                 |  10276 |  24606786.52
+ Blue Cross Blue Shield |   6357 |  13832634.55
+ UnitedHealthcare       |   4475 |  10843589.54
+ Medicaid               |   4006 |  14177164.05
+ Dual Eligible          |    355 |   1874224.43
+
+--- Q3. Claim <-> EOB pairing (EOB.claim.reference points to the Claim) ---
+ claims |  eobs  | claims_without_eob | eobs_without_claim | extra_eobs_same_claim 
+--------+--------+--------------------+--------------------+-----------------------
+ 151490 | 151490 |                  0 |                  0 |                     0
+
+--- Q4. What the payer paid vs what was billed ---
+    billed    |     paid     | pct_paid | eob_without_payment | paid_more_than_billed | zero_paid 
+--------------+--------------+----------+---------------------+-----------------------+-----------
+ 311695988.24 | 232244709.30 |     74.5 |                   0 |                     0 |     72173
+
+--- Q5. Distinct SNOMED diagnosis codes (sizes CONV-4: SNOMED -> ICD-10-CM) ---
+ distinct_condition_codes | conditions 
+--------------------------+------------
+                      259 |      46488
+
+ snomed_code |                   description                    | conditions 
+-------------+--------------------------------------------------+------------
+ 314529007   | Medication review due (situation)                |       9424
+ 73595000    | Stress (finding)                                 |       3642
+ 66383009    | Gingivitis (disorder)                            |       3569
+ 160903007   | Full-time employment (finding)                   |       3378
+ 160904001   | Part-time employment (finding)                   |       2122
+ 422650009   | Social isolation (finding)                       |       1338
+ 423315002   | Limited social contact (finding)                 |       1311
+ 741062008   | Not in labor force (finding)                     |       1201
+ 444814009   | Viral sinusitis (disorder)                       |       1154
+ 18718003    | Gingival disease (disorder)                      |       1012
+ 706893006   | Victim of intimate partner abuse (finding)       |        820
+ 109570002   | Primary dental caries (disorder)                 |        765
+ 424393004   | Reports of violence in the environment (finding) |        739
+ 195662009   | Acute viral pharyngitis (disorder)               |        705
+ 10509002    | Acute bronchitis (disorder)                      |        572
+
+--- Q6. Billed services on Claims by code system (sizes the 837 procedure crosswalk) ---
+                 code_system                 | distinct_codes | claim_lines 
+---------------------------------------------+----------------+-------------
+ http://snomed.info/sct                      |            690 |      381582
+ http://loinc.org                            |             32 |       82156
+ http://www.nlm.nih.gov/research/umls/rxnorm |            245 |       72173
+ http://hl7.org/fhir/sid/cvx                 |             21 |       16626
+
+--- Q7. Patients: demographics available for silver.member ---
+ patients | deceased | earliest_birth | latest_birth | female | male 
+----------+----------+----------------+--------------+--------+------
+     1168 |      168 | 1916-05-03     | 2026-10-06   |    591 |  577
+
+--- Q8. Claims per year, last 12 years (chooses the gold reporting window, H6) ---
+ claim_year | claims | patients_with_claims 
+------------+--------+----------------------
+ 2026       |   8714 |                  851
+ 2025       |  10284 |                  928
+ 2024       |   9959 |                  925
+ 2023       |  10384 |                  933
+ 2022       |   9853 |                  918
+ 2021       |  11462 |                  971
+ 2020       |  10439 |                  918
+ 2019       |  10317 |                  910
+ 2018       |   9929 |                  891
+ 2017       |   9420 |                  885
+ 2016       |   4978 |                  772
+ 2015       |   2660 |                  457
+
