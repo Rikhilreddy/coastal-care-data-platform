@@ -29,6 +29,24 @@ models:
 
 seeds:
   coastal_care:
-    # The SME override file is loaded by ingestion/reference/load_reference.py
+    # Default off: icd9_dx_overrides.csv is loaded by ingestion/reference/load_reference.py
     # (with approval validation and the load manifest), not by dbt.
     +enabled: false
+    # CONV-4: the SNOMED CT -> ICD-10-CM crosswalk is a dbt seed; its governance rules
+    # (signed approvals, valid billable targets, full coverage) are dbt tests.
+    snomed_icd10_crosswalk:
+      +enabled: true
+      +schema: ref
+      +column_types:
+        snomed_code: text
+        snomed_description: text
+        conditions: integer
+        category: text
+        icd10_code: text
+        sensitive: boolean
+        review_priority: text
+        review_status: text
+        rationale: text
+        reviewed_by: text
+        review_date: date
+        map_source: text

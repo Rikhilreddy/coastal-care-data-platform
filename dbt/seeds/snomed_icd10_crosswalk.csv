@@ -1,0 +1,260 @@
+snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_priority,review_status,rationale,reviewed_by,review_date,map_source
+314529007,Medication review due (situation),9424,NOT_CODABLE,,false,HIGH,PROPOSED,"Administrative reminder, not a condition",,,COASTAL_CROSSWALK_V1
+73595000,Stress (finding),3642,SDOH,Z733,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+66383009,Gingivitis (disorder),3569,DIAGNOSIS,K0510,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+160903007,Full-time employment (finding),3378,NOT_CODABLE,,false,HIGH,PROPOSED,Employment is not a problem condition; no ICD-10-CM code,,,COASTAL_CROSSWALK_V1
+160904001,Part-time employment (finding),2122,NOT_CODABLE,,false,HIGH,PROPOSED,Employment is not a problem condition; no ICD-10-CM code,,,COASTAL_CROSSWALK_V1
+422650009,Social isolation (finding),1338,SDOH,Z604,false,HIGH,PROPOSED,Social isolation coded as social exclusion (common SDOH mapping),,,COASTAL_CROSSWALK_V1
+423315002,Limited social contact (finding),1311,SDOH,Z608,false,HIGH,PROPOSED,Other problems related to social environment,,,COASTAL_CROSSWALK_V1
+741062008,Not in labor force (finding),1201,NOT_CODABLE,,false,HIGH,PROPOSED,Not in labor force is not unemployment (Z56.0); no code,,,COASTAL_CROSSWALK_V1
+444814009,Viral sinusitis (disorder),1154,DIAGNOSIS,J0190,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+18718003,Gingival disease (disorder),1012,DIAGNOSIS,K069,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+706893006,Victim of intimate partner abuse (finding),820,SDOH,Z91419,true,HIGH,PROPOSED,"Screening-based finding, not confirmed abuse (T74.-); personal history of adult abuse, unspecified",,,COASTAL_CROSSWALK_V1
+109570002,Primary dental caries (disorder),765,DIAGNOSIS,K029,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+424393004,Reports of violence in the environment (finding),739,SDOH,Z658,true,HIGH,PROPOSED,Other specified problems related to psychosocial circumstances,,,COASTAL_CROSSWALK_V1
+195662009,Acute viral pharyngitis (disorder),705,DIAGNOSIS,J029,false,HIGH,PROPOSED,Viral organism not specified,,,COASTAL_CROSSWALK_V1
+10509002,Acute bronchitis (disorder),572,DIAGNOSIS,J209,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+162864005,Body mass index 30+ - obesity (finding),560,DIAGNOSIS,E669,false,HIGH,PROPOSED,"BMI value not given, so no Z68.3- code",,,COASTAL_CROSSWALK_V1
+73438004,Unemployed (finding),530,SDOH,Z560,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+224299000,Received higher education (finding),484,NOT_CODABLE,,false,HIGH,PROPOSED,Education level is not a problem condition,,,COASTAL_CROSSWALK_V1
+72892002,Normal pregnancy (finding),452,STATUS_HISTORY,Z3490,true,HIGH,PROPOSED,Trimester unknown,,,COASTAL_CROSSWALK_V1
+714628002,Prediabetes (finding),446,DIAGNOSIS,R7303,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+271737000,Anemia (disorder),416,DIAGNOSIS,D649,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+82423001,Chronic pain (finding),295,DIAGNOSIS,G8929,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+160968000,Risk activity involvement (finding),292,SDOH,Z7289,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+59621000,Essential hypertension (disorder),290,DIAGNOSIS,I10,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+473461003,Educated to high school level (finding),268,NOT_CODABLE,,false,HIGH,PROPOSED,High-school education is not a problem condition,,,COASTAL_CROSSWALK_V1
+266948004,Has a criminal record (finding),262,SDOH,Z653,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+161744009,Past pregnancy history of miscarriage (situation),258,STATUS_HISTORY,Z8759,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+40055000,Chronic sinusitis (disorder),257,DIAGNOSIS,J329,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+427898007,Infection of tooth (disorder),256,DIAGNOSIS,K047,false,HIGH,PROPOSED,Tooth infection coded as periapical abscess without sinus,,,COASTAL_CROSSWALK_V1
+1149222004,Overdose (disorder),243,DIAGNOSIS,T50901A,true,HIGH,PROPOSED,"Substance unspecified, accidental, initial encounter; SME may refine to T40.- for opioids",,,COASTAL_CROSSWALK_V1
+274531002,Abnormal findings diagnostic imaging heart+coronary circulat (finding),220,DIAGNOSIS,R931,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+414545008,Ischemic heart disease (disorder),219,DIAGNOSIS,I259,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+10939881000119105,Unhealthy alcohol drinking behavior (finding),212,SDOH,Z7289,true,HIGH,PROPOSED,Screening finding; not coded as alcohol use disorder (F10.-) to avoid overcoding,,,COASTAL_CROSSWALK_V1
+278860009,Chronic low back pain (finding),202,DIAGNOSIS,M5450,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+237602007,Metabolic syndrome X (disorder),201,DIAGNOSIS,E88810,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+65363002,Otitis media (disorder),189,DIAGNOSIS,H6690,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+224295006,Only received primary school education (finding),185,SDOH,Z555,false,NORMAL,PROPOSED,Less than a high school diploma,,,COASTAL_CROSSWALK_V1
+37320007,Loss of teeth (disorder),180,DIAGNOSIS,K08409,false,NORMAL,PROPOSED,"Partial loss, cause and class unspecified",,,COASTAL_CROSSWALK_V1
+384709000,Sprain (morphologic abnormality),173,DIAGNOSIS,T148XXA,false,NORMAL,PROPOSED,Body region not specified,,,COASTAL_CROSSWALK_V1
+125605004,Fracture of bone (disorder),173,DIAGNOSIS,T148XXA,false,NORMAL,PROPOSED,Body region not specified,,,COASTAL_CROSSWALK_V1
+80583007,Severe anxiety (panic) (finding),171,DIAGNOSIS,F410,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+312608009,Laceration - injury (disorder),162,DIAGNOSIS,T148XXA,false,NORMAL,PROPOSED,Body region not specified,,,COASTAL_CROSSWALK_V1
+43878008,Streptococcal sore throat (disorder),155,DIAGNOSIS,J020,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+127013003,Disorder of kidney due to diabetes mellitus (disorder),152,DIAGNOSIS,E1121,false,HIGH,PROPOSED,Synthea diabetes is type 2; diabetic nephropathy,,,COASTAL_CROSSWALK_V1
+278558000,Dental filling lost (finding),152,DIAGNOSIS,K0859,false,NORMAL,PROPOSED,Lost restoration,,,COASTAL_CROSSWALK_V1
+278602001,Loose dental filling (finding),149,DIAGNOSIS,K0859,false,NORMAL,PROPOSED,Loose restoration,,,COASTAL_CROSSWALK_V1
+431855005,Chronic kidney disease stage 1 (disorder),145,DIAGNOSIS,N181,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+105531004,Housing unsatisfactory (finding),145,SDOH,Z5910,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+278588009,Fractured dental filling (finding),141,DIAGNOSIS,K08539,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+278598003,Leaking dental filling (finding),140,DIAGNOSIS,K0851,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+307426000,Acute infective cystitis (disorder),138,DIAGNOSIS,N3000,false,NORMAL,PROPOSED,Hematuria not documented,,,COASTAL_CROSSWALK_V1
+90781000119102,Microalbuminuria due to type 2 diabetes mellitus (disorder),137,DIAGNOSIS,E1129,false,HIGH,PROPOSED,Plus R80.9 if secondary codes are supported later,,,COASTAL_CROSSWALK_V1
+55822004,Hyperlipidemia (disorder),135,DIAGNOSIS,E785,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+1121000119107,Chronic neck pain (finding),134,DIAGNOSIS,M542,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+267020005,History of tubal ligation (situation),129,STATUS_HISTORY,Z9851,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+431856006,Chronic kidney disease stage 2 (disorder),129,DIAGNOSIS,N182,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+110030002,Concussion injury of brain (disorder),118,DIAGNOSIS,S060X9A,false,NORMAL,PROPOSED,Concussion NOS indexes to LOC of unspecified duration,,,COASTAL_CROSSWALK_V1
+44465007,Sprain of ankle (disorder),114,DIAGNOSIS,S93409A,false,NORMAL,PROPOSED,Side and ligament unspecified,,,COASTAL_CROSSWALK_V1
+840544004,Suspected disease caused by Severe acute respiratory coronavirus 2 (situation),106,STATUS_HISTORY,Z20822,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+446654005,Refugee (person),106,NOT_CODABLE,,true,HIGH,PROPOSED,Immigration status; not coded and treated as sensitive,,,COASTAL_CROSSWALK_V1
+840539006,Disease caused by severe acute respiratory syndrome coronavirus 2 (disorder),102,DIAGNOSIS,U071,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+44054006,Diabetes mellitus type 2 (disorder),97,DIAGNOSIS,E119,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+302870006,Hypertriglyceridemia (disorder),95,DIAGNOSIS,E781,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+386661006,Fever (finding),94,DIAGNOSIS,R509,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+157141000119108,Proteinuria due to type 2 diabetes mellitus (disorder),94,DIAGNOSIS,E1129,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+68496003,Polyp of colon (disorder),92,DIAGNOSIS,K635,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+6525002,Dependent drug abuse (disorder),87,DIAGNOSIS,F1920,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+124171000119105,Chronic intractable migraine without aura (disorder),86,DIAGNOSIS,G43719,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+196416002,Impacted molars (disorder),86,DIAGNOSIS,K011,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+62106007,Concussion with no loss of consciousness (disorder),84,DIAGNOSIS,S060X0A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+433144002,Chronic kidney disease stage 3 (disorder),84,DIAGNOSIS,N1830,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+399261000,History of coronary artery bypass grafting (situation),83,STATUS_HISTORY,Z951,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+361055000,Misuses drugs (finding),80,DIAGNOSIS,F1910,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+49727002,Cough (finding),78,DIAGNOSIS,R059,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+36971009,Sinusitis (disorder),78,DIAGNOSIS,J329,false,NORMAL,PROPOSED,Sinusitis NOS indexes to chronic,,,COASTAL_CROSSWALK_V1
+19169002,Miscarriage in first trimester (disorder),72,DIAGNOSIS,O039,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+75498004,Acute bacterial sinusitis (disorder),69,DIAGNOSIS,J0190,false,NORMAL,PROPOSED,Organism not specified,,,COASTAL_CROSSWALK_V1
+39848009,Whiplash injury to neck (disorder),67,DIAGNOSIS,S134XXA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+90460009,Injury of neck (disorder),67,DIAGNOSIS,S199XXA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+64859006,Osteoporosis (disorder),61,DIAGNOSIS,M810,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+239873007,Osteoarthritis of knee (disorder),59,DIAGNOSIS,M179,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+70704007,Sprain of wrist (disorder),59,DIAGNOSIS,S63509A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+1187604002,Serving in military service (finding),59,NOT_CODABLE,,false,NORMAL,PROPOSED,Military service is not a problem condition,,,COASTAL_CROSSWALK_V1
+39898005,Sleep disorder (disorder),57,DIAGNOSIS,G479,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+428251008,History of appendectomy (situation),55,STATUS_HISTORY,Z9049,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+36955009,Loss of taste (finding),55,DIAGNOSIS,R438,false,NORMAL,PROPOSED,Taste disturbance,,,COASTAL_CROSSWALK_V1
+698306007,Awaiting transplantation of kidney (situation),54,STATUS_HISTORY,Z7682,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+197927001,Recurrent urinary tract infection (disorder),53,DIAGNOSIS,N390,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+431857002,Chronic kidney disease stage 4 (disorder),52,DIAGNOSIS,N184,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+266934004,Transport problem (finding),52,SDOH,Z5982,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+80394007,Hyperglycemia (disorder),50,DIAGNOSIS,R739,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+48333001,Burn injury (morphologic abnormality),49,DIAGNOSIS,T300,false,NORMAL,PROPOSED,Region and degree unspecified,,,COASTAL_CROSSWALK_V1
+1290882004,History of seizure (situation),49,STATUS_HISTORY,Z8669,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+128613002,Seizure disorder (disorder),49,DIAGNOSIS,G40909,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+713458007,Lack of access to transportation (finding),48,SDOH,Z5982,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+399211009,History of myocardial infarction (situation),47,STATUS_HISTORY,I252,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+161665007,History of renal transplant (situation),46,STATUS_HISTORY,Z940,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+61804006,Alveolitis of jaw (disorder),46,DIAGNOSIS,M273,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+195967001,Asthma (disorder),44,DIAGNOSIS,J45909,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+65966004,Fracture of forearm (disorder),41,DIAGNOSIS,S5290XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+248595008,Sputum finding (finding),38,DIAGNOSIS,R093,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+78275009,Obstructive sleep apnea syndrome (disorder),38,DIAGNOSIS,G4733,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+84229001,Fatigue (finding),38,DIAGNOSIS,R5383,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+283385000,Laceration of thigh (disorder),37,DIAGNOSIS,S71119A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+156073000,Complete miscarriage (disorder),37,DIAGNOSIS,O039,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+88805009,Chronic congestive heart failure (disorder),36,DIAGNOSIS,I509,false,HIGH,PROPOSED,"Chronic CHF, type not specified",,,COASTAL_CROSSWALK_V1
+284551006,Laceration of foot (disorder),36,DIAGNOSIS,S91319A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+16114001,Fracture of ankle (disorder),36,DIAGNOSIS,S82899A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+283371005,Laceration of forearm (disorder),35,DIAGNOSIS,S51819A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+1551000119108,Nonproliferative diabetic retinopathy due to type II diabetes mellitus,35,DIAGNOSIS,E113299,false,HIGH,PROPOSED,Severity and eye not specified,,,COASTAL_CROSSWALK_V1
+46752004,Torus palatinus (disorder),34,DIAGNOSIS,M270,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+403190006,Epidermal burn of skin (disorder),32,DIAGNOSIS,T301,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+26929004,Alzheimer's disease (disorder),32,DIAGNOSIS,G309,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+233604007,Pneumonia (disorder),32,DIAGNOSIS,J189,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+58150001,Fracture of clavicle (disorder),31,DIAGNOSIS,S42009A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+84757009,Epilepsy (disorder),31,DIAGNOSIS,G40909,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+263102004,Fracture subluxation of wrist (disorder),31,DIAGNOSIS,S62109A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+370247008,Facial laceration (disorder),30,DIAGNOSIS,S0181XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+91302008,Sepsis (disorder),30,DIAGNOSIS,A419,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+62564004,Concussion with loss of consciousness (disorder),28,DIAGNOSIS,S060X9A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+203646004,Adolescent idiopathic scoliosis (disorder),28,DIAGNOSIS,M41129,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+368581000119106,Neuropathy due to type 2 diabetes mellitus (disorder),28,DIAGNOSIS,E1140,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+183996000,Sterilization requested (situation),27,STATUS_HISTORY,Z302,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+401314000,Acute non-ST segment elevation myocardial infarction (disorder),27,DIAGNOSIS,I214,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+35999006,Blighted ovum (disorder),26,DIAGNOSIS,O020,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+22298006,Myocardial infarction (disorder),25,DIAGNOSIS,I219,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+232353008,Perennial allergic rhinitis with seasonal variation (disorder),25,DIAGNOSIS,J3089,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+713197008,Recurrent rectal polyp (disorder),25,DIAGNOSIS,K621,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+201834006,"Localized, primary osteoarthritis of the hand (disorder)",24,DIAGNOSIS,M19049,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+32911000,Homeless (finding),24,SDOH,Z5900,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+284549007,Laceration of hand (disorder),24,DIAGNOSIS,S61419A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+192127007,Child attention deficit disorder (disorder),24,DIAGNOSIS,F909,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+33737001,Fracture of rib (disorder),23,DIAGNOSIS,S2239XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+46177005,End-stage renal disease (disorder),23,DIAGNOSIS,N186,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+198992004,Eclampsia in pregnancy (disorder),23,DIAGNOSIS,O159,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+254837009,Malignant neoplasm of breast (disorder),21,DIAGNOSIS,C50919,false,HIGH,PROPOSED,Assumes female breast; SME to confirm by sex,,,COASTAL_CROSSWALK_V1
+271825005,Respiratory distress (finding),21,DIAGNOSIS,R0603,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+267036007,Dyspnea (finding),21,DIAGNOSIS,R0600,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+389087006,Hypoxemia (disorder),21,DIAGNOSIS,R0902,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+56018004,Wheezing (finding),21,DIAGNOSIS,R062,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+125601008,Injury of knee (disorder),21,DIAGNOSIS,S8990XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+1255252008,Resorption of alveolar process due to dental trauma (disorder),19,DIAGNOSIS,K0889,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+73430006,Sleep apnea (disorder),19,DIAGNOSIS,G4730,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+401303003,Acute ST segment elevation myocardial infarction (disorder),19,DIAGNOSIS,I213,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+126906006,Neoplasm of prostate (disorder),19,DIAGNOSIS,D4959,false,NORMAL,PROPOSED,Behavior unspecified,,,COASTAL_CROSSWALK_V1
+203082005,Fibromyalgia (disorder),17,DIAGNOSIS,M797,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+446096008,Perennial allergic rhinitis (disorder),17,DIAGNOSIS,J3089,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+87433001,Pulmonary emphysema (disorder),17,DIAGNOSIS,J439,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+92691004,Carcinoma in situ of prostate (disorder),17,DIAGNOSIS,D075,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+24079001,Atopic dermatitis (disorder),17,DIAGNOSIS,L209,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+233678006,Childhood asthma (disorder),17,DIAGNOSIS,J45909,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+267102003,Sore throat (finding),17,DIAGNOSIS,J029,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+85116003,Miscarriage in second trimester (disorder),16,DIAGNOSIS,O039,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+443165006,Osteoporotic fracture of bone (disorder),16,DIAGNOSIS,M8000XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+398254007,Pre-eclampsia (disorder),16,DIAGNOSIS,O1490,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+403191005,Partial thickness burn (disorder),16,DIAGNOSIS,T302,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+239872002,Osteoarthritis of hip (disorder),16,DIAGNOSIS,M169,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+307731004,Injury of tendon of the rotator cuff of shoulder (disorder),15,DIAGNOSIS,S46009A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+68962001,Muscle pain (finding),14,DIAGNOSIS,M7910,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+5602001,Opioid abuse,14,DIAGNOSIS,F1110,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+241929008,Acute allergic reaction (disorder),14,DIAGNOSIS,T7840XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+57676002,Joint pain,14,DIAGNOSIS,M2550,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+367498001,Seasonal allergic rhinitis (disorder),14,DIAGNOSIS,J302,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+315268008,Suspected prostate cancer (situation),14,NOT_CODABLE,,false,NORMAL,PROPOSED,Uncertain diagnosis: not coded (outpatient guideline IV.H),,,COASTAL_CROSSWALK_V1
+185086009,Chronic obstructive bronchitis (disorder),14,DIAGNOSIS,J449,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+25064002,Headache (finding),13,DIAGNOSIS,R519,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+1231000119100,History of aortic valve replacement (situation),13,STATUS_HISTORY,Z952,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+49436004,Atrial fibrillation (disorder),12,DIAGNOSIS,I4891,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+162573006,Suspected lung cancer (situation),12,NOT_CODABLE,,false,NORMAL,PROPOSED,Uncertain diagnosis: not coded (outpatient guideline IV.H),,,COASTAL_CROSSWALK_V1
+60573004,Aortic valve stenosis (disorder),11,DIAGNOSIS,I350,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+127294003,Traumatic or nontraumatic brain injury (disorder),11,DIAGNOSIS,S069X9A,false,NORMAL,PROPOSED,Traumatic assumed; SME to confirm,,,COASTAL_CROSSWALK_V1
+267253006,Fetus with chromosomal abnormality (disorder),11,DIAGNOSIS,O3510X0,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+359817006,Closed fracture of hip (disorder),11,DIAGNOSIS,S72009A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+424132000,"Non-small cell carcinoma of lung, TNM stage 1 (disorder)",10,DIAGNOSIS,C3490,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+254637007,Non-small cell lung cancer (disorder),10,DIAGNOSIS,C3490,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+79586000,Tubal pregnancy (disorder),9,DIAGNOSIS,O00109,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+7200002,Alcoholism (disorder),9,DIAGNOSIS,F1020,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+60234000,Aortic valve regurgitation (disorder),9,DIAGNOSIS,I351,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+706870000,Acute pulmonary embolism (disorder),9,DIAGNOSIS,I2699,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+262574004,Bullet wound (disorder),9,DIAGNOSIS,T148XXA,true,HIGH,PROPOSED,Region not specified; external cause not coded,,,COASTAL_CROSSWALK_V1
+74400008,Appendicitis (disorder),9,DIAGNOSIS,K37,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+283545005,Gunshot wound (disorder),9,DIAGNOSIS,T148XXA,true,HIGH,PROPOSED,Region not specified; external cause not coded,,,COASTAL_CROSSWALK_V1
+444448004,Injury of medial collateral ligament of knee (disorder),9,DIAGNOSIS,S83419A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+370143000,Major depressive disorder (disorder),9,DIAGNOSIS,F329,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+83664006,Idiopathic atrophic hypothyroidism (disorder),9,DIAGNOSIS,E034,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+770349000,Sepsis caused by virus (disorder),8,DIAGNOSIS,A4189,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+230265002,Familial Alzheimer's disease of early onset (disorder),8,DIAGNOSIS,G300,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+427419006,Transformed migraine (disorder),8,DIAGNOSIS,G43709,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+109838007,Overlapping malignant neoplasm of colon (disorder),8,DIAGNOSIS,C188,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+876882001,Died in hospice (finding),8,NOT_CODABLE,,false,NORMAL,PROPOSED,"Place of death, not a condition",,,COASTAL_CROSSWALK_V1
+48724000,Mitral valve regurgitation (disorder),7,DIAGNOSIS,I340,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+65710008,Acute respiratory failure (disorder),7,DIAGNOSIS,J9600,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+363406005,Malignant neoplasm of colon (disorder),6,DIAGNOSIS,C189,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+43724002,Chill (finding),6,DIAGNOSIS,R6883,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+40275004,Contact dermatitis (disorder),6,DIAGNOSIS,L259,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+90560007,Gout,6,DIAGNOSIS,M109,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+444470001,Injury of anterior cruciate ligament (disorder),6,DIAGNOSIS,S83519A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+97331000119101,Macular edema and retinopathy due to type 2 diabetes mellitus (disorder),6,DIAGNOSIS,E11311,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+76571007,Septic shock (disorder),6,DIAGNOSIS,R6521,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+230690007,Cerebrovascular accident (disorder),6,DIAGNOSIS,I639,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+128188000,Cerebral palsy (disorder),5,DIAGNOSIS,G809,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+235595009,Gastroesophageal reflux disease (disorder),5,DIAGNOSIS,K219,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+6072007,Bleeding from anus (disorder),5,DIAGNOSIS,K625,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+11625007,Torus mandibularis (disorder),5,DIAGNOSIS,M270,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+68235000,Nasal congestion (finding),5,DIAGNOSIS,R0981,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+236077008,Protracted diarrhea (finding),5,DIAGNOSIS,R197,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+132281000119108,Acute deep venous thrombosis (disorder),5,DIAGNOSIS,I82409,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+56786000,Pulmonic valve stenosis (disorder),4,DIAGNOSIS,I370,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+37849005,Congenital uterine anomaly (disorder),4,DIAGNOSIS,Q519,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+398152000,Poor muscle tone (finding),4,DIAGNOSIS,M6289,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+108631000119101,History of autologous bone marrow transplant (situation),4,STATUS_HISTORY,Z9481,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+449868002,Smokes tobacco daily (finding),4,DIAGNOSIS,F17210,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+408512008,Body mass index 40+ - severely obese (finding),4,DIAGNOSIS,E6601,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+81629009,Traumatic dislocation of temporomandibular joint (disorder),4,DIAGNOSIS,S0300XA,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+263172003,Fracture of mandible (disorder),4,DIAGNOSIS,S02609A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+221360009,Spasticity (finding),4,DIAGNOSIS,R252,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+93143009,"Leukemia, disease (disorder)",4,DIAGNOSIS,C9590,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+67787004,Tongue tie (disorder),4,DIAGNOSIS,Q381,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+110359009,Intellectual disability (disorder),3,DIAGNOSIS,F79,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+45816000,Pyelonephritis (disorder),3,DIAGNOSIS,N12,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+422587007,Nausea (finding),3,DIAGNOSIS,R110,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+53827007,Excessive salivation (disorder),3,DIAGNOSIS,K117,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+312157006,Infectious mediastinitis (disorder),3,DIAGNOSIS,J9851,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+30832001,Rupture of patellar tendon (disorder),3,DIAGNOSIS,S76119A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+288959006,Unable to swallow saliva (finding),3,DIAGNOSIS,R1310,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+67782005,Acute respiratory distress syndrome (disorder),3,DIAGNOSIS,J80,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+698303004,Awaiting transplantation of bone marrow (situation),3,STATUS_HISTORY,Z7682,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+249497008,Vomiting symptom (finding),3,DIAGNOSIS,R1110,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+239720000,Tear of meniscus of knee (disorder),3,DIAGNOSIS,S83209A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+213150003,Kidney transplant failure and rejection (disorder),3,DIAGNOSIS,T8611,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+93761005,Primary malignant neoplasm of colon (disorder),3,DIAGNOSIS,C189,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+94260004,Metastatic malignant neoplasm to colon (disorder),3,DIAGNOSIS,C785,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+94503003,Metastatic malignant neoplasm to prostate (disorder),3,DIAGNOSIS,C7982,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+95417003,Primary fibromyalgia syndrome (disorder),3,DIAGNOSIS,M797,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+1501000119109,Proliferative diabetic retinopathy due to type II diabetes mellitus,2,DIAGNOSIS,E113599,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+109989006,Multiple myeloma (disorder),2,DIAGNOSIS,C9000,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+67811000119102,"Primary small cell malignant neoplasm of lung, TNM stage 1 (disorder)",2,DIAGNOSIS,C3490,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+36923009,"Major depression, single episode (disorder)",2,DIAGNOSIS,F329,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+262521009,Traumatic injury of spinal cord and/or vertebral column (disorder),2,DIAGNOSIS,T148XXA,false,NORMAL,PROPOSED,Level not specified,,,COASTAL_CROSSWALK_V1
+254632001,Small cell carcinoma of lung (disorder),2,DIAGNOSIS,C3490,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+161679004,History of artificial joint (situation),2,STATUS_HISTORY,Z9660,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+15724005,Fracture of vertebral column without spinal cord injury (disorder),2,DIAGNOSIS,T148XXA,false,NORMAL,PROPOSED,Level not specified,,,COASTAL_CROSSWALK_V1
+111287006,Tricuspid valve regurgitation (disorder),2,DIAGNOSIS,I361,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+27942005,Shock (disorder),2,DIAGNOSIS,R579,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+47505003,Posttraumatic stress disorder (disorder),1,DIAGNOSIS,F4310,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+4557003,Preinfarction syndrome (disorder),1,DIAGNOSIS,I200,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+22253000,Pain (finding),1,DIAGNOSIS,R52,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+235919008,Gallbladder calculus (disorder),1,DIAGNOSIS,K8020,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+69896004,Rheumatoid arthritis (disorder),1,DIAGNOSIS,M069,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+160701002,Social migrant (finding),1,NOT_CODABLE,,true,HIGH,PROPOSED,Migration status; not coded and treated as sensitive,,,COASTAL_CROSSWALK_V1
+15802004,Dystonia (disorder),1,DIAGNOSIS,G249,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+157265008,Dislocation of hip joint (disorder),1,DIAGNOSIS,S73006A,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+153351000119102,History of peripheral stem cell transplant (situation),1,STATUS_HISTORY,Z9484,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+152621000119105,History of allotransplantation of bone marrow (situation),1,STATUS_HISTORY,Z9481,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+267060006,Diarrhea symptom (finding),1,DIAGNOSIS,R197,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+65275009,Acute cholecystitis (disorder),1,DIAGNOSIS,K810,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+275408006,Postoperative renal failure (disorder),1,DIAGNOSIS,N990,false,NORMAL,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+62718007,Dribbling from mouth (finding),1,DIAGNOSIS,K117,false,NORMAL,PROPOSED,Drooling,,,COASTAL_CROSSWALK_V1
+609496007,Complication occurring during pregnancy (disorder),1,DIAGNOSIS,O2690,true,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1

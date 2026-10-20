@@ -1,0 +1,22 @@
+version: 2
+
+seeds:
+  - name: snomed_icd10_crosswalk
+    description: >
+      CONV-4 governed crosswalk, SNOMED CT condition codes (as used in Synthea FHIR) to
+      ICD-10-CM FY2027. One row per SNOMED code. Only APPROVED rows are used in silver.
+    columns:
+      - name: snomed_code
+        data_tests: [unique, not_null]
+      - name: category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['DIAGNOSIS', 'SDOH', 'STATUS_HISTORY', 'NOT_CODABLE']
+      - name: review_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['PROPOSED', 'APPROVED', 'REJECTED']
+      - name: sensitive
+        data_tests: [not_null]
