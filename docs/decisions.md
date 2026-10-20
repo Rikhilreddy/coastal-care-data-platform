@@ -1,3 +1,4 @@
 - Synthea generated via Docker (eclipse-temurin:17-jre), seed 42, 1,000 living Florida members (1,168 total incl. deceased).
 - Reference data: ICD-10-CM FY2027, CMS 2018 diagnosis GEMs (final release), HCPCS Level II Oct 2026.
 - CONV-3 (backlog): when the top-similarity candidate is a non-billable header, descend to its billable residual child instead of choosing a different billable concept. Found via 42789 (I49.8 vs R00.1); 172 non-billable targets in v2.
+- CONV-3 (backlog): when the top-similarity candidate is a non-billable header, descend to its billable residual child instead of choosing a different billable concept. Found via 42789 (I49.8 vs R00.1); 172 non-billable targets in v2.

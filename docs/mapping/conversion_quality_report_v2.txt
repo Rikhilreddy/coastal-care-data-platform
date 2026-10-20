@@ -11,7 +11,7 @@ SELECT 11934
 SELECT 20633
 SELECT 20633
 SELECT 12216
-UPDATE 9
+UPDATE 10
 SELECT 11934
 ALTER TABLE
 SELECT 12216
@@ -23,7 +23,7 @@ COMMIT
 --- R0. Reference inputs ---
  icd9_descriptions | overrides_approved | overrides_pending 
 -------------------+--------------------+-------------------
-             14567 |                  8 |                 0
+             14567 |                  9 |                 0
 
 
 --- R1. Coverage by match type ---
@@ -42,8 +42,8 @@ COMMIT
    decided_by    | distinct_codes | dx_rows 
 -----------------+----------------+---------
  DESC_SIMILARITY |           2290 |  391471
- SME_OVERRIDE    |              9 |  218369
- BILLABLE        |             25 |  113916
+ SME_OVERRIDE    |             10 |  225658
+ BILLABLE        |             24 |  106627
  LOWEST_CODE     |            114 |   16127
  VALID_FY2027    |              2 |     944
  RECIPROCAL      |              1 |       1
@@ -76,7 +76,7 @@ COMMIT
  78659     | Other chest pain                         | R0789      | Other chest pain                              | SME_OVERRIDE    |           1.000 |    7784
  7245      | Backache, unspecified                    | M549       | Dorsalgia, unspecified                        | DESC_SIMILARITY |           0.387 |    7608
  49390     | Asthma, unspecified type, unspecified    | J45909     | Unspecified asthma, uncomplicated             | DESC_SIMILARITY |           0.543 |    7429
- 42789     | Other specified cardiac dysrhythmias     | R001       | Bradycardia, unspecified                      | BILLABLE        |           0.245 |    7289
+ 42789     | Other specified cardiac dysrhythmias     | I4989      | Other specified cardiac arrhythmias not elsew | SME_OVERRIDE    |           0.245 |    7289
  7823      | Edema                                    | R609       | Edema, unspecified                            | SME_OVERRIDE    |           0.375 |    7020
  7812      | Abnormality of gait                      | R269       | Unspecified abnormalities of gait and mobilit | SME_OVERRIDE    |           0.526 |    6663
  78609     | Other respiratory abnormalities          | R0689      | Other abnormalities of breathing              | DESC_SIMILARITY |           0.455 |    6112
@@ -115,12 +115,9 @@ COMMIT
 --- R8. Regression versus previous run: decisions that changed ---
  codes_changed | dx_rows_affected 
 ---------------+------------------
-             4 |            19605
+             1 |             7289
 
  icd9_code | previous | current | decided_by_now | dx_rows 
 -----------+----------+---------+----------------+---------
- 7823      | R600     | R609    | SME_OVERRIDE   |    7020
- 7812      | R2689    | R269    | SME_OVERRIDE   |    6663
- 4241      | I358     | I359    | SME_OVERRIDE   |    3768
- 7807      | R5381    | R5383   | SME_OVERRIDE   |    2154
+ 42789     | R001     | I4989   | SME_OVERRIDE   |    7289
 
