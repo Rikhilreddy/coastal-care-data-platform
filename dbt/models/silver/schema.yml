@@ -95,11 +95,11 @@ models:
                 quote: false
 
   - name: claim_diagnosis
-    description: One row per valid ICD-9 diagnosis on a claim, with its ICD-10 conversion.
+    description: One row per diagnosis on a claim (all sources) with its ICD-10-CM conversion.
     data_tests:
       - unique:
           arguments:
-            column_name: "claim_id || '-' || segment || '-' || dx_position"
+            column_name: "source_system || '-' || claim_id || '-' || segment || '-' || dx_position"
     columns:
       - name: claim_id
         data_tests:
@@ -112,13 +112,22 @@ models:
           - accepted_values:
               arguments:
                 values: ['ADMITTING', 'PRINCIPAL', 'SECONDARY']
-      - name: gem_match_type
-        description: NULL would mean the code was never seen by the conversion build
+      - name: source_code_system
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['ICD9CM', 'SNOMEDCT']
+      - name: source_code
+        data_tests: [not_null]
+      - name: conversion_method
+        description: How icd10_code was decided. NULL would mean the code never reached the conversion logic.
         data_tests:
           - not_null
           - accepted_values:
               arguments:
-                values: ['EXACT', 'APPROXIMATE', 'APPROXIMATE_MULTI', 'COMBINATION', 'PARENT_FALLBACK', 'NO_MAP', 'NOT_IN_GEM']
+                values: ['EXACT', 'APPROXIMATE', 'APPROXIMATE_MULTI', 'COMBINATION', 'PARENT_FALLBACK',
+                         'NO_MAP', 'NOT_IN_GEM',
+                         'CROSSWALK', 'NOT_CODABLE', 'PENDING_REVIEW', 'REJECTED', 'NOT_IN_CROSSWALK']
 
   - name: claim_procedure
     description: One row per valid procedure code (ICD-9-CM procedure or HCPCS/CPT) on a claim.

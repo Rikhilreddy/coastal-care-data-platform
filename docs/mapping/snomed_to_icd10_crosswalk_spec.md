@@ -36,3 +36,23 @@
 | `unique` / `accepted_values` | One row per SNOMED code; valid category and status |
 
 Only `APPROVED` rows are used in silver. Review order: `review_priority = HIGH` first (≥200 conditions, HCC-relevant families, or sensitive).
+
+## How silver uses the crosswalk (CONV-4b)
+
+`silver.claim_diagnosis` now holds diagnoses from every source in one shape: `source_code_system` + `source_code` keep the original (ICD9CM or SNOMEDCT), `icd10_code` is the common language, and `conversion_method` says how it was decided.
+
+| FHIR `conversion_method` | Meaning | `icd10_code` |
+|---|---|---|
+| CROSSWALK | APPROVED crosswalk row with a target | Set |
+| NOT_CODABLE | APPROVED as having no ICD-10-CM meaning | NULL |
+| PENDING_REVIEW | Crosswalk row still PROPOSED | NULL (never guessed) |
+| REJECTED | Reviewer rejected the proposal | NULL |
+| NOT_IN_CROSSWALK | Code missing from the crosswalk (the coverage test fails the build first) | NULL |
+
+A `Claim.diagnosis` entry whose Condition is not in the bundle goes to `quarantine.code_exception` with reason `UNRESOLVED_REFERENCE`.
+
+**Tests:** `assert_fhir_diagnoses_reconcile_to_bronze` (every bronze diagnosis entry lands exactly once, in silver or quarantine) and `assert_fhir_icd10_only_from_approved_crosswalk` (no ICD-10 code without an approval). If any crosswalk governance test fails, dbt skips `claim_diagnosis`, so an invalid crosswalk can never reach silver.
+
+**Change from v1 of `silver.claim_diagnosis`:** `icd9_code` → `source_code` (+ `source_code_system`), `gem_match_type` → `conversion_method`, `icd9_in_reference` removed (derivable from `conversion_method`), `is_sensitive` added.
+
+**Quality report:** `sql/conversion/05_fhir_dx_conversion_report.sql` (C1–C7); section C3 is the SME worklist.

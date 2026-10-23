@@ -19,4 +19,5 @@ models:
           - accepted_values:
               arguments:
                 values: ['PLACEHOLDER_CODE', 'INVALID_FORMAT', 'WRONG_CODE_SYSTEM',
-                         'SCI_NOTATION', 'REVENUE_CODE', 'TRUNCATED', 'NON_CODE_TEXT']
+                         'SCI_NOTATION', 'REVENUE_CODE', 'TRUNCATED', 'NON_CODE_TEXT',
+                         'UNRESOLVED_REFERENCE']

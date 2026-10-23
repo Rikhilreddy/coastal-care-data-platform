@@ -1,0 +1,222 @@
+Timing is off.
+--- E1. Claim: top-level fields and how often they appear ---
+  claim_field   | claims 
+----------------+--------
+ billablePeriod | 151490
+ created        | 151490
+ id             | 151490
+ insurance      | 151490
+ item           | 151490
+ patient        | 151490
+ priority       | 151490
+ provider       | 151490
+ resourceType   | 151490
+ status         | 151490
+ total          | 151490
+ type           | 151490
+ use            | 151490
+ facility       |  79317
+ prescription   |  72173
+ procedure      |  57133
+ supportingInfo |  35334
+ diagnosis      |  29631
+
+--- E2. Claim: sub-fields of item[], careTeam[], insurance[] (first element) ---
+  element  |      field       | claims 
+-----------+------------------+--------
+ insurance | sequence         | 151490
+ insurance | coverage         | 151490
+ insurance | focal            | 151490
+ item      | sequence         | 151490
+ item      | productOrService | 151490
+ item      | encounter        | 151490
+ item      | net              |  79317
+
+--- E3. How Claims point to providers (reference patterns) ---
+                       provider_reference_pattern                        | claims 
+-------------------------------------------------------------------------+--------
+ Organization?identifier=https://github.com/synthetichealth/synthea|<id> | 151490
+
+--- E4. ExplanationOfBenefit: careTeam, total categories, adjudication categories ---
+            what            |                                  value                                  |   n    
+----------------------------+-------------------------------------------------------------------------+--------
+ eob_field                  | billablePeriod                                                          | 151490
+ eob_field                  | careTeam                                                                | 151490
+ eob_field                  | claim                                                                   | 151490
+ eob_field                  | contained                                                               | 151490
+ eob_field                  | created                                                                 | 151490
+ eob_field                  | payment                                                                 | 151490
+ eob_field                  | provider                                                                | 151490
+ eob_field                  | referral                                                                | 151490
+ eob_field                  | resourceType                                                            | 151490
+ eob_field                  | status                                                                  | 151490
+ eob_field                  | total                                                                   | 151490
+ eob_field                  | type                                                                    | 151490
+ eob_field                  | use                                                                     | 151490
+ eob_field                  | facility                                                                | 151490
+ eob_field                  | id                                                                      | 151490
+ eob_field                  | identifier                                                              | 151490
+ eob_field                  | insurance                                                               | 151490
+ eob_field                  | insurer                                                                 | 151490
+ eob_field                  | item                                                                    | 151490
+ eob_field                  | outcome                                                                 | 151490
+ eob_field                  | patient                                                                 | 151490
+ eob_field                  | diagnosis                                                               |  29631
+ item.adjudication.category | https://bluebutton.cms.gov/resources/variables/line_prvdr_pmt_amt       | 433876
+ item.adjudication.category | https://bluebutton.cms.gov/resources/variables/line_sbmtd_chrg_amt      | 433876
+ item.adjudication.category | https://bluebutton.cms.gov/resources/variables/line_alowd_chrg_amt      | 433876
+ item.adjudication.category | https://bluebutton.cms.gov/resources/variables/line_bene_ptb_ddctbl_amt | 433876
+ item.adjudication.category | https://bluebutton.cms.gov/resources/variables/line_coinsrnc_amt        | 433876
+ item.adjudication.category | https://bluebutton.cms.gov/resources/variables/line_prcsg_ind_cd        | 433876
+ total.category             | submitted                                                               | 151490
+
+--- E5. Do Organizations and Practitioners carry NPIs? (identifier systems) ---
+ resource_type |             identifier_system              | resources 
+---------------+--------------------------------------------+-----------
+ Organization  | https://github.com/synthetichealth/synthea |      1786
+ Practitioner  | http://hl7.org/fhir/sid/us-npi             |      1786
+
+ resource_type | resources | with_address | with_name 
+---------------+-----------+--------------+-----------
+ Practitioner  |      1786 |         1786 |      1786
+ Location      |      1787 |            0 |      1786
+ Organization  |      1786 |         1786 |      1786
+
+--- E6. Claim line codes (non-pharmacy): how many SNOMED codes cover 80/90/95/99% of lines ---
+ snomed_codes | snomed_lines | codes_for_80pct | codes_for_90pct | codes_for_95pct | codes_for_99pct 
+--------------+--------------+-----------------+-----------------+-----------------+-----------------
+          690 |       381582 |              59 |             109 |             182 |             353
+
+--- E7. Top 25 non-pharmacy SNOMED line codes (first line = the encounter itself?) ---
+   snomed_code   |                         display                         | lines | as_first_line 
+-----------------+---------------------------------------------------------+-------+---------------
+ 185347001       | Encounter for problem (procedure)                       | 24084 |         24084
+ 171207006       | Depression screening (procedure)                        | 21851 |             0
+ 265764009       | Renal dialysis (procedure)                              | 16096 |             0
+ 185349003       | Encounter for check up (procedure)                      | 13275 |         13275
+ 710824005       | Assessment of health and social care needs (procedure)  | 13238 |             0
+ 162673000       | General examination of patient (procedure)              | 10724 |         10724
+ 314529007       | Medication review due (situation)                       |  9424 |             0
+ 430193006       | Medication reconciliation (procedure)                   |  9106 |             0
+ 428211000124100 | Assessment of substance use (procedure)                 |  8515 |             0
+ 103697008       | Patient referral for dental care (procedure)            |  7596 |             0
+ 34043003        | Dental consultation and report (procedure)              |  7374 |             0
+ 243085009       | Oral health education (procedure)                       |  7147 |             0
+ 469020004       | Dental floss (physical object)                          |  7118 |             0
+ 1230220004      | Conventional release periodontal gel (dose form)        |  7118 |             0
+ 277183007       | Dental equipment (physical object)                      |  7118 |             0
+ 225362009       | Dental care (regime/therapy)                            |  7101 |             0
+ 1260009003      | Removal of supragingival plaque and calculus from all t |  7101 |             0
+ 1260010008      | Removal of subgingival plaque and calculus from all tee |  7101 |             0
+ 274788003       | Examination of gingivae (procedure)                     |  7101 |             0
+ 710841007       | Assessment of anxiety (procedure)                       |  6916 |             0
+ 385763009       | Hospice care (regime/therapy)                           |  4428 |             0
+ 702927004       | Urgent care clinic (environment)                        |  4045 |          4045
+ 866148006       | Screening for domestic abuse (procedure)                |  3999 |             0
+ 713106006       | Screening for drug abuse (procedure)                    |  3959 |             0
+ 706298007       | Dental x-ray system (physical object)                   |  3916 |             0
+
+--- E8. File sizing: non-pharmacy claims per payer per year, 2017+ (H14) ---
+       payer_name       | claim_year | claims 
+------------------------+------------+--------
+ Aetna                  |       2017 |    475
+ Aetna                  |       2018 |    436
+ Aetna                  |       2019 |    439
+ Aetna                  |       2020 |    473
+ Aetna                  |       2021 |    659
+ Aetna                  |       2022 |    415
+ Aetna                  |       2023 |    444
+ Aetna                  |       2024 |    538
+ Aetna                  |       2025 |    505
+ Aetna                  |       2026 |    432
+ Anthem                 |       2017 |    629
+ Anthem                 |       2018 |    684
+ Anthem                 |       2019 |    566
+ Anthem                 |       2020 |    501
+ Anthem                 |       2021 |    685
+ Anthem                 |       2022 |    526
+ Anthem                 |       2023 |    564
+ Anthem                 |       2024 |    500
+ Anthem                 |       2025 |    486
+ Anthem                 |       2026 |    479
+ Blue Cross Blue Shield |       2017 |    352
+ Blue Cross Blue Shield |       2018 |    394
+ Blue Cross Blue Shield |       2019 |    311
+ Blue Cross Blue Shield |       2020 |    280
+ Blue Cross Blue Shield |       2021 |    371
+ Blue Cross Blue Shield |       2022 |    228
+ Blue Cross Blue Shield |       2023 |    201
+ Blue Cross Blue Shield |       2024 |    230
+ Blue Cross Blue Shield |       2025 |    205
+ Blue Cross Blue Shield |       2026 |    181
+ Cigna Health           |       2017 |    508
+ Cigna Health           |       2018 |    426
+ Cigna Health           |       2019 |    424
+ Cigna Health           |       2020 |    398
+ Cigna Health           |       2021 |    546
+ Cigna Health           |       2022 |    441
+ Cigna Health           |       2023 |    433
+ Cigna Health           |       2024 |    411
+ Cigna Health           |       2025 |    439
+ Cigna Health           |       2026 |    291
+ Dual Eligible          |       2017 |     70
+ Dual Eligible          |       2018 |     61
+ Dual Eligible          |       2019 |      9
+ Dual Eligible          |       2020 |     20
+ Dual Eligible          |       2021 |     23
+ Dual Eligible          |       2022 |      5
+ Dual Eligible          |       2023 |     13
+ Dual Eligible          |       2024 |      7
+ Dual Eligible          |       2025 |      5
+ Dual Eligible          |       2026 |     11
+ Humana                 |       2017 |    335
+ Humana                 |       2018 |    330
+ Humana                 |       2019 |    400
+ Humana                 |       2020 |    408
+ Humana                 |       2021 |    529
+ Humana                 |       2022 |    397
+ Humana                 |       2023 |    378
+ Humana                 |       2024 |    320
+ Humana                 |       2025 |    418
+ Humana                 |       2026 |    346
+ Medicaid               |       2017 |    260
+ Medicaid               |       2018 |    258
+ Medicaid               |       2019 |    283
+ Medicaid               |       2020 |    282
+ Medicaid               |       2021 |    290
+ Medicaid               |       2022 |    287
+ Medicaid               |       2023 |    228
+ Medicaid               |       2024 |    223
+ Medicaid               |       2025 |    231
+ Medicaid               |       2026 |    170
+ Medicare               |       2017 |   1607
+ Medicare               |       2018 |   2079
+ Medicare               |       2019 |   2369
+ Medicare               |       2020 |   2445
+ Medicare               |       2021 |   2712
+ Medicare               |       2022 |   2570
+ Medicare               |       2023 |   2739
+ Medicare               |       2024 |   2384
+ Medicare               |       2025 |   2601
+ Medicare               |       2026 |   2181
+ NO_INSURANCE           |       2017 |    482
+ NO_INSURANCE           |       2018 |    500
+ NO_INSURANCE           |       2019 |    584
+ NO_INSURANCE           |       2020 |    447
+ NO_INSURANCE           |       2021 |    468
+ NO_INSURANCE           |       2022 |    294
+ NO_INSURANCE           |       2023 |    258
+ NO_INSURANCE           |       2024 |    278
+ NO_INSURANCE           |       2025 |    274
+ NO_INSURANCE           |       2026 |    284
+ UnitedHealthcare       |       2017 |    422
+ UnitedHealthcare       |       2018 |    291
+ UnitedHealthcare       |       2019 |    203
+ UnitedHealthcare       |       2020 |    183
+ UnitedHealthcare       |       2021 |    184
+ UnitedHealthcare       |       2022 |    151
+ UnitedHealthcare       |       2023 |    159
+ UnitedHealthcare       |       2024 |    161
+ UnitedHealthcare       |       2025 |    146
+ UnitedHealthcare       |       2026 |    139
+
