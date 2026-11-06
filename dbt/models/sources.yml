@@ -11,6 +11,10 @@ sources:
         description: CMS DE-SynPUF inpatient claims, one row per claim segment
       - name: desynpuf_outpatient
         description: CMS DE-SynPUF outpatient claims, one row per claim segment
+      - name: hl7_segment
+        description: Inbound HL7 v2 messages, one row per segment as received, loaded by hl7/load_bronze_hl7.py
+      - name: x12_segment
+        description: Inbound X12 files, one row per segment exactly as received, loaded by edi/load_bronze_x12.py
       - name: fhir_resource
         description: Synthea FHIR R4 resources, one row per resource as JSONB, loaded by ingestion/fhir/load_bronze_fhir.py
   - name: ref
@@ -20,3 +24,9 @@ sources:
       - name: icd9_dx_conversion
       - name: icd10cm
       - name: hcpcs
+  - name: audit
+    description: Control and test tables written by the pipelines
+    schema: audit
+    tables:
+      - name: mpi_test_truth
+        description: Answer key for MPI evaluation (seeded test-data noise); never used for matching

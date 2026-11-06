@@ -20,3 +20,34 @@ seeds:
                 values: ['PROPOSED', 'APPROVED', 'REJECTED']
       - name: sensitive
         data_tests: [not_null]
+
+  - name: service_line_crosswalk
+    description: >
+      EDI-1 governed crosswalk, claim-line codes (SNOMED CT, LOINC, CVX) to CPT / HCPCS Level II
+      for 837P service lines. CPT codes are used as numbers only (no AMA descriptions stored).
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "code_system || '-' || source_code"
+    columns:
+      - name: line_category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['SERVICE', 'BUNDLED', 'E_M_BY_AGE']
+      - name: review_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['PROPOSED', 'APPROVED', 'REJECTED']
+
+  - name: encounter_reason_dx
+    description: EDI-1 governed rule, visit types whose standard reason-for-visit ICD-10-CM code applies when a claim has no codable diagnosis (H28).
+    columns:
+      - name: encounter_code
+        data_tests: [unique, not_null]
+      - name: icd10_rule
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['FIXED', 'BY_AGE']

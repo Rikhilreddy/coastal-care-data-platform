@@ -1,0 +1,47 @@
+# CI-1: every push and pull request rebuilds the platform from synthetic fixtures and runs
+# every test (dbt data + unit tests, HIPAA access checks, pyx12, python-hl7, round trips).
+# No real or PHI data is ever used in CI. All tools are free and open source.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci          # throwaway container password, not a secret
+          POSTGRES_DB: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U ci" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PG_HOST: localhost
+      PG_PORT: "5432"
+      PG_DB: coastal_care
+      PG_USER: ci
+      PG_PASSWORD: ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PostgreSQL 16 client
+        run: sudo apt-get update -q && sudo apt-get install -yq postgresql-client-16
+      - name: Install Python tools
+        run: pip install -r ci/requirements-ci.txt
+      - name: Build and test end to end
+        run: ./ci/run_ci.sh
+      - name: Keep dbt logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-logs
+          path: dbt/logs/

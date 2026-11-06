@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: hl7_adt_event
+    description: HL7-1 ADT A01/A03 events parsed from bronze.hl7_segment.
+    columns:
+      - name: message_control_id
+        data_tests: [unique, not_null]
+      - name: event_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['A01', 'A03']
+      - name: facility_mrn
+        data_tests: [not_null]

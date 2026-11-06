@@ -1,25 +1,25 @@
 snomed_code,snomed_description,conditions,category,icd10_code,sensitive,review_priority,review_status,rationale,reviewed_by,review_date,map_source
 314529007,Medication review due (situation),9424,NOT_CODABLE,,false,HIGH,PROPOSED,"Administrative reminder, not a condition",,,COASTAL_CROSSWALK_V1
-73595000,Stress (finding),3642,SDOH,Z733,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+73595000,Stress (finding),3642,SDOH,Z733,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
 66383009,Gingivitis (disorder),3569,DIAGNOSIS,K0510,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 160903007,Full-time employment (finding),3378,NOT_CODABLE,,false,HIGH,PROPOSED,Employment is not a problem condition; no ICD-10-CM code,,,COASTAL_CROSSWALK_V1
 160904001,Part-time employment (finding),2122,NOT_CODABLE,,false,HIGH,PROPOSED,Employment is not a problem condition; no ICD-10-CM code,,,COASTAL_CROSSWALK_V1
-422650009,Social isolation (finding),1338,SDOH,Z604,false,HIGH,PROPOSED,Social isolation coded as social exclusion (common SDOH mapping),,,COASTAL_CROSSWALK_V1
-423315002,Limited social contact (finding),1311,SDOH,Z608,false,HIGH,PROPOSED,Other problems related to social environment,,,COASTAL_CROSSWALK_V1
+422650009,Social isolation (finding),1338,SDOH,Z604,false,HIGH,APPROVED,Social isolation coded as social exclusion (common SDOH mapping),Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+423315002,Limited social contact (finding),1311,SDOH,Z608,false,HIGH,APPROVED,Other problems related to social environment,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
 741062008,Not in labor force (finding),1201,NOT_CODABLE,,false,HIGH,PROPOSED,Not in labor force is not unemployment (Z56.0); no code,,,COASTAL_CROSSWALK_V1
 444814009,Viral sinusitis (disorder),1154,DIAGNOSIS,J0190,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-18718003,Gingival disease (disorder),1012,DIAGNOSIS,K069,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+18718003,Gingival disease (disorder),1012,DIAGNOSIS,K069,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
 706893006,Victim of intimate partner abuse (finding),820,SDOH,Z91419,true,HIGH,APPROVED,Screening-based finding; not confirmed abuse (T74.-); personal history of adult abuse unspecified,Rikhi Y.,2026-10-20,COASTAL_CROSSWALK_V1
-109570002,Primary dental caries (disorder),765,DIAGNOSIS,K029,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-424393004,Reports of violence in the environment (finding),739,SDOH,Z658,true,HIGH,PROPOSED,Other specified problems related to psychosocial circumstances,,,COASTAL_CROSSWALK_V1
-195662009,Acute viral pharyngitis (disorder),705,DIAGNOSIS,J029,false,HIGH,PROPOSED,Viral organism not specified,,,COASTAL_CROSSWALK_V1
-10509002,Acute bronchitis (disorder),572,DIAGNOSIS,J209,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-162864005,Body mass index 30+ - obesity (finding),560,DIAGNOSIS,E669,false,HIGH,PROPOSED,"BMI value not given, so no Z68.3- code",,,COASTAL_CROSSWALK_V1
-73438004,Unemployed (finding),530,SDOH,Z560,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+109570002,Primary dental caries (disorder),765,DIAGNOSIS,K029,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+424393004,Reports of violence in the environment (finding),739,SDOH,Z658,true,HIGH,APPROVED,Other specified problems related to psychosocial circumstances,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+195662009,Acute viral pharyngitis (disorder),705,DIAGNOSIS,J029,false,HIGH,APPROVED,Viral organism not specified,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+10509002,Acute bronchitis (disorder),572,DIAGNOSIS,J209,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+162864005,Body mass index 30+ - obesity (finding),560,DIAGNOSIS,E669,false,HIGH,APPROVED,"BMI value not given, so no Z68.3- code",Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+73438004,Unemployed (finding),530,SDOH,Z560,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
 224299000,Received higher education (finding),484,NOT_CODABLE,,false,HIGH,PROPOSED,Education level is not a problem condition,,,COASTAL_CROSSWALK_V1
 72892002,Normal pregnancy (finding),452,STATUS_HISTORY,Z3490,true,HIGH,PROPOSED,Trimester unknown,,,COASTAL_CROSSWALK_V1
-714628002,Prediabetes (finding),446,DIAGNOSIS,R7303,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
-271737000,Anemia (disorder),416,DIAGNOSIS,D649,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
+714628002,Prediabetes (finding),446,DIAGNOSIS,R7303,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
+271737000,Anemia (disorder),416,DIAGNOSIS,D649,false,HIGH,APPROVED,Direct equivalent,Rikhi Y.,2026-10-23,COASTAL_CROSSWALK_V1
 82423001,Chronic pain (finding),295,DIAGNOSIS,G8929,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 160968000,Risk activity involvement (finding),292,SDOH,Z7289,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1
 59621000,Essential hypertension (disorder),290,DIAGNOSIS,I10,false,HIGH,PROPOSED,Direct equivalent,,,COASTAL_CROSSWALK_V1

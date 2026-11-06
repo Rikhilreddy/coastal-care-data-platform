@@ -1,0 +1,20 @@
+   semantic_tag    | eob_lines |  submitted   | zero_charge 
+-------------------+-----------+--------------+-------------
+ procedure         |    262893 | 259998801.72 |           0
+ (no tag)          |     91788 |  14706742.63 |           0
+ regime/therapy    |     25406 |  13924493.00 |           0
+ GAD-7             |      6914 |    957312.44 |           0
+ environment       |      5420 |    432046.45 |        1375
+ observable entity |       201 |    123785.85 |           0
+ physical object   |     33182 |     95726.85 |       28194
+ PRP-OMP           |       331 |     45016.00 |           0
+ finding           |        17 |     10469.45 |           0
+ qualifier value   |        69 |      7369.89 |           0
+ situation         |         6 |      3695.10 |           0
+ disorder          |         4 |       427.24 |           0
+ product           |        73 |         0.00 |          73
+ dose form         |      7118 |         0.00 |        7118
+ body structure    |        47 |         0.00 |          47
+ substance         |       407 |         0.00 |         407
+(16 rows)
+

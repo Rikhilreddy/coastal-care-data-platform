@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: edi_claim_line
+    description: Priced EOB lines of non-pharmacy FHIR claims, classified SERVICE / BUNDLED / UNMAPPED for the 837P.
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "claim_id || '-' || line_sequence"
+    columns:
+      - name: line_role
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['SERVICE', 'BUNDLED', 'UNMAPPED']
+
+  - name: edi_claim_readiness
+    description: Pre-submission edits. One row per non-pharmacy FHIR claim; READY when reject_reason is null.
+    columns:
+      - name: claim_id
+        data_tests: [unique, not_null]
+      - name: reject_reason
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['SELF_PAY', 'INSTITUTIONAL_837I_BACKLOG', 'DENTAL_OUT_OF_SCOPE',
+                         'UNMAPPED_SERVICE_CODE', 'NO_BILLABLE_SERVICE', 'NO_DIAGNOSIS']
+      - name: usage_indicator
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['P', 'T']
+
+  - name: edi_inbound_837p_claim
+    description: EDI-2 claims rebuilt from inbound 837P segments (bronze.x12_segment).
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "claim_id || '-' || usage_indicator"
+    columns:
+      - name: claim_id
+        data_tests: [not_null]
+      - name: usage_indicator
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['P', 'T']
+
+  - name: edi_inbound_837p_line
+    description: EDI-2 service lines rebuilt from inbound 837P segments.
+    columns:
+      - name: code_qualifier
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['HC']
+
+  - name: edi_inbound_835_claim
+    description: EDI-3 claim payments (CLP) received in 835 remittances.
+    columns:
+      - name: claim_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['1', '2', '3', '4', '19', '20', '21', '22', '23']
+
+  - name: edi_inbound_835_line
+    description: EDI-3 paid service lines (SVC) with CAS adjustments pivoted.

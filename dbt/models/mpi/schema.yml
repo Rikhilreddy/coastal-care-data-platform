@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: mpi_link
+    description: MPI decision per source identity (AUTO_LINK / REVIEW / NO_MATCH).
+    data_tests:
+      - unique:
+          arguments:
+            column_name: "source_system || '-' || source_record_id"
+    columns:
+      - name: decision
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['AUTO_LINK', 'REVIEW', 'NO_MATCH']
+  - name: mpi_match_quality
+    description: Precision and recall of the MPI against the seeded answer key.

@@ -1,3 +1,4 @@
+{{ config(grants={'select': ['cc_steward']}) }}  -- SEC-1: direct identifiers, stewards only
 -- One row per FHIR Patient (Synthea), typed. STTM: docs/mapping/sttm_fhir.csv
 -- JSONPath (jsonb_path_query_first) selects array elements by MEANING, not position:
 -- e.g. "the identifier whose system is SSN", "the race extension", wherever they sit.

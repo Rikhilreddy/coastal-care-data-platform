@@ -1,0 +1,8 @@
+encounter_code,encounter_description,icd10_rule,icd10_code,review_status,rationale,reviewed_by,review_date
+185349003,Encounter for check up (procedure),BY_AGE,Z0000|Z00129,PROPOSED,"Routine exam without abnormal findings: adult Z00.00 (18+), child Z00.129 (<18)",,
+162673000,General examination of patient (procedure),BY_AGE,Z0000|Z00129,PROPOSED,"Routine exam without abnormal findings: adult Z00.00 (18+), child Z00.129 (<18)",,
+410620009,Well child visit (procedure),FIXED,Z00129,PROPOSED,Routine child health exam without abnormal findings,,
+33879002,Administration of vaccine to produce active immunity (procedure),FIXED,Z23,PROPOSED,Encounter for immunization,,
+424619006,Prenatal visit (regime/therapy),FIXED,Z3490,PROPOSED,"Supervision of normal pregnancy, trimester unspecified",,
+424441002,Prenatal initial visit (regime/therapy),FIXED,Z3490,PROPOSED,"Supervision of normal pregnancy, trimester unspecified",,
+169762003,Postnatal visit (regime/therapy),FIXED,Z392,PROPOSED,Routine postpartum follow-up,,

@@ -1,0 +1,692 @@
+snomed_code,description,semantic_tag,lines,as_first_line
+185347001,Encounter for problem (procedure),procedure,24084,24084
+171207006,Depression screening (procedure),procedure,21851,0
+265764009,Renal dialysis (procedure),procedure,16096,0
+185349003,Encounter for check up (procedure),procedure,13275,13275
+710824005,Assessment of health and social care needs (procedure),procedure,13238,0
+162673000,General examination of patient (procedure),procedure,10724,10724
+314529007,Medication review due (situation),situation,9424,0
+430193006,Medication reconciliation (procedure),procedure,9106,0
+428211000124100,Assessment of substance use (procedure),procedure,8515,0
+103697008,Patient referral for dental care (procedure),procedure,7596,0
+34043003,Dental consultation and report (procedure),procedure,7374,0
+243085009,Oral health education (procedure),procedure,7147,0
+277183007,Dental equipment (physical object),physical object,7118,0
+1230220004,Conventional release periodontal gel (dose form),dose form,7118,0
+469020004,Dental floss (physical object),physical object,7118,0
+1260009003,Removal of supragingival plaque and calculus from all teeth using dental instrument (procedure),procedure,7101,0
+274788003,Examination of gingivae (procedure),procedure,7101,0
+225362009,Dental care (regime/therapy),regime/therapy,7101,0
+1260010008,Removal of subgingival plaque and calculus from all teeth using dental instrument (procedure),procedure,7101,0
+710841007,Assessment of anxiety (procedure),procedure,6916,0
+385763009,Hospice care (regime/therapy),regime/therapy,4428,0
+702927004,Urgent care clinic (environment),environment,4045,4045
+866148006,Screening for domestic abuse (procedure),procedure,3999,0
+713106006,Screening for drug abuse (procedure),procedure,3959,0
+706298007,Dental x-ray system (physical object),physical object,3916,0
+763302001,Assessment using Alcohol Use Disorders Identification Test - Consumption (procedure),procedure,3896,0
+185345009,Encounter for symptom (procedure),procedure,3862,3862
+241046008,Dental plain X-ray bitewing (procedure),procedure,3806,0
+337388004,Blood glucose testing strips (physical object),physical object,3794,0
+410620009,Well child visit (procedure),procedure,3683,3683
+73595000,Stress (finding),finding,3642,0
+762993000,Assessment using Morse Fall Scale (procedure),procedure,3639,0
+66383009,Gingivitis (disorder),disorder,3569,0
+68071007,Dental fluoride treatment (procedure),procedure,3552,0
+160903007,Full-time employment (finding),finding,3378,0
+410401003,Nursing care/supplementary surveillance (regime/therapy),regime/therapy,3177,0
+703423002,Combined chemotherapy and radiation therapy (procedure),procedure,2689,0
+52052004,Rehabilitation therapy (regime/therapy),regime/therapy,2452,0
+424619006,Prenatal visit (regime/therapy),regime/therapy,2382,2382
+50849002,Emergency room admission (procedure),procedure,2238,2238
+225158009,Auscultation of the fetal heart (procedure),procedure,2237,0
+274804006,Evaluation of uterine fundal height (procedure),procedure,2237,0
+160904001,Part-time employment (finding),finding,2122,0
+308335008,Patient encounter procedure (procedure),procedure,2107,2107
+398171003,Hearing examination (procedure),procedure,2104,0
+390906007,Follow-up encounter (procedure),procedure,1927,1927
+448337001,Telemedicine consultation with patient (procedure),procedure,1654,1633
+76601001,Intramuscular injection (procedure),procedure,1614,0
+371883000,Outpatient procedure (procedure),procedure,1434,1434
+180256009,Subcutaneous immunotherapy (procedure),procedure,1432,0
+715252007,Depression screening using Patient Health Questionnaire Nine Item score (procedure),procedure,1414,0
+1137596000,Blood lancet (physical object),physical object,1389,0
+225738002,Operating room (environment),environment,1375,0
+81733005,Dental surgical procedure (procedure),procedure,1368,0
+456191000124101,Postoperative care for dental procedure (regime/therapy),regime/therapy,1368,0
+972002,"Air filter, device (physical object)",physical object,1366,0
+463659001,Medical air low pressure tubing (physical object),physical object,1366,0
+706226000,Continuous positive airway pressure/Bilevel positive airway pressure mask (physical object),physical object,1366,0
+422650009,Social isolation (finding),finding,1338,0
+3802001,Dental application of desensitizing medicament (procedure),procedure,1322,0
+423315002,Limited social contact (finding),finding,1311,0
+33879002,Administration of vaccine to produce active immunity (procedure),procedure,1310,1310
+698314001,Consultation for treatment (procedure),procedure,1297,1179
+741062008,Not in labor force (finding),finding,1201,0
+444814009,Viral sinusitis (disorder),disorder,1154,0
+103750000,Sleep apnea assessment (procedure),procedure,1105,0
+18718003,Gingival disease (disorder),disorder,1012,0
+64544008,"Gingivectomy or gingivoplasty, per tooth (procedure)",procedure,1012,0
+36228007,Ophthalmic examination and evaluation (procedure),procedure,995,995
+252832004,Intraocular pressure test (procedure),procedure,967,0
+314971001,Camera fundoscopy (procedure),procedure,967,0
+55468007,Ocular slit lamp examination (procedure),procedure,967,0
+16830007,Visual acuity testing (procedure),procedure,967,0
+722161008,Diabetic retinal eye exam (procedure),procedure,967,0
+389153003,Indirect gonioscopy (procedure),procedure,967,0
+371908008,Oxygen administration by mask (procedure),procedure,821,0
+706893006,Victim of intimate partner abuse (finding),finding,820,0
+431182000,Placing subject in prone position (procedure),procedure,799,0
+109570002,Primary dental caries (disorder),disorder,765,0
+409023009,Professional / ancillary services care (regime/therapy),regime/therapy,755,0
+424393004,Reports of violence in the environment (finding),finding,739,0
+195662009,Acute viral pharyngitis (disorder),disorder,705,0
+5880005,Physical examination procedure (procedure),procedure,700,0
+467645007,Continuous positive airway pressure nasal oxygen cannula (physical object),physical object,691,0
+1259293006,Application of composite dental filling material to dentin of tooth following fracture of tooth (procedure),procedure,676,0
+704718009,CPAP/BPAP oral mask (physical object),physical object,675,0
+1256042007,Restoration of tooth with coverage of all cusps using dental filling material (procedure),procedure,671,0
+868187001,"Assessment using Car, Relax, Alone, Forget, Friends, Trouble Screening Test (procedure)",procedure,660,0
+73761001,Colonoscopy (procedure),procedure,593,0
+10509002,Acute bronchitis (disorder),disorder,572,0
+700070005,Optical coherence tomography of retina (procedure),procedure,562,0
+162864005,Body mass index 30+ - obesity (finding),finding,560,0
+386516004,Anticipatory guidance (procedure),procedure,549,0
+73438004,Unemployed (finding),finding,530,0
+104091002,"Hemogram, automated, with red blood cells, white blood cells, hemoglobin, hematocrit, indices, platelet count, and manual white blood cell differential (procedure)",procedure,510,0
+439708006,Home visit (procedure),procedure,488,488
+224299000,Received higher education (finding),finding,484,0
+91251008,Physical therapy procedure (regime/therapy),regime/therapy,476,0
+337414009,Blood glucose meter (physical object),physical object,475,0
+252160004,Standard pregnancy test (procedure),procedure,466,0
+424441002,Prenatal initial visit (regime/therapy),regime/therapy,464,464
+72892002,Normal pregnancy (finding),finding,452,0
+714628002,Prediabetes (finding),finding,446,0
+439740005,Postoperative follow-up visit (procedure),procedure,444,444
+169230002,Ultrasound scan for fetal viability (procedure),procedure,435,0
+271737000,Anemia (disorder),disorder,416,0
+315639002,Initial patient assessment (procedure),procedure,407,0
+370789001,Development of individualized plan of care (procedure),procedure,407,0
+16335031000119103,High resolution computed tomography of chest without contrast (procedure),procedure,401,0
+84478008,Occupational therapy (regime/therapy),regime/therapy,376,0
+127783003,Spirometry (procedure),procedure,339,0
+90226004,"Cytopathology procedure, preparation of smear, genital source (procedure)",procedure,335,0
+32485007,Hospital admission (procedure),procedure,333,333
+711446003,Transplantation of kidney regime (regime/therapy),regime/therapy,326,0
+399208008,Plain X-ray of chest (procedure),procedure,325,0
+706390002,Dental impression material (physical object),physical object,318,0
+468277001,Dental impression tray material (physical object),physical object,318,0
+44608003,Blood group typing (procedure),procedure,310,0
+702172008,Home continuous positive airway pressure unit (physical object),physical object,302,0
+706180003,Respiratory humidifier (physical object),physical object,302,0
+117015009,Throat culture (procedure),procedure,301,0
+82423001,Chronic pain (finding),finding,295,0
+160968000,Risk activity involvement (finding),finding,292,0
+59621000,Essential hypertension (disorder),disorder,290,0
+23426006,Measurement of respiratory function (procedure),procedure,290,0
+713779008,"Nitrile examination/treatment glove, non-powdered, sterile (physical object)",physical object,274,0
+29303009,Electrocardiographic procedure (procedure),procedure,274,0
+706724001,Face shield (physical object),physical object,274,0
+470618009,Antiseptic towelette (physical object),physical object,274,0
+419343004,Alcohol disinfectant (substance),substance,274,0
+1141679000,Isolation gown (physical object),physical object,274,0
+409533008,Air-purifying respirator (physical object),physical object,274,0
+170615005,Home nebulizer (physical object),physical object,271,0
+394701000,Asthma follow-up (regime/therapy),regime/therapy,271,271
+473461003,Educated to high school level (finding),finding,268,0
+314098000,Rubella screening test (procedure),procedure,266,0
+60218003,"Urinalysis, protein, qualitative (procedure)",procedure,266,0
+28163009,"Skin test for tuberculosis, Tine test (procedure)",procedure,266,0
+117010004,Urine culture (procedure),procedure,266,0
+395123002,Urine screening test for diabetes (procedure),procedure,266,0
+269828009,Syphilis infectious titer test (procedure),procedure,266,0
+31676001,Human immunodeficiency virus antigen test (procedure),procedure,266,0
+310861008,Chlamydia antigen test (procedure),procedure,266,0
+104326007,Measurement of Varicella-zoster virus antibody (procedure),procedure,266,0
+47758006,Hepatitis B surface antigen measurement (procedure),procedure,266,0
+165829005,Gonorrhea infection titer test (procedure),procedure,266,0
+104375008,"Hepatitis C antibody, confirmatory test (procedure)",procedure,266,0
+443529005,Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using fluorescence in situ hybridization screening technique (procedure),procedure,264,0
+266948004,Has a criminal record (finding),finding,262,0
+161744009,Past pregnancy history of miscarriage (situation),situation,258,0
+40055000,Chronic sinusitis (disorder),disorder,257,0
+173291009,Simple extraction of tooth (procedure),procedure,256,0
+427898007,Infection of tooth (disorder),disorder,256,0
+1004045004,Intravitreal injection of anti-vascular endothelial growth factor (procedure),procedure,255,0
+169762003,Postnatal visit (regime/therapy),regime/therapy,252,252
+228869008,Manual wheelchair (physical object),physical object,249,0
+275833003,Alpha-fetoprotein test - antenatal (procedure),procedure,248,0
+271442007,Fetal anatomy study (procedure),procedure,248,0
+183460006,Obstetric emergency hospital admission (procedure),procedure,246,246
+268556000,Urine screening for glucose (procedure),procedure,244,0
+399014008,Administration of vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae antigens (procedure),procedure,244,0
+1149222004,Overdose (disorder),disorder,243,0
+118001005,Streptococcus pneumoniae group B antigen assay (procedure),procedure,235,0
+25656009,"Physical examination, complete (procedure)",procedure,233,0
+228557008,Cognitive and behavioral therapy (regime/therapy),regime/therapy,229,0
+56876005,Drug rehabilitation and detoxification (regime/therapy),regime/therapy,222,222
+40701008,Echocardiography (procedure),procedure,221,0
+274531002,Abnormal findings diagnostic imaging heart+coronary circulat (finding),finding,220,0
+308283009,Discharge from hospital (procedure),procedure,220,0
+414545008,Ischemic heart disease (disorder),disorder,219,0
+234745004,Take oral or dental impression (procedure),procedure,213,0
+10939881000119105,Unhealthy alcohol drinking behavior (finding),finding,212,0
+1269321004,Fitting of denture (procedure),procedure,212,0
+8060009,"Denture, device (physical object)",physical object,212,0
+278860009,Chronic low back pain (finding),finding,202,0
+386216000,"Human parturition, function (observable entity)",observable entity,201,0
+237602007,Metabolic syndrome X (disorder),disorder,201,0
+441550005,Urinalysis with reflex to microscopy and culture (procedure),procedure,200,0
+310417005,Certification procedure (procedure),procedure,196,0
+185087000,Notifications (procedure),procedure,196,0
+305336008,Admission to hospice (procedure),procedure,196,196
+183452005,Emergency hospital admission (procedure),procedure,192,192
+65363002,Otitis media (disorder),disorder,189,0
+84100007,History taking (procedure),procedure,187,0
+63332003,History AND physical examination (procedure),procedure,186,0
+224295006,Only received primary school education (finding),finding,185,0
+58000006,Patient discharge (procedure),procedure,185,0
+225386006,Pre-discharge assessment (procedure),procedure,180,0
+37320007,Loss of teeth (disorder),disorder,180,0
+183519002,Referral to cardiology service (procedure),procedure,178,0
+384709000,Sprain (morphologic abnormality),morphologic abnormality,173,0
+125605004,Fracture of bone (disorder),disorder,173,0
+80583007,Severe anxiety (panic) (finding),finding,171,0
+311555007,Speech and language therapy regime (regime/therapy),regime/therapy,171,0
+71651007,Mammography (procedure),procedure,168,0
+410410006,Screening surveillance (regime/therapy),regime/therapy,168,168
+473231009,Renal disorder medication review (procedure),procedure,165,0
+308646001,Death Certification,(no tag),164,164
+288086009,Suture open wound (procedure),procedure,162,0
+229064008,Movement therapy (regime/therapy),regime/therapy,162,0
+312608009,Laceration - injury (disorder),disorder,162,0
+281789004,Antibiotic therapy (procedure),procedure,161,0
+223470000,Discussion about signs and symptoms (procedure),procedure,161,0
+43878008,Streptococcal sore throat (disorder),disorder,155,0
+312681000,Bone density scan (procedure),procedure,155,0
+278558000,Dental filling lost (finding),finding,152,0
+127013003,Disorder of kidney due to diabetes mellitus (disorder),disorder,152,0
+15081005,Pulmonary rehabilitation (regime/therapy),regime/therapy,152,0
+278602001,Loose dental filling (finding),finding,149,0
+57617002,Urine specimen collection (procedure),procedure,148,0
+105531004,Housing unsatisfactory (finding),finding,145,0
+431855005,Chronic kidney disease stage 1 (disorder),disorder,145,0
+278588009,Fractured dental filling (finding),finding,141,0
+278598003,Leaking dental filling (finding),finding,140,0
+307426000,Acute infective cystitis (disorder),disorder,138,0
+305408004,Admission to surgical department (procedure),procedure,137,137
+90781000119102,Microalbuminuria due to type 2 diabetes mellitus (disorder),disorder,137,0
+65200003,Insertion of intrauterine contraceptive device (procedure),procedure,137,0
+33367005,Angiography of coronary artery (procedure),procedure,136,0
+55822004,Hyperlipidemia (disorder),disorder,135,0
+1121000119107,Chronic neck pain (finding),finding,134,0
+274474001,Bone immobilization (procedure),procedure,134,0
+8537005,Solution (substance),substance,133,0
+267020005,History of tubal ligation (situation),situation,129,0
+431856006,Chronic kidney disease stage 2 (disorder),disorder,129,0
+14768001,Peripheral blood smear interpretation (procedure),procedure,118,0
+162676008,Brief general examination (procedure),procedure,118,0
+415300000,Review of systems (procedure),procedure,118,0
+110030002,Concussion injury of brain (disorder),disorder,118,0
+169553002,Implantation of subcutaneous contraceptive (procedure),procedure,117,0
+44465007,Sprain of ankle (disorder),disorder,114,0
+91537007,"Hospital bed, device (physical object)",physical object,112,0
+370995009,Health risks education (procedure),procedure,111,0
+736169004,Post anesthesia care management (procedure),procedure,109,0
+386053000,Evaluation procedure (procedure),procedure,109,0
+840544004,Suspected disease caused by Severe acute respiratory coronavirus 2 (situation),situation,106,0
+261352009,Face mask (physical object),physical object,106,0
+446654005,Refugee (person),person,106,0
+67879005,"History and physical examination, limited (procedure)",procedure,105,0
+840539006,Disease caused by severe acute respiratory syndrome coronavirus 2 (disorder),disorder,102,0
+51116004,Passive immunization (procedure),procedure,101,0
+269911007,Sputum examination (procedure),procedure,101,0
+714812005,Induced termination of pregnancy (procedure),procedure,99,0
+270427003,Patient-initiated encounter (procedure),procedure,99,99
+10383002,Counseling for termination of pregnancy (procedure),procedure,99,0
+386394001,Pregnancy termination care (regime/therapy),regime/therapy,97,0
+44054006,Diabetes mellitus type 2 (disorder),disorder,97,0
+302870006,Hypertriglyceridemia (disorder),disorder,95,0
+65546002,Extraction of wisdom tooth (procedure),procedure,94,0
+157141000119108,Proteinuria due to type 2 diabetes mellitus (disorder),disorder,94,0
+386661006,Fever (finding),finding,94,0
+68496003,Polyp of colon (disorder),disorder,92,0
+274031008,Rectal polypectomy (procedure),procedure,89,0
+6525002,Dependent drug abuse (disorder),disorder,87,0
+415070008,Percutaneous coronary intervention,(no tag),87,0
+196416002,Impacted molars (disorder),disorder,86,0
+124171000119105,Chronic intractable migraine without aura (disorder),disorder,86,0
+133899007,Postoperative care (regime/therapy),regime/therapy,84,0
+305351004,Admission to intensive care unit (procedure),procedure,84,73
+433144002,Chronic kidney disease stage 3 (disorder),disorder,84,0
+62106007,Concussion with no loss of consciousness (disorder),disorder,84,0
+399261000,History of coronary artery bypass grafting (situation),situation,83,0
+185389009,Follow-up visit (procedure),procedure,81,81
+361055000,Misuses drugs (finding),finding,80,0
+49727002,Cough (finding),finding,78,0
+1263416007,Removal of intrauterine contraceptive device (procedure),procedure,78,0
+433236007,Transthoracic echocardiography (procedure),procedure,78,0
+36971009,Sinusitis (disorder),disorder,78,0
+395142003,Allergy screening test (procedure),procedure,77,0
+281036007,Follow-up consultation (procedure),procedure,77,77
+104435004,Screening for occult blood in feces (procedure),procedure,73,0
+301807007,Removal of subcutaneous contraceptive (procedure),procedure,72,0
+19169002,Miscarriage in first trimester (disorder),disorder,72,0
+75498004,Acute bacterial sinusitis (disorder),disorder,69,0
+310061009,Gynecology service (qualifier value),qualifier value,69,69
+35025007,Manual pelvic examination (procedure),procedure,69,0
+33195004,External beam radiation therapy procedure (procedure),procedure,68,0
+39848009,Whiplash injury to neck (disorder),disorder,67,0
+311791003,Information gathering (procedure),procedure,67,0
+90460009,Injury of neck (disorder),disorder,67,0
+210098006,Domiciliary or rest home patient evaluation and management (procedure),procedure,67,67
+431069006,Packed red blood cells (product),product,63,0
+64859006,Osteoporosis (disorder),disorder,61,0
+85548006,Episiotomy (procedure),procedure,60,0
+1187604002,Serving in military service (finding),finding,59,0
+46706006,Replacement of contraceptive intrauterine device (procedure),procedure,59,0
+70704007,Sprain of wrist (disorder),disorder,59,0
+239873007,Osteoarthritis of knee (disorder),disorder,59,0
+71493000,Transfusion of packed red blood cells (procedure),procedure,58,0
+39898005,Sleep disorder (disorder),disorder,57,0
+423475008,Heart failure education (procedure),procedure,55,0
+440546007,Discussion about pregnancy (procedure),procedure,55,0
+410006001,Digital examination of rectum (procedure),procedure,55,0
+428251008,History of appendectomy (situation),situation,55,0
+36955009,Loss of taste (finding),finding,55,0
+367336001,Chemotherapy (procedure),procedure,54,0
+698306007,Awaiting transplantation of kidney (situation),situation,54,0
+197927001,Recurrent urinary tract infection (disorder),disorder,53,0
+305342007,Admission to ward (procedure),procedure,53,53
+305432006,Admission to surgical transplant department (procedure),procedure,53,53
+705417005,Wheelchair accessory (physical object),physical object,53,0
+14736009,History and physical examination with evaluation and management of patient (procedure),procedure,52,0
+386478007,Triage: emergency center (procedure),procedure,52,0
+266934004,Transport problem (finding),finding,52,0
+61746007,Taking patient vital signs (procedure),procedure,52,0
+431857002,Chronic kidney disease stage 4 (disorder),disorder,52,0
+18946005,Epidural anesthesia (procedure),procedure,51,0
+306316000,Referral to transplant surgeon (procedure),procedure,51,0
+182777000,Monitoring of patient (regime/therapy),regime/therapy,51,0
+183478001,Emergency hospital admission for asthma (procedure),procedure,51,51
+80394007,Hyperglycemia (disorder),disorder,50,0
+128613002,Seizure disorder (disorder),disorder,49,0
+1290882004,History of seizure (situation),situation,49,0
+48333001,Burn injury (morphologic abnormality),morphologic abnormality,49,0
+713458007,Lack of access to transportation (finding),finding,48,0
+119219003,Kidney part (body structure),body structure,47,0
+399211009,History of myocardial infarction (situation),situation,47,0
+390791001,Referral for echocardiography (procedure),procedure,47,0
+61804006,Alveolitis of jaw (disorder),disorder,46,0
+284053004,Tooth socket procedure (procedure),procedure,46,0
+161665007,History of renal transplant (situation),situation,46,0
+31208007,Medical induction of labor (procedure),procedure,45,0
+306185001,Referral to cardiac surgery service (procedure),procedure,45,0
+110467000,Pre-surgery testing (procedure),procedure,44,0
+195967001,Asthma (disorder),disorder,44,0
+709138001,Notification of treatment plan (procedure),procedure,44,0
+52765003,Intubation (procedure),procedure,43,0
+410770002,Administration of anesthesia for procedure (procedure),procedure,43,0
+410538000,Scheduling (procedure),procedure,42,0
+392247006,Insertion of catheter into artery (procedure),procedure,42,0
+170837001,Allergic disorder initial assessment (regime/therapy),regime/therapy,42,42
+305428000,Admission to orthopedic department (procedure),procedure,42,0
+1255320005,Wheeled walker (physical object),physical object,41,0
+65966004,Fracture of forearm (disorder),disorder,41,0
+713026007,Plain X-ray of humerus (procedure),procedure,41,0
+397821002,Patient transfer to intensive care unit (procedure),procedure,41,41
+272265001,Appliance for sleep apnea (physical object),physical object,40,0
+306706006,Discharge to ward (procedure),procedure,40,0
+271280005,Removal of endotracheal tube (procedure),procedure,40,0
+65677008,Pulmonary catheterization with Swan-Ganz catheter (procedure),procedure,39,0
+23745001,Documentation procedure (procedure),procedure,39,0
+359672006,Median sternotomy (procedure),procedure,39,0
+762998009,Assessment using New York Heart Association Classification (procedure),procedure,39,0
+223495004,Preparation of patient for procedure (regime/therapy),regime/therapy,39,0
+78275009,Obstructive sleep apnea syndrome (disorder),disorder,38,0
+701100002,Polysomnography analyzer (physical object),physical object,38,0
+701077002,Respiratory apnea monitoring system (physical object),physical object,38,0
+248595008,Sputum finding (finding),finding,38,0
+84229001,Fatigue (finding),finding,38,0
+156073000,Complete miscarriage (disorder),disorder,37,0
+169673001,Antenatal RhD antibody screening (procedure),procedure,37,0
+283385000,Laceration of thigh (disorder),disorder,37,0
+252482003,Stair-climbing test (procedure),procedure,37,0
+11466000,Cesarean section (procedure),procedure,37,0
+243063003,Postoperative procedure education (procedure),procedure,37,0
+302761001,Walking exercise test (procedure),procedure,37,0
+284551006,Laceration of foot (disorder),disorder,36,0
+88805009,Chronic congestive heart failure (disorder),disorder,36,0
+16114001,Fracture of ankle (disorder),disorder,36,0
+392091000,Care regimes assessment (procedure),procedure,36,0
+283371005,Laceration of forearm (disorder),disorder,35,0
+1290459008,Plain X-ray of ankle region (procedure),procedure,35,0
+1551000119108,Nonproliferative diabetic retinopathy due to type II diabetes mellitus,(no tag),35,0
+711069006,Coordination of care plan (procedure),procedure,35,0
+70536003,Transplant of kidney (procedure),procedure,34,0
+79345008,Excision of maxillary torus palatinus (procedure),procedure,34,0
+46752004,Torus palatinus (disorder),disorder,34,0
+428830000,Pretransplant evaluation of kidney recipient (procedure),procedure,34,0
+385781007,Home health aide service (regime/therapy),regime/therapy,34,0
+229095001,Exercise class (regime/therapy),regime/therapy,33,0
+698560000,Referral to sleep apnea clinic (procedure),procedure,33,0
+290045001,Kitchen practice (regime/therapy),regime/therapy,33,0
+26929004,Alzheimer's disease (disorder),disorder,32,0
+54550000,Electroencephalogram (procedure),procedure,32,0
+403190006,Epidermal burn of skin (disorder),disorder,32,0
+233604007,Pneumonia (disorder),disorder,32,0
+713024005,Plain X-ray of wrist region (procedure),procedure,31,0
+168594001,Plain X-ray of clavicle (procedure),procedure,31,0
+263102004,Fracture subluxation of wrist (disorder),disorder,31,0
+336621006,Oxygen concentrator (physical object),physical object,31,0
+58150001,Fracture of clavicle (disorder),disorder,31,0
+84757009,Epilepsy (disorder),disorder,31,0
+200619008,Comprehensive interview and evaluation (procedure),procedure,30,0
+91302008,Sepsis (disorder),disorder,30,0
+706112002,Patient lifting system (physical object),physical object,30,0
+237001001,Augmentation of labor (procedure),procedure,30,0
+417511005,Referral to home health care service (procedure),procedure,30,0
+370247008,Facial laceration (disorder),disorder,30,0
+384700001,Injection of tetanus antitoxin (procedure),procedure,30,0
+368581000119106,Neuropathy due to type 2 diabetes mellitus (disorder),disorder,28,0
+62564004,Concussion with loss of consciousness (disorder),disorder,28,0
+203646004,Adolescent idiopathic scoliosis (disorder),disorder,28,0
+401314000,Acute non-ST segment elevation myocardial infarction (disorder),disorder,27,0
+183996000,Sterilization requested (situation),situation,27,0
+397539000,Grid retinal photocoagulation (procedure),procedure,27,0
+35999006,Blighted ovum (disorder),disorder,26,0
+268533009,Sterilization education (procedure),procedure,26,0
+360008003,Commode (physical object),physical object,26,0
+710839006,Assessment of cardiac status using monitoring device (procedure),procedure,25,0
+713197008,Recurrent rectal polyp (disorder),disorder,25,0
+232353008,Perennial allergic rhinitis with seasonal variation (disorder),disorder,25,0
+165197003,Diagnostic assessment (procedure),procedure,25,0
+15220000,Laboratory test (procedure),procedure,25,0
+22298006,Myocardial infarction (disorder),disorder,25,0
+32911000,Homeless (finding),finding,24,0
+170838006,Allergic disorder follow-up assessment (regime/therapy),regime/therapy,24,24
+201834006,"Localized, primary osteoarthritis of the hand (disorder)",disorder,24,0
+192127007,Child attention deficit disorder (disorder),disorder,24,0
+183444007,Referral for further care (procedure),procedure,24,0
+287664005,Ligation of bilateral fallopian tubes (procedure),procedure,24,0
+284549007,Laceration of hand (disorder),disorder,24,0
+33737001,Fracture of rib (disorder),disorder,23,0
+46177005,End-stage renal disease (disorder),disorder,23,0
+183495009,Non-urgent orthopedic admission (procedure),procedure,23,23
+198992004,Eclampsia in pregnancy (disorder),disorder,23,0
+233553003,Vascular cannula removal (procedure),procedure,22,0
+8290005,Induced cardioplegia (procedure),procedure,22,0
+63697000,Cardiopulmonary bypass operation (procedure),procedure,22,0
+301884003,Removal of aortic cross clamp (procedure),procedure,22,0
+42825003,Cannulation (procedure),procedure,22,0
+301882004,Placement of aortic cross clamp (procedure),procedure,22,0
+125601008,Injury of knee (disorder),disorder,21,0
+267036007,Dyspnea (finding),finding,21,0
+225338004,Risk assessment (procedure),procedure,21,0
+56018004,Wheezing (finding),finding,21,0
+1505002,Hospital admission for isolation (procedure),procedure,21,21
+430701006,Resuscitation using intravenous fluid (procedure),procedure,21,0
+389087006,Hypoxemia (disorder),disorder,21,0
+271825005,Respiratory distress (finding),finding,21,0
+1290407002,Plain X-ray of knee region (procedure),procedure,21,0
+254837009,Malignant neoplasm of breast (disorder),disorder,21,0
+126906006,Neoplasm of prostate (disorder),disorder,19,0
+234687006,Grafting of periodontal bone defect (procedure),procedure,19,0
+401303003,Acute ST segment elevation myocardial infarction (disorder),disorder,19,0
+73430006,Sleep apnea (disorder),disorder,19,0
+1255252008,Resorption of alveolar process due to dental trauma (disorder),disorder,19,0
+232717009,Coronary artery bypass grafting (procedure),procedure,19,0
+473220001,Hematologic disorder medication review (procedure),procedure,18,0
+453131000124105,Videotelephony encounter (procedure),procedure,18,18
+87433001,Pulmonary emphysema (disorder),disorder,17,0
+233678006,Childhood asthma (disorder),disorder,17,0
+24079001,Atopic dermatitis (disorder),disorder,17,0
+418824004,Off-pump coronary artery bypass (procedure),procedure,17,0
+699253003,Surgical manipulation of joint of knee (procedure),procedure,17,0
+203082005,Fibromyalgia (disorder),disorder,17,0
+92691004,Carcinoma in situ of prostate (disorder),disorder,17,0
+267102003,Sore throat (finding),finding,17,0
+446096008,Perennial allergic rhinitis (disorder),disorder,17,0
+443165006,Osteoporotic fracture of bone (disorder),disorder,16,0
+236974004,Instrumental delivery (procedure),procedure,16,0
+403191005,Partial thickness burn (disorder),disorder,16,0
+239872002,Osteoarthritis of hip (disorder),disorder,16,0
+398254007,Pre-eclampsia (disorder),disorder,16,0
+85116003,Miscarriage in second trimester (disorder),disorder,16,0
+86013001,Periodic reevaluation and management of healthy individual (procedure),procedure,15,15
+449214001,Transfer to stepdown unit (procedure),procedure,15,0
+307731004,Injury of tendon of the rotator cuff of shoulder (disorder),disorder,15,0
+241929008,Acute allergic reaction (disorder),disorder,14,0
+76746007,Cardiovascular stress testing (procedure),procedure,14,0
+65575008,Biopsy of prostate (procedure),procedure,14,0
+82808001,Sleep apnea monitoring with alarm (regime/therapy),regime/therapy,14,0
+313191000,Injection of epinephrine (procedure),procedure,14,0
+315268008,Suspected prostate cancer (situation),situation,14,0
+57676002,Joint pain,(no tag),14,0
+5602001,Opioid abuse,(no tag),14,0
+367498001,Seasonal allergic rhinitis (disorder),disorder,14,0
+68962001,Muscle pain (finding),finding,14,0
+43075005,Partial resection of colon (procedure),procedure,14,0
+185086009,Chronic obstructive bronchitis (disorder),disorder,14,0
+705427004,Power-assisted wheelchair (physical object),physical object,13,0
+306206005,Referral to service (procedure),procedure,13,0
+1231000119100,History of aortic valve replacement (situation),situation,13,0
+261323006,Portable oxygen cylinder (physical object),physical object,13,0
+25064002,Headache (finding),finding,13,0
+698354004,Magnetic resonance imaging for measurement of brain volume (procedure),procedure,12,0
+49436004,Atrial fibrillation (disorder),disorder,12,0
+162573006,Suspected lung cancer (situation),situation,12,0
+418891003,Computed tomography of chest and abdomen (procedure),procedure,12,0
+127294003,Traumatic or nontraumatic brain injury (disorder),disorder,11,0
+713021002,Plain X-ray of pelvis (procedure),procedure,11,0
+267253006,Fetus with chromosomal abnormality (disorder),disorder,11,0
+359817006,Closed fracture of hip (disorder),disorder,11,0
+60573004,Aortic valve stenosis (disorder),disorder,11,0
+79094001,Initial psychiatric interview with mental status and evaluation (procedure),procedure,11,11
+26604007,Complete blood count (procedure),procedure,10,0
+254637007,Non-small cell lung cancer (disorder),disorder,10,0
+424132000,"Non-small cell carcinoma of lung, TNM stage 1 (disorder)",disorder,10,0
+79586000,Tubal pregnancy (disorder),disorder,9,0
+83664006,Idiopathic atrophic hypothyroidism (disorder),disorder,9,0
+60234000,Aortic valve regurgitation (disorder),disorder,9,0
+444448004,Injury of medial collateral ligament of knee (disorder),disorder,9,0
+346447007,Fresh frozen plasma (product),product,9,0
+370143000,Major depressive disorder (disorder),disorder,9,0
+223484005,Discussion about treatment (procedure),procedure,9,8
+262574004,Bullet wound (disorder),disorder,9,0
+74400008,Appendicitis (disorder),disorder,9,0
+283545005,Gunshot wound (disorder),disorder,9,0
+80146002,Excision of appendix (procedure),procedure,9,0
+706870000,Acute pulmonary embolism (disorder),disorder,9,0
+7200002,Alcoholism (disorder),disorder,9,0
+223487003,Discussion about options (procedure),procedure,8,0
+69212005,Range of motion testing (procedure),procedure,8,0
+770349000,Sepsis caused by virus (disorder),disorder,8,0
+4525004,Emergency department patient visit (procedure),procedure,8,8
+230265002,Familial Alzheimer's disease of early onset (disorder),disorder,8,0
+427419006,Transformed migraine (disorder),disorder,8,0
+122856003,Oral examination (procedure),procedure,8,0
+90470006,Prostatectomy (procedure),procedure,8,0
+122548005,Biopsy of breast (procedure),procedure,8,0
+876882001,Died in hospice (finding),finding,8,0
+433114000,Human epidermal growth factor receptor 2 gene detection by immunohistochemistry (procedure),procedure,8,0
+860577005,Aortic valve bioprosthesis (physical object),physical object,8,0
+1290789000,Plain X-ray of mandible (procedure),procedure,8,0
+1571000087109,Ultrasonography of bilateral breasts (procedure),procedure,8,0
+76164006,Biopsy of colon (procedure),procedure,8,0
+434363004,Human epidermal growth factor receptor 2 gene detection by fluorescence in situ hybridization (procedure),procedure,8,0
+109838007,Overlapping malignant neoplasm of colon (disorder),disorder,8,0
+65710008,Acute respiratory failure (disorder),disorder,7,0
+48724000,Mitral valve regurgitation (disorder),disorder,7,0
+367494004,Premature birth of newborn (finding),finding,7,0
+43060002,Intravenous injection (procedure),procedure,7,0
+866146005,Serum metabolic panel (procedure),procedure,6,0
+76571007,Septic shock (disorder),disorder,6,0
+444470001,Injury of anterior cruciate ligament (disorder),disorder,6,0
+90560007,Gout,(no tag),6,0
+433112001,Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance with contrast (procedure),procedure,6,0
+74566002,"Crutch, device (physical object)",physical object,6,0
+24623002,Screening mammography (procedure),procedure,6,0
+308251003,Admission to clinical oncology department (procedure),procedure,6,6
+112790001,Nasal sinus endoscopy (procedure),procedure,6,0
+97331000119101,Macular edema and retinopathy due to type 2 diabetes mellitus (disorder),disorder,6,0
+408919008,Psychosocial care (regime/therapy),regime/therapy,6,0
+43724002,Chill (finding),finding,6,0
+40275004,Contact dermatitis (disorder),disorder,6,0
+363406005,Malignant neoplasm of colon (disorder),disorder,6,0
+230690007,Cerebrovascular accident (disorder),disorder,6,0
+180178009,Continuous subcutaneous infusion of insulin (procedure),procedure,6,0
+235595009,Gastroesophageal reflux disease (disorder),disorder,5,0
+6072007,Bleeding from anus (disorder),disorder,5,0
+103746007,Heparin therapy (procedure),procedure,5,0
+446573003,Continuous positive airway pressure titration (procedure),procedure,5,0
+445912000,Excision of fallopian tube and surgical removal of ectopic pregnancy (procedure),procedure,5,0
+23183008,Excision of lingual torus (procedure),procedure,5,0
+128188000,Cerebral palsy (disorder),disorder,5,0
+365853002,Imaging finding (finding),finding,5,0
+709010006,Liaising with referral source (procedure),procedure,5,0
+236077008,Protracted diarrhea (finding),finding,5,0
+720253003,Home-use sleep apnea recording system (physical object),physical object,5,0
+108219001,Physician visit with evaluation AND/OR management service (procedure),procedure,5,5
+418023006,"Computed tomography of chest, abdomen and pelvis (procedure)",procedure,5,0
+47505003,Posttraumatic stress disorder (disorder),disorder,5,4
+305411003,Admission to thoracic surgery department (procedure),procedure,5,5
+132281000119108,Acute deep venous thrombosis (disorder),disorder,5,0
+68235000,Nasal congestion (finding),finding,5,0
+312853008,Medical records review (procedure),procedure,5,0
+183976008,Operative procedure planned (situation),situation,5,0
+312384001,Multidisciplinary assessment (procedure),procedure,5,0
+167995008,Sputum microscopy (procedure),procedure,5,0
+11625007,Torus mandibularis (disorder),disorder,5,0
+116861002,Transfusion of fresh frozen plasma (procedure),procedure,5,0
+252480006,Simple walk test (procedure),procedure,4,0
+392021009,Lumpectomy of breast (procedure),procedure,4,0
+37849005,Congenital uterine anomaly (disorder),disorder,4,0
+371361000119107,Comprehensive metabolic panel (procedure),procedure,4,0
+398152000,Poor muscle tone (finding),finding,4,0
+408512008,Body mass index 40+ - severely obese (finding),finding,4,0
+413180006,Pan retinal photocoagulation for diabetes (procedure),procedure,4,0
+263172003,Fracture of mandible (disorder),disorder,4,0
+445988008,Assessment using health assessment questionnaire (procedure),procedure,4,0
+449868002,Smokes tobacco daily (finding),finding,4,0
+464173000,Portable oxygen concentrator (physical object),physical object,4,0
+24832002,Closed reduction of mandibular fracture (procedure),procedure,4,0
+23933004,Excision of lingual frenum (procedure),procedure,4,0
+56786000,Pulmonic valve stenosis (disorder),disorder,4,0
+67787004,Tongue tie (disorder),disorder,4,0
+221360009,Spasticity (finding),finding,4,0
+183418007,Social case work (regime/therapy),regime/therapy,4,0
+179632003,Closed reduction of dislocation of temporomandibular joint (procedure),procedure,4,0
+171231001,Asthma screening (procedure),procedure,4,0
+763228001,Assessment using Canadian Study of Health and Aging Clinical Frailty Scale (procedure),procedure,4,0
+772071006,Referral to dentist (procedure),procedure,4,0
+81629009,Traumatic dislocation of temporomandibular joint (disorder),disorder,4,0
+108631000119101,History of autologous bone marrow transplant (situation),situation,4,0
+93143009,"Leukemia, disease (disorder)",disorder,4,0
+133900002,Intraoperative care (regime/therapy),regime/therapy,3,0
+249497008,Vomiting symptom (finding),finding,3,0
+30832001,Rupture of patellar tendon (disorder),disorder,3,0
+422587007,Nausea (finding),finding,3,0
+105376000,Transesophageal echocardiography (procedure),procedure,3,0
+45816000,Pyelonephritis (disorder),disorder,3,0
+392023007,Excision of lesion of breast (procedure),procedure,3,0
+304532001,Treatment failure risk education (procedure),procedure,3,0
+304531008,Treatment side effects education (procedure),procedure,3,0
+288959006,Unable to swallow saliva (finding),finding,3,0
+26212005,Replacement of aortic valve (procedure),procedure,3,0
+94503003,Metastatic malignant neoplasm to prostate (disorder),disorder,3,0
+93761005,Primary malignant neoplasm of colon (disorder),disorder,3,0
+94260004,Metastatic malignant neoplasm to colon (disorder),disorder,3,0
+95417003,Primary fibromyalgia syndrome (disorder),disorder,3,0
+37729005,"Patient transfer, in-hospital (procedure)",procedure,3,0
+386395000,Preoperative coordination (regime/therapy),regime/therapy,3,3
+213150003,Kidney transplant failure and rejection (disorder),disorder,3,0
+37542007,"Posttreatment stabilization, orthodontic device (procedure)",procedure,3,0
+58828004,"Application of dressing, sterile (procedure)",procedure,3,0
+394894008,Pre-operative chemotherapy (procedure),procedure,3,0
+185317003,Telephone encounter (procedure),procedure,3,3
+183856001,Referral to hypertension clinic (procedure),procedure,3,0
+110359009,Intellectual disability (disorder),disorder,3,0
+698303004,Awaiting transplantation of bone marrow (situation),situation,3,0
+88039007,Transplant of lung (procedure),procedure,3,0
+112001000119100,Positive screening for depression on Patient Health Questionnaire 9 (finding),finding,3,0
+34896006,Incision (procedure),procedure,3,0
+67782005,Acute respiratory distress syndrome (disorder),disorder,3,0
+85765000,Fiberoptic bronchoscopy (procedure),procedure,3,0
+414088005,Emergency coronary artery bypass graft (procedure),procedure,3,0
+53827007,Excessive salivation (disorder),disorder,3,0
+236931002,Methotrexate injection into tubal pregnancy (procedure),procedure,3,0
+312157006,Infectious mediastinitis (disorder),disorder,3,0
+239720000,Tear of meniscus of knee (disorder),disorder,3,0
+180325003,Direct current cardioversion (procedure),procedure,3,0
+225415001,Close observation (regime/therapy),regime/therapy,3,0
+180207008,Intravenous blood transfusion of packed cells (procedure),procedure,3,0
+183830008,Referral for X-ray (procedure),procedure,2,0
+225337009,Suicide risk assessment (procedure),procedure,2,0
+18286008,Catheter ablation of tissue of heart (procedure),procedure,2,0
+170245002,Child examination: school screening (procedure),procedure,2,0
+58776007,Autologous bone marrow transplant (procedure),procedure,2,0
+234262008,Excision of axillary lymph node (procedure),procedure,2,0
+161679004,History of artificial joint (situation),situation,2,0
+15724005,Fracture of vertebral column without spinal cord injury (disorder),disorder,2,0
+241055006,Mammogram - symptomatic (procedure),procedure,2,0
+243174005,Weaning from mechanically assisted ventilation (regime/therapy),regime/therapy,2,0
+1501000119109,Proliferative diabetic retinopathy due to type II diabetes mellitus,(no tag),2,0
+1290953004,Plain X-ray of spine and pelvis (procedure),procedure,2,0
+254632001,Small cell carcinoma of lung (disorder),disorder,2,0
+262521009,Traumatic injury of spinal cord and/or vertebral column (disorder),disorder,2,0
+443497002,Excision of sentinel lymph node (procedure),procedure,2,0
+432231006,Fine needle aspiration biopsy of lung (procedure),procedure,2,0
+27942005,Shock (disorder),disorder,2,0
+429609002,Lung volume reduction surgery (procedure),procedure,2,0
+122869004,Measurement procedure (procedure),procedure,2,0
+417656005,Osteopathic postural examination (procedure),procedure,2,0
+122460008,Reexploration procedure (procedure),procedure,2,0
+308481009,Referral to orthopedic surgeon (procedure),procedure,2,0
+112011000119102,Negative screening for depression on Patient Health Questionnaire 9 (finding),finding,2,0
+3457005,Patient referral (procedure),procedure,2,0
+40617009,Artificial ventilation (regime/therapy),regime/therapy,2,0
+111287006,Tricuspid valve regurgitation (disorder),disorder,2,0
+36923009,"Major depression, single episode (disorder)",disorder,2,0
+109989006,Multiple myeloma (disorder),disorder,2,0
+396487001,Sentinel lymph node biopsy (procedure),procedure,2,0
+91602002,Thoracentesis (procedure),procedure,2,0
+67811000119102,"Primary small cell malignant neoplasm of lung, TNM stage 1 (disorder)",disorder,2,0
+62718007,Dribbling from mouth (finding),finding,1,0
+225953001,Evaluating response to treatment (procedure),procedure,1,0
+116863004,Transfusion of red blood cells (procedure),procedure,1,0
+705991002,Mechanical cardiac valve prosthesis (physical object),physical object,1,0
+152621000119105,History of allotransplantation of bone marrow (situation),situation,1,0
+113120007,Interstitial brachytherapy (procedure),procedure,1,0
+9905009,Loop colostomy (procedure),procedure,1,0
+153351000119102,History of peripheral stem cell transplant (situation),situation,1,0
+410299006,"Lab findings education, guidance, and counseling (procedure)",procedure,1,0
+384682003,Multidisciplinary care conference (procedure),procedure,1,0
+235919008,Gallbladder calculus (disorder),disorder,1,0
+69896004,Rheumatoid arthritis (disorder),disorder,1,0
+157265008,Dislocation of hip joint (disorder),disorder,1,0
+387713003,Surgical procedure (procedure),procedure,1,1
+15802004,Dystonia (disorder),disorder,1,0
+65275009,Acute cholecystitis (disorder),disorder,1,0
+360066001,Left ventricular assist device (physical object),physical object,1,0
+185316007,Indirect encounter (procedure),procedure,1,1
+160701002,Social migrant (finding),finding,1,0
+234336002,Hemopoietic stem cell transplant (procedure),procedure,1,0
+22523008,Vasectomy (procedure),procedure,1,0
+22253000,Pain (finding),finding,1,0
+267060006,Diarrhea symptom (finding),finding,1,0
+165355002,Patient informed - test result (situation),situation,1,0
+266753000,Referral for laboratory tests (procedure),procedure,1,0
+126261006,"Human platelets, pooled (product)",product,1,0
+275408006,Postoperative renal failure (disorder),disorder,1,0
+232967006,Implantation of left cardiac ventricular assist device (procedure),procedure,1,0
+609496007,Complication occurring during pregnancy (disorder),disorder,1,0
+447759004,Brachytherapy of breast (procedure),procedure,1,0
+4557003,Preinfarction syndrome (disorder),disorder,1,0
+426701000119108,"Ultrasonography of abdomen, right upper quadrant and epigastrium (procedure)",procedure,1,0
+609588000,Prosthetic total arthroplasty of knee joint (procedure),procedure,1,0
+385892002,Mental health screening (procedure),procedure,1,0
+45595009,Laparoscopic cholecystectomy (procedure),procedure,1,0
+305433001,Admission to trauma surgery department (procedure),procedure,1,0
+737617004,Referral to prosthetic service (procedure) ,procedure,1,0
+737617004,Referral to prosthetic service (procedure),procedure,1,0

@@ -10,22 +10,59 @@ model-paths: ["models"]
 macro-paths: ["macros"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]
+
+# pg_trgm gives the MPI fuzzy name similarity (trusted extension: the database owner can create it)
+on-run-start:
+  - "create extension if not exists pg_trgm"
 target-path: target
 clean-targets: ["target", "dbt_packages"]
 
 models:
   coastal_care:
+    # SEC-1 HIPAA grants: dbt re-applies them on every build (tables are rebuilt).
+    # Roles come from security/10_roles_and_access.sql, which must run once before dbt.
+    # Models holding direct identifiers override this with cc_steward only.
     # staging: typed, cleaned 1:1 copies of bronze rows (views, not for analysts)
     staging:
       +schema: staging
       +materialized: view
+      +grants:
+        select: ['cc_engineer']
     silver:
       +schema: silver
       +materialized: table
+      +grants:
+        select: ['cc_engineer']
     # quarantine: rejected rows and values, kept so nothing disappears
     quarantine:
       +schema: quarantine
       +materialized: table
+      +grants:
+        select: ['cc_engineer']
+    # edi: outbound claim preparation (pre-submission edits) for the X12 generators
+    edi:
+      +schema: edi
+      +materialized: table
+      +grants:
+        select: ['cc_engineer']
+    # hl7: inbound HL7 v2 ADT events
+    hl7:
+      +schema: hl7
+      +materialized: table
+      +grants:
+        select: ['cc_engineer']
+    # gold: star schema and business marts for analytics (no direct identifiers)
+    gold:
+      +schema: gold
+      +materialized: table
+      +grants:
+        select: ['cc_analyst', 'cc_steward', 'cc_engineer']
+    # mpi: master patient index (who is who across sources)
+    mpi:
+      +schema: mpi
+      +materialized: table
+      +grants:
+        select: ['cc_steward']
 
 seeds:
   coastal_care:
@@ -50,3 +87,31 @@ seeds:
         reviewed_by: text
         review_date: date
         map_source: text
+    # EDI-1: service-line crosswalk and visit-reason diagnosis rule (governed like CONV-4)
+    service_line_crosswalk:
+      +enabled: true
+      +schema: ref
+      +column_types:
+        code_system: text
+        source_code: text
+        description: text
+        eob_lines: integer
+        line_category: text
+        procedure_code: text
+        procedure_code_type: text
+        review_status: text
+        rationale: text
+        reviewed_by: text
+        review_date: date
+    encounter_reason_dx:
+      +enabled: true
+      +schema: ref
+      +column_types:
+        encounter_code: text
+        encounter_description: text
+        icd10_rule: text
+        icd10_code: text
+        review_status: text
+        rationale: text
+        reviewed_by: text
+        review_date: date

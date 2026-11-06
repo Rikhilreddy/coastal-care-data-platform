@@ -3,39 +3,39 @@ Timing is off.
 --- C1. FHIR claim diagnoses by conversion outcome ---
  conversion_method | dx_rows | pct_rows | principal_rows 
 -------------------+---------+----------+----------------
- PENDING_REVIEW    |   45283 |     97.4 |          29375
- CROSSWALK         |    1205 |      2.6 |            256
+ PENDING_REVIEW    |   33247 |     71.5 |          23399
+ CROSSWALK         |   13241 |     28.5 |           6232
 
 --- C2. Crosswalk review progress (codes and the claim diagnoses they cover) ---
  review_status | review_priority | codes | claim_dx_rows 
 ---------------+-----------------+-------+---------------
- APPROVED      | HIGH            |     4 |          1205
- PROPOSED      | HIGH            |   101 |         39162
+ APPROVED      | HIGH            |    16 |         13241
+ PROPOSED      | HIGH            |    89 |         27126
  PROPOSED      | NORMAL          |   154 |          6121
 
 --- C3. SME worklist: PROPOSED codes ranked by claim diagnoses waiting on them ---
  snomed_code |              snomed_description               | proposed_icd10 |    category    | sensitive | claim_dx_rows 
 -------------+-----------------------------------------------+----------------+----------------+-----------+---------------
  314529007   | Medication review due (situation)             |                | NOT_CODABLE    | f         |          9424
- 73595000    | Stress (finding)                              | Z733           | SDOH           | f         |          3642
  66383009    | Gingivitis (disorder)                         | K0510          | DIAGNOSIS      | f         |          3569
  160903007   | Full-time employment (finding)                |                | NOT_CODABLE    | f         |          3378
  160904001   | Part-time employment (finding)                |                | NOT_CODABLE    | f         |          2122
- 422650009   | Social isolation (finding)                    | Z604           | SDOH           | f         |          1338
- 423315002   | Limited social contact (finding)              | Z608           | SDOH           | f         |          1311
  741062008   | Not in labor force (finding)                  |                | NOT_CODABLE    | f         |          1201
  444814009   | Viral sinusitis (disorder)                    | J0190          | DIAGNOSIS      | f         |          1154
- 18718003    | Gingival disease (disorder)                   | K069           | DIAGNOSIS      | f         |          1012
- 109570002   | Primary dental caries (disorder)              | K029           | DIAGNOSIS      | f         |           765
- 424393004   | Reports of violence in the environment (findi | Z658           | SDOH           | t         |           739
- 195662009   | Acute viral pharyngitis (disorder)            | J029           | DIAGNOSIS      | f         |           705
- 10509002    | Acute bronchitis (disorder)                   | J209           | DIAGNOSIS      | f         |           572
- 162864005   | Body mass index 30+ - obesity (finding)       | E669           | DIAGNOSIS      | f         |           560
- 73438004    | Unemployed (finding)                          | Z560           | SDOH           | f         |           530
  224299000   | Received higher education (finding)           |                | NOT_CODABLE    | f         |           484
  72892002    | Normal pregnancy (finding)                    | Z3490          | STATUS_HISTORY | t         |           452
- 714628002   | Prediabetes (finding)                         | R7303          | DIAGNOSIS      | f         |           446
- 271737000   | Anemia (disorder)                             | D649           | DIAGNOSIS      | f         |           416
+ 82423001    | Chronic pain (finding)                        | G8929          | DIAGNOSIS      | f         |           295
+ 160968000   | Risk activity involvement (finding)           | Z7289          | SDOH           | f         |           292
+ 59621000    | Essential hypertension (disorder)             | I10            | DIAGNOSIS      | f         |           290
+ 473461003   | Educated to high school level (finding)       |                | NOT_CODABLE    | f         |           268
+ 266948004   | Has a criminal record (finding)               | Z653           | SDOH           | t         |           262
+ 161744009   | Past pregnancy history of miscarriage (situat | Z8759          | STATUS_HISTORY | t         |           258
+ 40055000    | Chronic sinusitis (disorder)                  | J329           | DIAGNOSIS      | f         |           257
+ 427898007   | Infection of tooth (disorder)                 | K047           | DIAGNOSIS      | f         |           256
+ 1149222004  | Overdose (disorder)                           | T50901A        | DIAGNOSIS      | t         |           243
+ 274531002   | Abnormal findings diagnostic imaging heart+co | R931           | DIAGNOSIS      | f         |           220
+ 414545008   | Ischemic heart disease (disorder)             | I259           | DIAGNOSIS      | f         |           219
+ 278860009   | Chronic low back pain (finding)               | M5450          | DIAGNOSIS      | f         |           202
 
 --- C4. Sensitive diagnoses (counts only; masked in gold) ---
  sensitive_dx_rows | claims | distinct_codes 
@@ -46,13 +46,13 @@ Timing is off.
  principal_outcome | claims |    billed    
 -------------------+--------+--------------
  NO_DIAGNOSIS      |  49686 | 179763425.38
- PENDING_REVIEW    |  29375 | 109817594.43
+ PENDING_REVIEW    |  23399 |  89489904.41
 
 --- C6. Principal-diagnosis ICD-10 coverage, all sources ---
  source_system | principal_dx | with_icd10 | pct_with_icd10 
 ---------------+--------------+------------+----------------
  DESYNPUF      |       846173 |     838969 |           99.1
- SYNTHEA_FHIR  |        29631 |        256 |            0.9
+ SYNTHEA_FHIR  |        29631 |       6232 |           21.0
 
 --- C7. Unresolved Condition references (quarantined) ---
  unresolved_references 

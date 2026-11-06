@@ -1,4 +1,4 @@
-{{ config(meta={'pii': 'restricted'}) }}
+{{ config(meta={'pii': 'restricted'}, grants={'select': ['cc_steward']}) }}
 -- RESTRICTED: direct identifiers (name, SSN, MRN, address, phone), one row per member.
 -- Kept apart from silver.member so analysts can use demographics without identifiers
 -- (HIPAA minimum necessary). Only the MPI/matching process and admin roles read this

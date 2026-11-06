@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: dim_member
+    description: De-identified member dimension (no direct identifiers).
+    columns:
+      - name: member_key
+        data_tests: [unique, not_null]
+  - name: dim_date
+    columns:
+      - name: date_key
+        data_tests: [unique, not_null]
+  - name: fct_claim
+    columns:
+      - name: claim_key
+        data_tests: [unique, not_null]
+      - name: member_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_member')
+                field: member_key
+      - name: service_date_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: line_of_business
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['MEDICARE', 'MEDICAID', 'DUAL', 'COMMERCIAL', 'SELF_PAY']
+  - name: fct_inpatient_stay
+    columns:
+      - name: stay_key
+        data_tests: [unique, not_null]
+  - name: mart_readmission_30d
+    columns:
+      - name: stay_key
+        data_tests: [unique]
+
+unit_tests:
+  - name: transfer_claims_merge_into_one_stay
+    description: A transfer (admitted the day of the prior discharge) is one stay; a stay 10 days later is a new stay.
+    model: fct_inpatient_stay
+    given:
+      - input: ref('fct_claim')
+        rows:
+          - {member_key: m1, source_system: DESYNPUF, line_of_business: MEDICARE, claim_id: c1, paid_amount: 100, claim_type: IP, is_adjustment: false, admission_date: '2009-01-01', discharge_date: '2009-01-05', claim_thru_date: '2009-01-05'}
+          - {member_key: m1, source_system: DESYNPUF, line_of_business: MEDICARE, claim_id: c2, paid_amount: 50, claim_type: IP, is_adjustment: false, admission_date: '2009-01-05', discharge_date: '2009-01-08', claim_thru_date: '2009-01-08'}
+          - {member_key: m1, source_system: DESYNPUF, line_of_business: MEDICARE, claim_id: c3, paid_amount: 70, claim_type: IP, is_adjustment: false, admission_date: '2009-01-18', discharge_date: '2009-01-20', claim_thru_date: '2009-01-20'}
+          - {member_key: m1, source_system: DESYNPUF, line_of_business: MEDICARE, claim_id: c4, paid_amount: -50, claim_type: IP, is_adjustment: true, admission_date: '2009-01-05', discharge_date: '2009-01-08', claim_thru_date: '2009-01-08'}
+    expect:
+      rows:
+        - {stay_seq: 1, admission_date: '2009-01-01', discharge_date: '2009-01-08', length_of_stay: 7, claims_merged: 2, paid_amount: 150}
+        - {stay_seq: 2, admission_date: '2009-01-18', discharge_date: '2009-01-20', length_of_stay: 2, claims_merged: 1, paid_amount: 70}

@@ -1,0 +1,62 @@
+Timing is off.
+--- E9. Claim lines by SNOMED semantic tag, i.e. the "(procedure)" / "(physical object)" suffix ---
+      semantic_tag       | codes | lines  
+-------------------------+-------+--------
+ procedure               |   335 | 262893
+ physical object         |    41 |  33182
+ regime/therapy          |    36 |  25406
+ finding                 |    63 |  20734
+ disorder                |   173 |  15048
+ situation               |    21 |  10334
+ dose form               |     1 |   7118
+ environment             |     2 |   5420
+ substance               |     2 |    407
+ (no tag)                |     7 |    322
+ morphologic abnormality |     2 |    222
+ observable entity       |     1 |    201
+ person                  |     1 |    106
+ product                 |     3 |     73
+ qualifier value         |     1 |     69
+ body structure          |     1 |     47
+
+--- E10. Where line charges live: EOB item submitted charge, summed vs Claim.total ---
+ claims_with_priced_lines | priced_lines | line_total_equals_claim_total | line_total_differs 
+--------------------------+--------------+-------------------------------+--------------------
+                    79317 |       433876 |                         79317 |                  0
+
+--- E11. Non-pharmacy claims WITHOUT any diagnosis, by encounter type (first line) ---
+ encounter_code |                   encounter_type                   | claims | without_diagnosis | pct_without 
+----------------+----------------------------------------------------+--------+-------------------+-------------
+ 185347001      | Encounter for problem (procedure)                  |  24084 |             22868 |        95.0
+ 185349003      | Encounter for check up (procedure)                 |  13275 |              6695 |        50.4
+ 162673000      | General examination of patient (procedure)         |  10724 |               805 |         7.5
+ 702927004      | Urgent care clinic (environment)                   |   4045 |              1042 |        25.8
+ 185345009      | Encounter for symptom (procedure)                  |   3862 |               391 |        10.1
+ 410620009      | Well child visit (procedure)                       |   3683 |              1547 |        42.0
+ 424619006      | Prenatal visit (regime/therapy)                    |   2382 |              2065 |        86.7
+ 50849002       | Emergency room admission (procedure)               |   2238 |               458 |        20.5
+ 308335008      | Patient encounter procedure (procedure)            |   2107 |              2090 |        99.2
+ 390906007      | Follow-up encounter (procedure)                    |   1927 |              1884 |        97.8
+ 448337001      | Telemedicine consultation with patient (procedure) |   1633 |              1633 |       100.0
+ 371883000      | Outpatient procedure (procedure)                   |   1434 |              1429 |        99.7
+ 33879002       | Administration of vaccine to produce active immuni |   1310 |              1306 |        99.7
+ 698314001      | Consultation for treatment (procedure)             |   1179 |              1135 |        96.3
+ 36228007       | Ophthalmic examination and evaluation (procedure)  |    995 |               949 |        95.4
+ 439708006      | Home visit (procedure)                             |    488 |               486 |        99.6
+ 424441002      | Prenatal initial visit (regime/therapy)            |    464 |                12 |         2.6
+ 439740005      | Postoperative follow-up visit (procedure)          |    444 |               395 |        89.0
+ 32485007       | Hospital admission (procedure)                     |    333 |               194 |        58.3
+ 394701000      | Asthma follow-up (regime/therapy)                  |    271 |               268 |        98.9
+
+--- E12. EOB careTeam: who the rendering provider is ---
+ care_team_role |                 provider_reference_pattern                  |  eobs  
+----------------+-------------------------------------------------------------+--------
+ primary        | Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|<id> | 151490
+
+--- E13. Dental share (dental claims use CDT codes on an 837D; CDT is ADA-licensed) ---
+ claims_with_dental_lines | non_pharmacy_claims 
+--------------------------+---------------------
+                    15255 |               79317
+
+--- Export: every non-pharmacy line code for the service-line crosswalk (codes only, no PHI) ---
+COPY 691
