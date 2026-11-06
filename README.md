@@ -1,5 +1,7 @@
 # Coastal Care Data Platform
 
+![CI](https://github.com/Rikhilreddy/coastal-care-data-platform/actions/workflows/ci.yml/badge.svg)
+
 An end-to-end **healthcare data engineering** platform: claims, clinical and enrollment data move from raw files to an analytics star schema. On the way, the platform converts code sets, exchanges HIPAA X12 EDI and HL7 v2 messages, matches patients across systems, and enforces HIPAA access rules. Every step is reconciled and tested.
 
 Everything is **free and open source**. All data is **synthetic** (CMS DE-SynPUF, Synthea) and is still handled as if it were PHI.
