@@ -107,17 +107,21 @@ with right:
 left, right = st.columns(2)
 with left:
     st.subheader("30-day readmission rate")
+    # A rate on a handful of stays is noise (1 of 2 = 50%): only years with enough stays are shown.
+    min_stays = 30
     rr = q(f"""select discharge_year, sum(index_stays) as stays, sum(readmissions) as readmits
-               from gold.mart_readmission_rate where source_system in {in_src} group by 1 order by 1""")
+               from gold.mart_readmission_rate where source_system in {in_src}
+               group by 1 having sum(index_stays) >= {min_stays} order by 1""")
     if rr.empty:
         st.info("No index stays for this selection.")
     else:
         rr["rate"] = 100.0 * rr["readmits"].astype(float) / rr["stays"].astype(float)
-        chart = alt.Chart(rr).mark_bar(cornerRadiusEnd=4, size=20, color="#2a78d6").encode(
-            x=alt.X("discharge_year:O", title="Discharge year", axis=alt.Axis(labelAngle=0)), y=alt.Y("rate:Q", title="Readmitted within 30 days (%)"),
+        chart = alt.Chart(rr).mark_bar(cornerRadiusEnd=4, color="#2a78d6").encode(
+            x=alt.X("discharge_year:O", title="Discharge year", axis=alt.Axis(labelAngle=0, labelOverlap="greedy")), y=alt.Y("rate:Q", title="Readmitted within 30 days (%)"),
             tooltip=["discharge_year", "stays", "readmits", alt.Tooltip("rate:Q", format=".1f")])
         st.altair_chart(axis_style(chart), use_container_width=True)
-        st.caption("All-cause; index stays discharged alive with 30 days of follow-up. Planned readmissions not excluded yet.")
+        st.caption(f"All-cause; index stays discharged alive with 30 days of follow-up; years with at least {min_stays} "
+                   "index stays. Planned readmissions not excluded yet.")
 
 with right:
     st.subheader("837P submission readiness")
