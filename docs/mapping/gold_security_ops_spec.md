@@ -6,7 +6,7 @@
 | `dim_member` | member | Birth year, age band, sex, state. No name, SSN, address or exact DOB |
 | `dim_date` | day | 2007–2030 |
 | `fct_claim` | claim | Net of adjustments (recoupments are negative rows); line of business from payer (macro `line_of_business`) |
-| `fct_member_coverage_year` | member × year | Member months = months with Part A, Part B or HMO coverage (DE-SynPUF). Synthea members get enrollment from the 834 |
+| `fct_member_coverage_year` | member × year × line of business | DE-SynPUF: months with Part A, Part B or HMO coverage. Synthea: 834 spans linked by the MPI, a month with coverage on any day, one plan per month |
 | `mart_pmpm` | source × LOB × year × claim type | PMPM = net paid / member months. Paid with no enrollment that year is reported separately, never dropped |
 | `fct_inpatient_stay` | stay | Overlapping or same-day claims (transfers, interim bills) merged with a gaps-and-islands pattern |
 | `mart_readmission_30d`, `mart_readmission_rate` | stay; source × LOB × year | All-cause 30-day readmission. Index stay: discharged alive with 30 days of follow-up in the data. **Not yet applied:** CMS planned-readmission algorithm |
@@ -46,7 +46,7 @@ The DAG chains: bronze loads (FHIR, X12, HL7, in parallel) → `dbt build` → H
 | Retries | Safe because every loader is idempotent |
 | Claim window | 45 days back, or `from_month` in the run conf for a backfill |
 
-Tested locally with `airflow dags test`: all 11 tasks succeeded.
+Bronze loads include the enrollment export; the 834 is generated and loaded after the access check, in parallel with the 837P. Tested locally with `airflow dags test`: all 14 tasks succeeded.
 
 ## CI: GitHub Actions (`.github/workflows/ci.yml` → `ci/run_ci.sh`)
 Each push or pull request starts a Postgres 16 service container and restores the synthetic fixture (`ci/fixtures/coastal_care_fixture.dump`: bronze, ref and audit schema, no real data). It then runs:
@@ -57,7 +57,8 @@ Each push or pull request starts a Postgres 16 service container and restores th
 4. 837P out → pyx12 → in
 5. 835 out → pyx12 → in
 6. ADT out → python-hl7 → in, twice (idempotency)
-7. `dbt build` again
+7. Enrollment CSV → bronze (twice), 834 out → pyx12 → in
+8. `dbt build` again
 
 Any failure turns the PR red. The full run takes about 40 s locally.
 

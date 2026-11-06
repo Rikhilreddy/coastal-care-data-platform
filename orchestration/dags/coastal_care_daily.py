@@ -3,10 +3,11 @@ Coastal Care Data Platform: daily pipeline (Apache Airflow 3, open source).   OR
 
 Order matters and is enforced by the task graph:
 
-  load_fhir ─┐
-  load_x12  ─┼─> dbt_build ─> access_check ─> generate_837p ─> load_837p_roundtrip ─┐
-  load_hl7  ─┘                                                                       │
-            dbt_build_final <─ load_835 <─ generate_835 <─ dbt_build_edi <───────────┘
+  load_fhir       ─┐
+  load_enrollment ─┤
+  load_x12        ─┼─> dbt_build ─> access_check ─> generate_837p ─> load_837p_roundtrip ─┐
+  load_hl7        ─┘           └──> generate_834 ─> load_834 ─────────────────────────────┤
+                  dbt_build_final <─ load_835 <─ generate_835 <─ dbt_build_edi <──────────┘
 
 * Bronze loaders are idempotent (SHA-256 manifest): a retry or a re-run never duplicates rows.
 * dbt build runs models AND tests together, so a failed reconciliation stops everything
@@ -48,6 +49,8 @@ with DAG(
 ) as dag:
     load_fhir = BashOperator(task_id="load_fhir",
                              bash_command=sh(f"ls data/source/synthea/fhir/*.json >/dev/null 2>&1 && {PY} ingestion/fhir/load_bronze_fhir.py || echo 'no FHIR bundles today'"))
+    load_enrollment = BashOperator(task_id="load_enrollment", bash_command=sh(
+        f"ls data/source/synthea/csv/payer_transitions.csv >/dev/null 2>&1 && {PY} ingestion/synthea_csv/load_bronze_enrollment.py || echo 'no enrollment export today'"))
     load_x12 = BashOperator(task_id="load_x12_inbound",
                             bash_command=sh(f"[ -d data/edi/inbound ] && {PY} edi/load_bronze_x12.py --dir data/edi/inbound || echo 'no inbound X12 today'"))
     load_hl7 = BashOperator(task_id="load_hl7_inbound",
@@ -69,6 +72,10 @@ with DAG(
     load_835 = BashOperator(task_id="load_835", bash_command=sh(
         f"ls data/edi/outbound/835/*/*.x12 >/dev/null 2>&1 && {PY} edi/load_bronze_x12.py --dir data/edi/outbound/835 || echo 'no 835 files in window'"))
     dbt_build_final = BashOperator(task_id="dbt_build_final", bash_command=sh(f"{DBT} build"))
+    generate_834 = BashOperator(task_id="generate_834", bash_command=sh(f"{PY} edi/generate_834.py --from 2016-01"))
+    load_834 = BashOperator(task_id="load_834", bash_command=sh(
+        f"ls data/edi/outbound/834/*.x12 >/dev/null 2>&1 && {PY} edi/load_bronze_x12.py --dir data/edi/outbound/834 || echo 'no 834 files'"))
 
-    [load_fhir, load_x12, load_hl7] >> dbt_build >> access_check >> generate_837p >> load_837p
+    [load_fhir, load_enrollment, load_x12, load_hl7] >> dbt_build >> access_check >> generate_837p >> load_837p
+    access_check >> generate_834 >> load_834 >> dbt_build_edi
     load_837p >> dbt_build_edi >> generate_835 >> load_835 >> dbt_build_final

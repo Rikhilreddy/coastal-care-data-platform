@@ -11,6 +11,10 @@ sources:
         description: CMS DE-SynPUF inpatient claims, one row per claim segment
       - name: desynpuf_outpatient
         description: CMS DE-SynPUF outpatient claims, one row per claim segment
+      - name: synthea_payers
+        description: Synthea payers.csv as exported (EDI-4 source), ingestion/synthea_csv/load_bronze_enrollment.py
+      - name: synthea_payer_transitions
+        description: Synthea payer_transitions.csv as exported, one row per coverage span (PHI - owner name)
       - name: hl7_segment
         description: Inbound HL7 v2 messages, one row per segment as received, loaded by hl7/load_bronze_hl7.py
       - name: x12_segment
@@ -28,5 +32,7 @@ sources:
     description: Control and test tables written by the pipelines
     schema: audit
     tables:
+      - name: edi_file_manifest
+        description: One row per generated X12 file (837P, 835, 834) with control totals and the window it covers
       - name: mpi_test_truth
         description: Answer key for MPI evaluation (seeded test-data noise); never used for matching

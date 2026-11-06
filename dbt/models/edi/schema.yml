@@ -66,3 +66,16 @@ models:
 
   - name: edi_inbound_835_line
     description: EDI-3 paid service lines (SVC) with CAS adjustments pivoted.
+
+  - name: edi_inbound_834_member
+    description: EDI-4 one row per enrollment record (INS loop) received on an 834.
+    columns:
+      - name: subscriber_id
+        data_tests: [not_null]
+      - name: coverage_begin
+        data_tests: [not_null]
+      - name: maintenance_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['001', '021', '024', '025', '030']

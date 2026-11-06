@@ -119,3 +119,35 @@ Implementation rules (from pyx12): ST03 is "Not Used" in 835 5010, and CLP06 doe
 | `assert_835_balances` | Every line, claim and payment balances |
 | `assert_835_completes_837` | Every received 837 claim has exactly one 835 claim |
 | `assert_835_paid_matches_eob` | 835 paid = EOB paid, within 1 cent per line (H17 float payments) |
+
+## EDI-4: 834 benefit enrollment (payer → plan) and member months
+
+| Step | What | Where |
+|---|---|---|
+| 1 | Land Synthea `payers.csv` and `payer_transitions.csv` as exported (SHA-256 manifest, reconciled) | `ingestion/synthea_csv/load_bronze_enrollment.py` → `bronze.synthea_*` |
+| 2 | One 834 per payer, one INS loop per coverage span in the window (default from 2016-01) | `edi/generate_834.py` (005010X220A1) |
+| 3 | Validate (own checks + pyx12), load back to bronze | `load_bronze_x12.py` |
+| 4 | Parse: one row per INS with subscriber ID, demographics, benefit begin/end | `stg_x12__834_segment`, `edi_inbound_834_member` |
+| 5 | Match each payer member ID to our member (MPI, source `X12_834`) | `mpi_source_record` → `mpi_link` |
+| 6 | Only AUTO_LINK records become enrollment, then member months per year and line of business | `silver.member_enrollment` → `gold.fct_member_coverage_year` → `mart_pmpm` |
+
+**834 segments used**
+
+| Segment | Meaning |
+|---|---|
+| `BGN08=4` | Verify: full file for the window |
+| `N1*P5` / `N1*IN` | Sponsor / payer |
+| `INS*Y*18*030*XN*A` | Subscriber, self, audit/compare, notification only, active |
+| `REF*0F` | Payer member ID |
+| `NM1*IL` | Name and SSN (`NM108=34`) |
+| `N3`, `N4`, `DMG` | Address, birth date, sex |
+| `HD*030**HLT` | Health coverage |
+| `DTP*348` / `DTP*349` | Benefit begin / end |
+
+**Member month rule:** a calendar month with coverage on any day. If a plan changes mid-month, the month counts once, for the plan that started last.
+
+| dbt test | Proves |
+|---|---|
+| `assert_834_roundtrip` | For each loaded 834, the spans received equal the bronze history for that payer and window: same IDs and dates, nothing lost or invented. Proved by tampering one end date: the test failed |
+| `assert_member_months_valid` | 0 to 12 months per member and year across all plans |
+| `assert_mpi_no_false_links` | Covers the 834 feed as well as ADT |

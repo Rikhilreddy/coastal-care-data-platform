@@ -23,3 +23,7 @@
 | H35 | Synthea Encounters carry no hospital MRN | Patient identity is the FHIR id only | ADT generator assigns a facility MRN (`M` + SHA-256 of facility and member); the MPI must link it back |
 | H36 | Synthea names carry numeric suffixes (`Ana123`) | Never present in a real registration system | Stripped in ADT messages and on the member side of the MPI |
 | H37 | Two fixture patients share an SSN (mother and child) | A pure SSN match would auto-link the wrong person | Scoring requires DOB and name agreement too; shared-SSN pairs fall below the auto-link threshold |
+| H38 | Synthea gives no subscriber ID for dependents (only the owner's name) | Children and spouses cannot be sent under a subscriber | Every covered person is sent as a subscriber (INS01=Y, INS02=18), with their own payer member ID |
+| H39 | Coverage history includes NO_INSURANCE spans | They are gaps, not coverage | Not sent on the 834; claims in those months stay SELF_PAY |
+| H40 | Secondary payers in the history | COB loop 2320 not built | Primary coverage only; documented backlog |
+| H41 | A claim's payer can differ from the member's enrolled plan that year | Paid lands in one line of business, member months in another | Reported, not forced: `mart_pmpm` keeps paid with no enrollment in a separate column |

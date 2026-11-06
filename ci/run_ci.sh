@@ -2,7 +2,8 @@
 # CI-1: rebuild and prove the whole platform from a synthetic fixture, end to end.
 #   restore bronze/ref/audit fixture -> HIPAA roles -> dbt build (all tests)
 #   -> access checks -> 837P out -> pyx12 -> 837P in -> 835 out -> pyx12 -> 835 in
-#   -> ADT out -> python-hl7 -> ADT in (twice: idempotent) -> dbt build again.
+#   -> ADT out -> python-hl7 -> ADT in (twice: idempotent) -> 834 out -> pyx12 -> 834 in
+#   -> dbt build again (834 round trip, MPI on both feeds, member months).
 # Any broken rule stops the run with a non-zero exit, so the pull request shows red.
 # Uses only synthetic data (ci/fixtures). Run from the project root.
 set -euo pipefail
@@ -24,6 +25,11 @@ rm -rf data/edi/outbound data/hl7/outbound
 
 step "2. HIPAA roles"
 psql -q -v ON_ERROR_STOP=1 -f security/10_roles_and_access.sql
+
+step "2b. enrollment history (Synthea CSV fixture) -> bronze, twice (second run must skip)"
+python ingestion/synthea_csv/load_bronze_enrollment.py --dir ci/fixtures/synthea_csv
+python ingestion/synthea_csv/load_bronze_enrollment.py --dir ci/fixtures/synthea_csv | grep -q "SUCCESS 0 .*FAILED 0" \
+    || { echo "second enrollment load was not idempotent"; exit 1; }
 
 step "3. dbt build (models + data tests + unit tests)"
 dbt_build
@@ -56,6 +62,11 @@ PY
 python hl7/load_bronze_hl7.py --dir data/hl7/outbound/adt
 python hl7/load_bronze_hl7.py --dir data/hl7/outbound/adt | grep -q "SUCCESS 0 .*FAILED 0" \
     || { echo "second HL7 load was not idempotent"; exit 1; }
+
+step "7b. 834 enrollment outbound -> validate -> inbound"
+python edi/generate_834.py --from 2016-01
+x12_check data/edi/outbound/834
+python edi/load_bronze_x12.py --dir data/edi/outbound/834
 
 step "8. dbt build on the round-tripped data"
 dbt_build
