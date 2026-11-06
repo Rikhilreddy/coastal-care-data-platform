@@ -50,6 +50,14 @@ def lob_color(domain):
                      scale=alt.Scale(domain=list(domain), range=[LOB_COLORS[d] for d in domain]))
 
 
+def show(chart):
+    """Full-width chart on any Streamlit version (width= replaced use_container_width=)."""
+    try:
+        st.altair_chart(axis_style(chart), width="stretch")
+    except TypeError:
+        st.altair_chart(axis_style(chart), use_container_width=True)
+
+
 def axis_style(chart):
     return (chart.configure_axis(labelColor=MUTED, titleColor=INK, gridColor="#e6e5e0", domainColor="#d0cfca")
                  .configure_legend(labelColor=INK, titleColor=INK).configure_view(stroke=None))
@@ -90,7 +98,7 @@ with left:
             x=alt.X("year:O", title="Year", axis=alt.Axis(labelAngle=0)), y=alt.Y("pmpm:Q", title="PMPM ($)"),
             color=lob_color(sorted(pmpm.line_of_business.unique())),
             tooltip=[alt.Tooltip("year:O"), "line_of_business", alt.Tooltip("pmpm:Q", format="$,.2f")])
-        st.altair_chart(axis_style(chart), use_container_width=True)
+        show(chart)
         st.caption("Net paid (incl. recoupments) / member months with any medical coverage.")
 
 with right:
@@ -102,7 +110,7 @@ with right:
         y=alt.Y("claim_type:N", title=None, sort="-x"), x=alt.X("sum(paid):Q", title="Net paid ($)"),
         color=lob_color(sorted(by_type.line_of_business.unique())),
         tooltip=["claim_type", "line_of_business", alt.Tooltip("paid:Q", format="$,.2f")])
-    st.altair_chart(axis_style(chart), use_container_width=True)
+    show(chart)
 
 left, right = st.columns(2)
 with left:
@@ -119,7 +127,7 @@ with left:
         chart = alt.Chart(rr).mark_bar(cornerRadiusEnd=4, color="#2a78d6").encode(
             x=alt.X("discharge_year:O", title="Discharge year", axis=alt.Axis(labelAngle=0, labelOverlap="greedy")), y=alt.Y("rate:Q", title="Readmitted within 30 days (%)"),
             tooltip=["discharge_year", "stays", "readmits", alt.Tooltip("rate:Q", format=".1f")])
-        st.altair_chart(axis_style(chart), use_container_width=True)
+        show(chart)
         st.caption(f"All-cause; index stays discharged alive with 30 days of follow-up; years with at least {min_stays} "
                    "index stays. Planned readmissions not excluded yet.")
 
@@ -130,7 +138,7 @@ with right:
     chart = alt.Chart(ready).mark_bar(cornerRadiusEnd=4, size=18, color="#2a78d6").encode(
         y=alt.Y("status:N", title=None, sort="-x"), x=alt.X("claims:Q", title="Claims", axis=alt.Axis(format="d", tickMinStep=1)),
         tooltip=["status", "claims", alt.Tooltip("billed:Q", format="$,.2f")])
-    st.altair_chart(axis_style(chart), use_container_width=True)
+    show(chart)
     st.caption("READY claims are sent as 837P; the rest are held by the first failing pre-submission edit.")
 
 st.subheader("Data quality scorecard")
