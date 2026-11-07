@@ -1,5 +1,5 @@
 # ORCH-2: run the coastal_care_daily DAG in Docker (Airflow 3, LocalExecutor).
-#   docker compose up -d --build        then open http://localhost:8080
+#   docker compose up -d --build        then open http://localhost:8080 (or set AIRFLOW_PORT)
 #   docker compose down                 stop (add -v to also delete Airflow's own metadata)
 # The pipeline's data stays in YOUR Postgres (coastal_care) on the host; the container reaches
 # it at host.docker.internal with the credentials from .env. Airflow keeps its own metadata
@@ -29,6 +29,10 @@ services:
     env_file: .env                        # PG_USER / PG_PASSWORD / PG_DB for the project database
     environment:
       PG_HOST: host.docker.internal       # the Postgres running on your Mac
+      # .env may leave PG_USER empty (on a Mac that means "my login user"); inside the container
+      # the login user is "airflow", so fall back to YOUR Mac user name instead.
+      PG_USER: ${PG_USER:-${USER}}
+      COASTAL_IN_DOCKER: "1"              # the DAG then keeps these settings and does not re-read .env
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow-db:5432/airflow
       AIRFLOW__CORE__DAGS_FOLDER: /opt/coastal_care/orchestration/dags
@@ -42,7 +46,7 @@ services:
     volumes:
       - .:/opt/coastal_care
     ports:
-      - "8080:8080"
+      - "${AIRFLOW_PORT:-8080}:8080"        # another Airflow already on 8080? AIRFLOW_PORT=8081 docker compose up -d
 
 volumes:
   airflow-db:

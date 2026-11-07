@@ -35,8 +35,16 @@ DBT = f"cd {HOME}/dbt && DBT_PROFILES_DIR={HOME}/dbt {os.environ.get('COASTAL_DB
 
 
 def sh(cmd: str) -> str:
-    """Every task runs from the project root with the project's .env loaded."""
-    return f"set -euo pipefail; cd {HOME}; set -a; [ -f .env ] && . ./.env; set +a; {cmd}"
+    """Every task runs from the project root. Locally the project's .env supplies the database
+    settings; in Docker, docker-compose.yml supplies them (PG_HOST must stay host.docker.internal,
+    so .env is NOT re-read there, or it would point back to the container's own localhost)."""
+    load_env = "" if os.environ.get("COASTAL_IN_DOCKER") else "if [ -f .env ]; then set -a; . ./.env; set +a; fi; "
+    return f"set -euo pipefail; cd {HOME}; {load_env}{cmd}"
+
+
+def when(test: str, cmd: str, skipped: str) -> str:
+    """Run cmd only if test passes. Unlike `test && cmd || echo`, a FAILING cmd still fails the task."""
+    return f"if {test}; then {cmd}; else echo '{skipped}'; fi"
 
 
 with DAG(
@@ -50,13 +58,17 @@ with DAG(
     tags=["healthcare", "hipaa", "edi", "fhir", "hl7"],
 ) as dag:
     load_fhir = BashOperator(task_id="load_fhir",
-                             bash_command=sh(f"ls data/source/synthea/fhir/*.json >/dev/null 2>&1 && {PY} ingestion/fhir/load_bronze_fhir.py || echo 'no FHIR bundles today'"))
+                             bash_command=sh(when("ls data/source/synthea/fhir/*.json >/dev/null 2>&1",
+                                                   f"{PY} ingestion/fhir/load_bronze_fhir.py", "no FHIR bundles today")))
     load_enrollment = BashOperator(task_id="load_enrollment", bash_command=sh(
-        f"ls data/source/synthea/csv/payer_transitions.csv >/dev/null 2>&1 && {PY} ingestion/synthea_csv/load_bronze_enrollment.py || echo 'no enrollment export today'"))
+        when("[ -f data/source/synthea/csv/payer_transitions.csv ]",
+             f"{PY} ingestion/synthea_csv/load_bronze_enrollment.py", "no enrollment export today")))
     load_x12 = BashOperator(task_id="load_x12_inbound",
-                            bash_command=sh(f"[ -d data/edi/inbound ] && {PY} edi/load_bronze_x12.py --dir data/edi/inbound || echo 'no inbound X12 today'"))
+                            bash_command=sh(when("[ -d data/edi/inbound ]",
+                                                 f"{PY} edi/load_bronze_x12.py --dir data/edi/inbound", "no inbound X12 today")))
     load_hl7 = BashOperator(task_id="load_hl7_inbound",
-                            bash_command=sh(f"[ -d data/hl7/inbound ] && {PY} hl7/load_bronze_hl7.py --dir data/hl7/inbound || echo 'no inbound HL7 today'"))
+                            bash_command=sh(when("[ -d data/hl7/inbound ]",
+                                                 f"{PY} hl7/load_bronze_hl7.py --dir data/hl7/inbound", "no inbound HL7 today")))
 
     dbt_build = BashOperator(task_id="dbt_build", bash_command=sh(f"{DBT} build"))
     # API-1: verify provider NPIs against the CMS NPPES registry (incremental by watermark)
@@ -71,15 +83,18 @@ with DAG(
     generate_837p = BashOperator(task_id="generate_837p",
                                  bash_command=sh(f"{PY} edi/generate_837p.py --from {window}"))
     load_837p = BashOperator(task_id="load_837p_roundtrip", bash_command=sh(
-        f"ls data/edi/outbound/837P/*/*.x12 >/dev/null 2>&1 && {PY} edi/load_bronze_x12.py --dir data/edi/outbound/837P || echo 'no 837P files in window'"))
+        when("ls data/edi/outbound/837P/*/*.x12 >/dev/null 2>&1",
+             f"{PY} edi/load_bronze_x12.py --dir data/edi/outbound/837P", "no 837P files in window")))
     dbt_build_edi = BashOperator(task_id="dbt_build_edi", bash_command=sh(f"{DBT} build -s path:models/edi"))
     generate_835 = BashOperator(task_id="generate_835", bash_command=sh(f"{PY} edi/generate_835.py --from {window}"))
     load_835 = BashOperator(task_id="load_835", bash_command=sh(
-        f"ls data/edi/outbound/835/*/*.x12 >/dev/null 2>&1 && {PY} edi/load_bronze_x12.py --dir data/edi/outbound/835 || echo 'no 835 files in window'"))
+        when("ls data/edi/outbound/835/*/*.x12 >/dev/null 2>&1",
+             f"{PY} edi/load_bronze_x12.py --dir data/edi/outbound/835", "no 835 files in window")))
     dbt_build_final = BashOperator(task_id="dbt_build_final", bash_command=sh(f"{DBT} build"))
     generate_834 = BashOperator(task_id="generate_834", bash_command=sh(f"{PY} edi/generate_834.py --from 2016-01"))
     load_834 = BashOperator(task_id="load_834", bash_command=sh(
-        f"ls data/edi/outbound/834/*.x12 >/dev/null 2>&1 && {PY} edi/load_bronze_x12.py --dir data/edi/outbound/834 || echo 'no 834 files'"))
+        when("ls data/edi/outbound/834/*.x12 >/dev/null 2>&1",
+             f"{PY} edi/load_bronze_x12.py --dir data/edi/outbound/834", "no 834 files")))
 
     [load_fhir, load_enrollment, load_x12, load_hl7] >> dbt_build >> access_check >> generate_837p >> load_837p
     access_check >> generate_834 >> load_834 >> dbt_build_edi
