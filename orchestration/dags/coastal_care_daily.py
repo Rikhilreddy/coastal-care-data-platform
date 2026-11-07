@@ -79,14 +79,16 @@ with DAG(
 
     # Claims window: service months from 45 days back (late claims), or the month given in the
     # run conf for a backfill:  airflow dags test coastal_care_daily -c '{"from_month": "2017-01"}'
-    window = "{{ dag_run.conf.get('from_month') or macros.ds_add(ds, -45)[:7] }}"
+    prev_month = "(macros.datetime.strptime(ds, '%Y-%m-%d').replace(day=1) - macros.timedelta(days=1)).strftime('%Y-%m')"
+    window = ("--from {{ dag_run.conf.get('from_month') or " + prev_month + " }} "
+              "--to {{ dag_run.conf.get('to_month') or dag_run.conf.get('from_month') and '2099-12' or " + prev_month + " }}")
     generate_837p = BashOperator(task_id="generate_837p",
-                                 bash_command=sh(f"{PY} edi/generate_837p.py --from {window}"))
+                                 bash_command=sh(f"{PY} edi/generate_837p.py {window}"))
     load_837p = BashOperator(task_id="load_837p_roundtrip", bash_command=sh(
         when("ls data/edi/outbound/837P/*/*.x12 >/dev/null 2>&1",
              f"{PY} edi/load_bronze_x12.py --dir data/edi/outbound/837P", "no 837P files in window")))
     dbt_build_edi = BashOperator(task_id="dbt_build_edi", bash_command=sh(f"{DBT} build -s path:models/edi"))
-    generate_835 = BashOperator(task_id="generate_835", bash_command=sh(f"{PY} edi/generate_835.py --from {window}"))
+    generate_835 = BashOperator(task_id="generate_835", bash_command=sh(f"{PY} edi/generate_835.py {window}"))
     load_835 = BashOperator(task_id="load_835", bash_command=sh(
         when("ls data/edi/outbound/835/*/*.x12 >/dev/null 2>&1",
              f"{PY} edi/load_bronze_x12.py --dir data/edi/outbound/835", "no 835 files in window")))
