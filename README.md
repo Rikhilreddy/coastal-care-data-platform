@@ -1,9 +1,5 @@
 # Coastal Care Data Platform
 
-![CI](https://github.com/Rikhilreddy/coastal-care-data-platform/actions/workflows/ci.yml/badge.svg)
-
-![CI](https://github.com/Rikhilreddy/coastal-care-data-platform/actions/workflows/ci.yml/badge.svg)
-
 An end-to-end **healthcare data engineering** platform: claims, clinical and enrollment data move from raw files to an analytics star schema. On the way, the platform converts code sets, exchanges HIPAA X12 EDI and HL7 v2 messages, matches patients across systems, and enforces HIPAA access rules. Every step is reconciled and tested.
 
 Everything is **free and open source**. All data is **synthetic** (CMS DE-SynPUF, Synthea) and is still handled as if it were PHI.
@@ -24,7 +20,10 @@ Everything is **free and open source**. All data is **synthetic** (CMS DE-SynPUF
 | **HCPCS / CPT, ICD-10** | CMS HCPCS and ICD-10-CM reference sets; no AMA CPT descriptions (licensed) | `code_exception` quarantine for unresolved codes |
 | **HIPAA** | Roles (analyst, engineer, steward, auditor), masked identity view, de-identified gold, dbt-managed grants | `security/check_access.sh`: 18 allow/deny rules, run in CI |
 | **Analytics** | Star schema, PMPM by line of business (member months from DE-SynPUF and the 834), 30-day readmissions, charge outliers | Gold paid = silver paid (test); 15.1% Medicare readmission rate (2008), in line with national rates |
-| **Orchestration** | Apache Airflow 3 DAG | All 14 tasks succeed in `airflow dags test` |
+| **SCD Type 2** | dbt snapshot of member location and plan with business-dated versions; `dim_member_history` | One current version per member, no gaps or overlaps (test) |
+| **Incremental loading** | dbt incremental model with a `_loaded_at` watermark; Python watermark table for the API | Second run inserts 0 rows; re-sent files reprocessed; completeness test |
+| **API ingestion (OOP)** | CMS NPPES NPI Registry: rate limit, retries, swappable transports | Offline fixture in CI; watermark prevents re-checking |
+| **Orchestration** | Apache Airflow 3 DAG, locally or in Docker (`docker compose up`) | All 15 tasks succeed in `airflow dags test` |
 | **CI/CD** | GitHub Actions: Postgres service container, synthetic fixture, full pipeline | About 160 dbt checks plus the EDI and HL7 round trips on every PR |
 | **Dashboard** | Streamlit, read-only role `cc_analyst` | Cannot read PHI schemas by construction |
 
@@ -51,15 +50,19 @@ streamlit run dashboard/app.py
 ```
 To prove everything on a throwaway database, as CI does: `PG_DB=coastal_care_ci ./ci/run_ci.sh`
 
+See `docs/topic_coverage.md` for where every topic lives.
+
 ## Repository layout
 | Path | Contents |
 |---|---|
-| `ingestion/` | Bronze loaders (DE-SynPUF, FHIR, Synthea enrollment CSV, reference code sets) |
+| `ingestion/` | Bronze loaders (DE-SynPUF, FHIR, Synthea enrollment CSV, NPPES API, reference code sets) |
 | `edi/` | 837P, 835 and 834 generators, X12 bronze loader |
 | `hl7/` | ADT generator, HL7 bronze loader |
 | `dbt/` | Models (staging, silver, quarantine, edi, hl7, mpi, gold), macros, seeds (crosswalks), tests |
 | `security/` | Roles and access proof |
 | `orchestration/` | Airflow DAG |
+| `docker-compose.yml`, `docker/` | Airflow in Docker |
+| `scripts/` | SCD-2 history replay |
 | `dashboard/` | Streamlit app |
 | `ci/` | CI script, synthetic fixture, pinned requirements |
 | `docs/` | Mapping specs (STTM), profiling findings (H1–H37), decisions |

@@ -1,0 +1,48 @@
+# ORCH-2: run the coastal_care_daily DAG in Docker (Airflow 3, LocalExecutor).
+#   docker compose up -d --build        then open http://localhost:8080
+#   docker compose down                 stop (add -v to also delete Airflow's own metadata)
+# The pipeline's data stays in YOUR Postgres (coastal_care) on the host; the container reaches
+# it at host.docker.internal with the credentials from .env. Airflow keeps its own metadata
+# in the airflow-db container. The project folder is mounted, so DAG and code edits are live.
+services:
+  airflow-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow          # local-only metadata database, not project data
+      POSTGRES_DB: airflow
+    volumes:
+      - airflow-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 10
+
+  airflow:
+    build:
+      context: .
+      dockerfile: docker/airflow/Dockerfile
+    depends_on:
+      airflow-db:
+        condition: service_healthy
+    command: standalone                   # api-server + scheduler + dag-processor + triggerer
+    env_file: .env                        # PG_USER / PG_PASSWORD / PG_DB for the project database
+    environment:
+      PG_HOST: host.docker.internal       # the Postgres running on your Mac
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow-db:5432/airflow
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/coastal_care/orchestration/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "True"   # local demo: no login screen
+      COASTAL_HOME: /opt/coastal_care
+      COASTAL_PYTHON: /opt/coastal-venv/bin/python
+      COASTAL_DBT: /opt/coastal-venv/bin/dbt
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # needed on Linux; harmless on Mac
+    volumes:
+      - .:/opt/coastal_care
+    ports:
+      - "8080:8080"
+
+volumes:
+  airflow-db:

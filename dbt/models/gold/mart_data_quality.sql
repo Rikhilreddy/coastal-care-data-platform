@@ -8,3 +8,5 @@ union all select 'Code values quarantined', 'ALL', count(*) from {{ ref('code_ex
 union all select 'Charge outlier lines', 'ALL', count(*) from {{ ref('mart_charge_outlier') }}
 union all select 'Claims ready for 837P', 'ALL', count(*) filter (where coalesce(reject_reason, '') = '') from {{ ref('edi_claim_readiness') }}
 union all select 'Claims held by pre-submission edits', 'ALL', count(*) filter (where coalesce(reject_reason, '') <> '') from {{ ref('edi_claim_readiness') }}
+union all
+select 'Provider NPIs checked against NPPES: ' || lookup_status, 'ALL', count(*) from {{ ref('provider_registry') }} group by lookup_status

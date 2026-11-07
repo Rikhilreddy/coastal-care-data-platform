@@ -11,7 +11,7 @@ export PG_HOST="${PG_HOST:-localhost}" PG_PORT="${PG_PORT:-5432}" PG_DB="${PG_DB
 export PGHOST="$PG_HOST" PGPORT="$PG_PORT" PGUSER="$PG_USER" PGPASSWORD="${PG_PASSWORD:-}" PGDATABASE="$PG_DB"
 export DBT_PROFILES_DIR="$PWD/dbt"
 step () { echo; echo "=== $*"; }
-dbt_build () { (cd dbt && dbt build --warn-error-options '{"error": []}' 2>&1 | tee /tmp/dbt.log | grep -E "ERROR|FAIL|Done" ; ! grep -qE "ERROR=[1-9]" /tmp/dbt.log); }
+dbt_build () { (cd dbt && dbt build ${DBT_BUILD_ARGS:-} 2>&1 | tee /tmp/dbt.log | grep -E "ERROR|FAIL|Done" ; ! grep -qE "ERROR=[1-9]" /tmp/dbt.log); }
 x12_check () {   # pyx12 exits 1 on a known 999-writer bug, so judge by its verdict line
     local bad=0
     while IFS= read -r f; do out=$(x12valid "$f" 2>&1 || true); grep -q ": OK$" <<< "$out" || { echo "INVALID $f"; echo "$out" | head -5; bad=1; }; done < <(find "$1" -name "*.x12")
@@ -31,8 +31,13 @@ python ingestion/synthea_csv/load_bronze_enrollment.py --dir ci/fixtures/synthea
 python ingestion/synthea_csv/load_bronze_enrollment.py --dir ci/fixtures/synthea_csv | grep -q "SUCCESS 0 .*FAILED 0" \
     || { echo "second enrollment load was not idempotent"; exit 1; }
 
-step "3. dbt build (models + data tests + unit tests)"
-dbt_build
+step "3. dbt build (models + data tests + unit tests; snapshot waits for enrollment)"
+DBT_BUILD_ARGS="--exclude member_history+" dbt_build
+
+step "3b. API ingestion: NPPES NPI registry (offline fixture), twice (second run: nothing new)"
+python ingestion/nppes/load_bronze_nppes.py --fixture ci/fixtures/nppes_responses.json
+python ingestion/nppes/load_bronze_nppes.py --fixture ci/fixtures/nppes_responses.json | grep -q "candidates=0" \
+    || { echo "NPPES watermark did not prevent re-checking"; exit 1; }
 
 step "4. access control proof"
 ./security/check_access.sh
@@ -68,7 +73,13 @@ python edi/generate_834.py --from 2016-01
 x12_check data/edi/outbound/834
 python edi/load_bronze_x12.py --dir data/edi/outbound/834
 
-step "8. dbt build on the round-tripped data"
+step "7c. SCD-2: replay member history 2017-2025, then prove versions exist"
+dbt build --project-dir dbt --profiles-dir dbt -s +member_enrollment --exclude member_history+ >/dev/null
+./scripts/replay_member_history.sh 2017 2025
+psql -qtAc "select count(*) from snapshots.member_history group by member_key having count(*) > 1 limit 1" | grep -q . \
+    || { echo "SCD-2 history has no member with more than one version"; exit 1; }
+
+step "8. dbt build on the round-tripped data (incremental models take only new rows)"
 dbt_build
 psql -c "select * from mpi.mpi_match_quality"
 grep -q "assert_835_pending_claims.*PASS" /tmp/dbt.log || { echo "claims left without a 835"; exit 1; }

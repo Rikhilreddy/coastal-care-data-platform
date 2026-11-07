@@ -4,3 +4,4 @@ psycopg2-binary==2.9.13
 python-dotenv==1.2.3
 pyx12==4.0.0
 hl7==0.4.5
+requests>=2.31,<3

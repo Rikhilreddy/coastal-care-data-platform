@@ -14,6 +14,8 @@ Order matters and is enforced by the task graph:
   downstream: no 837 is generated from data that did not reconcile.
 * Credentials come from the environment (.env / Airflow connection), never from this file.
 * DE-SynPUF and the CMS reference sets are static releases, loaded once, not daily.
+* load_nppes_registry calls a free public API (NPPES): rate-limited, retried, watermarked.
+* Runs locally (`airflow dags test`) or in Docker (docker-compose.yml at the project root).
 
 Local run (no scheduler needed):
     export COASTAL_HOME=$PWD AIRFLOW__CORE__DAGS_FOLDER=$PWD/orchestration/dags
@@ -29,7 +31,7 @@ from airflow.sdk import DAG
 
 HOME = os.environ.get("COASTAL_HOME", "/opt/coastal_care")
 PY = os.environ.get("COASTAL_PYTHON", "python")
-DBT = f"cd {HOME}/dbt && DBT_PROFILES_DIR={HOME}/dbt dbt"
+DBT = f"cd {HOME}/dbt && DBT_PROFILES_DIR={HOME}/dbt {os.environ.get('COASTAL_DBT', 'dbt')}"
 
 
 def sh(cmd: str) -> str:
@@ -57,6 +59,9 @@ with DAG(
                             bash_command=sh(f"[ -d data/hl7/inbound ] && {PY} hl7/load_bronze_hl7.py --dir data/hl7/inbound || echo 'no inbound HL7 today'"))
 
     dbt_build = BashOperator(task_id="dbt_build", bash_command=sh(f"{DBT} build"))
+    # API-1: verify provider NPIs against the CMS NPPES registry (incremental by watermark)
+    load_nppes = BashOperator(task_id="load_nppes_registry",
+                              bash_command=sh(f"{PY} ingestion/nppes/load_bronze_nppes.py --limit 200"))
     access_check = BashOperator(task_id="hipaa_access_check", bash_command=sh("bash security/check_access.sh && echo access-ok"))
     # (a bash_command ending in .sh is treated by Airflow as a template FILE, hence the echo)
 
@@ -78,4 +83,5 @@ with DAG(
 
     [load_fhir, load_enrollment, load_x12, load_hl7] >> dbt_build >> access_check >> generate_837p >> load_837p
     access_check >> generate_834 >> load_834 >> dbt_build_edi
+    dbt_build >> load_nppes >> dbt_build_final
     load_837p >> dbt_build_edi >> generate_835 >> load_835 >> dbt_build_final

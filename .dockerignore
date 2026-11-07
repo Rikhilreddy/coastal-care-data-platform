@@ -1,0 +1,8 @@
+# Never copy data or secrets into an image (PHI and credentials stay out of images too)
+data/
+.env
+.venv/
+.git/
+dbt/target/
+dbt/logs/
+**/__pycache__/

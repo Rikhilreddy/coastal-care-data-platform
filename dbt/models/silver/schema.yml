@@ -156,3 +156,13 @@ models:
       - unique:
           arguments:
             column_name: "source_system || '-' || member_source_id"
+  - name: provider_registry
+    description: API-1 latest NPPES NPI Registry answer per NPI on our claims.
+    columns:
+      - name: npi
+        data_tests: [unique]
+      - name: lookup_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['FOUND', 'NOT_FOUND', 'INVALID_FORMAT', 'INVALID_CHECK_DIGIT', 'API_ERROR']

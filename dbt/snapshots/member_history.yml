@@ -1,0 +1,16 @@
+snapshots:
+  - name: member_history
+    description: >
+      SCD Type 2 history of each member's location (city, state, ZIP3) and enrolled plan.
+      One row per version: dbt_valid_from / dbt_valid_to bound the period it was true;
+      the current version has dbt_valid_to = null. Built by dbt's check strategy:
+      a new version opens only when a tracked column changes.
+    relation: ref('member_attributes_asof')
+    config:
+      schema: snapshots
+      unique_key: member_key
+      strategy: check
+      check_cols: [city, state, zip3, plan_name, line_of_business]
+      updated_at: as_of_ts
+      grants:
+        select: ['cc_engineer', 'cc_steward']

@@ -1,8 +1,24 @@
-{{ config(grants={'select': ['cc_steward']}) }}  -- SEC-1: direct identifiers, stewards only
+{{ config(
+    materialized='incremental',
+    unique_key='message_control_id',
+    incremental_strategy='delete+insert',
+    on_schema_change='fail',
+    grants={'select': ['cc_steward']}
+) }}  -- SEC-1: direct identifiers, stewards only
+-- INCREMENTAL (watermark): the first run builds everything; every later run reads only the
+-- bronze segments loaded AFTER the high-water mark (max _loaded_at already in this table).
+-- A file re-sent by the hospital is reloaded with a new _loaded_at, so its messages are
+-- picked up again and replace the old rows (unique_key = MSH-10). `dbt build --full-refresh`
+-- rebuilds from scratch. assert_adt_incremental_complete proves no message is ever missed.
 -- HL7-1: one row per ADT message (A01 admit, A03 discharge), fields picked by HL7 position.
 -- PID-3 is a REPEATING field (~): the MR and SS identifiers are found by their type code (CX.5).
-with seg as (select * from {{ source('bronze', 'hl7_segment') }}),
-msh as (select message_control_id, _source_file, fields[7] as message_ts, split_part(fields[9], '^', 2) as event_type,
+with seg as (
+    select * from {{ source('bronze', 'hl7_segment') }}
+    {% if is_incremental() %}
+    where _loaded_at > (select coalesce(max(_loaded_at), '1900-01-01') from {{ this }})
+    {% endif %}
+),
+msh as (select message_control_id, _source_file, _loaded_at, fields[7] as message_ts, split_part(fields[9], '^', 2) as event_type,
                fields[4] as sending_facility, fields[11] as processing_id
         from seg where segment_id = 'MSH'),
 evn as (select message_control_id, fields[2] as event_ts from seg where segment_id = 'EVN'),
@@ -18,7 +34,7 @@ pv1 as (select message_control_id, fields[2] as patient_class, fields[19] as vis
                split_part(fields[7], '^', 1) as attending_npi, fields[44] as admit_ts, fields[45] as discharge_ts
         from seg where segment_id = 'PV1')
 select
-    m.message_control_id, m._source_file, m.event_type, m.processing_id, m.sending_facility,
+    m.message_control_id, m._source_file, m._loaded_at, m.event_type, m.processing_id, m.sending_facility,
     to_timestamp(nullif(e.event_ts, ''), 'YYYYMMDDHH24MISS')                     as event_ts,
     i.facility_mrn, i.ssn,
     split_part(p.fields[5], p.component_sep, 1)                                   as last_name,
