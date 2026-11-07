@@ -4,6 +4,11 @@
 # Exit code 1 if any rule is broken, so CI can run it.
 set -u
 DB="${PG_DB:-coastal_care}"
+# psql reads PGHOST/PGUSER/...; the project's settings are PG_HOST/PG_USER/... (from .env or
+# docker-compose). Map them, so this works on a Mac, in CI and inside the Airflow container.
+export PGHOST="${PGHOST:-${PG_HOST:-}}" PGPORT="${PGPORT:-${PG_PORT:-5432}}"
+export PGUSER="${PGUSER:-${PG_USER:-}}" PGPASSWORD="${PGPASSWORD:-${PG_PASSWORD:-}}"
+[ -z "$PGHOST" ] && unset PGHOST; [ -z "$PGUSER" ] && unset PGUSER   # empty = local socket / login user
 fail=0
 check () {   # role  table  expected(ALLOW|DENY)
     if psql -d "$DB" -qAt -v ON_ERROR_STOP=1 -c "SET ROLE $1; SELECT 1 FROM $2 LIMIT 1;" >/dev/null 2>&1; then got=ALLOW; else got=DENY; fi
